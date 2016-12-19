@@ -1,0 +1,324 @@
+\begin{thebibliography}{}
+
+\bibitem[Anazi, 2007]{Anazi}
+Anazi, B. D.~A. (2007).
+\newblock Enhanced oil recovery techniques and nitrogen injection.
+\newblock {\em CSEG Recorder}, pages 29--33.
+
+\bibitem[Asheim, 1988]{Asheim}
+Asheim, H. (1988).
+\newblock Maximization of water sweep efficiency by controlling production and
+  injection rates.
+\newblock In {\em SPE Paper 18365 presented at the SPE European Petroleum
+  Conference}, London, UK.
+
+\bibitem[Aziz and Settari, 1979]{Aziz_book79}
+Aziz, K. and Settari, A. (1979).
+\newblock {\em Petroleum Reservoir Simulation}.
+\newblock Applied Science Publishers, London.
+
+\bibitem[Bertsekas, 1999]{Bertsekas}
+Bertsekas, D.~P. (1999).
+\newblock {\em Nonlinear Programming}.
+\newblock Athena Scientific.
+
+\bibitem[Bonnans et~al., 2006]{Bonnans}
+Bonnans, Fredaric, J., Gilbert, Charles, J., Lemarachal, Sagastizabal, C., and
+  A., C. (2006).
+\newblock {\em Numerical optimization: Theoretical and practical aspects}.
+\newblock Universitext, Berlin: Springer-Verlag.
+
+\bibitem[Brouwer and Jansen, 2004]{Brouwer:2004}
+Brouwer, D.~R. and Jansen, J.~D. (2004).
+\newblock Dynamic optimization of water flooding with smart wells using optimal
+  control theory.
+\newblock {\em SPE Journal}, 9(4):391--402.
+
+\bibitem[Bryson and Ho, 2001]{Bryson:1975}
+Bryson, A. and Ho, Y. (2001).
+\newblock {\em Applied Optimal Control}.
+\newblock Taylor and Francis (Hemisphere), Levittown.
+
+\bibitem[Cao, 2002]{Cao:Thesis}
+Cao, H. (2002).
+\newblock {\em Development of techniques for general purpose simulators}.
+\newblock Ph.D. thesis, Stanford University.
+
+\bibitem[Chavent et~al., 1975]{Chavent}
+Chavent, G., Dupuy, M., and Lemonnier, P. (1975).
+\newblock History matching by use of optimal control theory.
+\newblock {\em SPE Journal}, 15:74--86.
+
+\bibitem[Chen et~al., 1974]{Gavalas}
+Chen, W., Gavalas, G., and Wasserman, M. (1974).
+\newblock A new algorithm for automatic history matching.
+\newblock {\em SPE Journal}, 14(6):593--608.
+
+\bibitem[Chen and Oliver, 2010]{Chen:2010}
+Chen, Y. and Oliver, D. (2010).
+\newblock Ensemble-based closed-loop optimization applied to {B}rugge field.
+\newblock {\em SPE Reservoir Evaluation \& Engineering}, 13(1):56--71.
+
+\bibitem[Christie and Blunt, 2001]{Christie}
+Christie, M. and Blunt, M. (2001).
+\newblock Tenth {SPE} comparative solution project: a comparison of upscaling
+  techniques.
+\newblock {\em SPE Reservoir Evaluation and Engineering}, 4(4):308--317.
+
+\bibitem[Coats, 1980]{Coats:1980}
+Coats, K. (1980).
+\newblock An equation of state compositional model.
+\newblock {\em SPE Journal}, 20(5):363--376.
+
+\bibitem[De~Montleau et~al., 2006]{Montleau}
+De~Montleau, P., Cominelli, A., Neylon, K., Rowan, D., Pallister, I., Tesaker,
+  O., and Nygard, I. (2006).
+\newblock Production optimization under constraints using adjoint gradients.
+\newblock In {\em 10th European Conference on the Mathematics of Oil Recovery}.
+
+\bibitem[{Echeverr\'ia Ciaurri} et~al., 2011]{echeverria:2011}
+{Echeverr\'ia Ciaurri}, D., Isebor, O.~J., and Durlofsky, L.~J. (2011).
+\newblock Application of derivative-free methologies to generally constrained
+  oil production optimisation problems.
+\newblock {\em International Journal of Mathematical Modelling and Numerical
+  Optimisation}, 2:134--161.
+
+\bibitem[et~al., 2011]{Kirk}
+et~al., S. K.~R. (2011).
+\newblock Surface and subsurface requirements for successful implementation of
+  offshore chemical enhanced oil recovery.
+
+\bibitem[et~al., 2010]{Jelmert}
+et~al., T. A.~J. (2010).
+\newblock Comparative study of different eor methods.
+
+\bibitem[Fleshman and Lekic, 1999]{Fleshman}
+Fleshman, R. and Lekic, O. (1999).
+\newblock Artificial lift for high v olume production.
+\newblock {\em Oilfield Review}, (11):48--63.
+
+\bibitem[Gill et~al., 2005]{SNOPT}
+Gill, P.~E., Murray, W., and Saunders, M.~A. (2005).
+\newblock {SNOPT}: An {SQP} algorithm for large-scale constrained optimization.
+\newblock {\em SIAM Rev.}, 47(1):99--131.
+
+\bibitem[Glover, 2001]{Glover}
+Glover, P. (2001).
+\newblock {\em Formation Evaluation MSc Course Notes}.
+\newblock Aberdeen University.
+
+\bibitem[Gunzburger, 2003]{GunzburgerBook}
+Gunzburger, M. (2003).
+\newblock {\em {Perspectives in Flow Control and Optimization}}.
+\newblock SIAM.
+
+\bibitem[Hager, 2000]{Hager2000}
+Hager, W.~W. (2000).
+\newblock {Runge-Kutta} methods in optimal control and the transformed adjoint
+  system.
+\newblock {\em Numerische Mathematik}, 87(2):247--282.
+
+\bibitem[Han et~al., 2013]{CPRA}
+Han, C., Wallis, J., Sarma, P., Li, G., Schrader, M.~L., and Chen, W. (2013).
+\newblock Adaptation of the {CPR} preconditioner for efficient solution of the
+  adjoint equation.
+\newblock {\em SPE Journal}, 18(2):207--213.
+
+\bibitem[Jansen, 2011]{Jansen:2011}
+Jansen, J.~D. (2011).
+\newblock Adjoint-based optimization of multi-phase flow through porous media -
+  a review.
+\newblock {\em Computers \& Fluids}, 46(1):40 -- 51.
+
+\bibitem[Juttner, 1997]{Juttner}
+Juttner, I. (1997).
+\newblock Oil displacement in miscible condition.
+\newblock {\em Rudarsko-Geološko-NAFTNI Zbornik}, 9(1):63--66.
+
+\bibitem[Kermen, 2011]{Kermen}
+Kermen, E. (2011).
+\newblock {\em Thermal Enhancement of Water-Flooding in Medium- Heavy Oil
+  Recovery, in Applied Earth Sciences}.
+\newblock Delft University of Technology, The Netherlands.
+
+\bibitem[Kourounis et~al., 2014]{Kourounis2014}
+Kourounis, D., Durlofsky, L.~J., Jansen, J.~D., and Aziz, K. (2014).
+\newblock Adjoint formulation and constraint handling for gradient-based
+  optimization of compositional reservoir flow.
+\newblock {\em Computational Geosciences}, pages 1--21.
+
+\bibitem[Kourounis and Schenk, 2015]{Kourounis2015}
+Kourounis, D. and Schenk, O. (2015).
+\newblock Constraint handling for gradient-based optimization of compositional
+  reservoir flow.
+\newblock {\em Computational Geosciences}, 19(5):1109--1122.
+
+\bibitem[Kraaijevanger et~al., 2007]{Kraaijevanger}
+Kraaijevanger, J., Egberts, P., Valstar, J., and Buurman, H. (2007).
+\newblock Optimal waterflood design using the adjoint method.
+\newblock In {\em Paper SPE 105764 presented at the SPE Reservoir Simulation
+  Symposium}, Houston, USA.
+
+\bibitem[Kulkarni, 2003]{Kulkarni}
+Kulkarni, M.~M. (2003).
+\newblock {\em Immiscible and Miscible Gas-Oil Displacements in Porous Media}.
+\newblock Louisiana State University.
+
+\bibitem[Li et~al., 2003]{Li}
+Li, R., Reynolds, A., and Oliver, D. (2003).
+\newblock History matching of three-phase flow production data.
+\newblock {\em SPE Journal}, 8(4):328--340.
+
+\bibitem[Liu et~al., 1993]{Ramirez:1993}
+Liu, W., Ramirez, W., and Qi, Y. (1993).
+\newblock Optimal control of steam flooding.
+\newblock {\em SPE Advanced Technology Series}, 1(2):73--82.
+
+\bibitem[Mattax and Dalton, 1990]{Mattax}
+Mattax and Dalton (1990).
+\newblock Reservoir simulation.
+\newblock {\em Society of Petroleum Engineers}.
+
+\bibitem[Mehos and Ramirez, 1989]{Ramirez:1989}
+Mehos, G. and Ramirez, W. (1989).
+\newblock Use of optimal control theory to optimize carbon dioxide
+  miscible-flooding enhanced oil recovery.
+\newblock {\em Journal of Petroleum Science and Engineering}, 2(4):247--260.
+
+\bibitem[Melzer and Midland, 2012]{Melzer}
+Melzer, L.~S. and Midland, T. (2012).
+\newblock Carbon dioxide enhanced oil recovery co2 eor): Factors involved in
+  adding carbon capture, utilization and storage (ccus) to enhanced oil
+  recovery.
+
+\bibitem[Meyer, 2007]{Meyer}
+Meyer, J.~P. (2007).
+\newblock Summary of carbon dioxide enhanced oil recovery co2 eor injection
+  well technology.
+\newblock {\em American Petroleum Institute}, page~54.
+
+\bibitem[Nadarajah and Jameson, 2000]{Nadarajah:2000}
+Nadarajah, S. and Jameson, A. (2000).
+\newblock A comparison of the continuous and discrete adjoint approach to
+  automatic aerodynamic optimization.
+\newblock In {\em AIAA 38th Aerospace Sciences Meeting and Exhibit}, Reno, NV.
+
+\bibitem[Oliver et~al., 2008]{Oliver}
+Oliver, D., Reynolds, A., and Liu, N. (2008).
+\newblock {\em Inverse Theory for Petroleum Reservoir Characterization and
+  History Matching}.
+\newblock Cambridge University Press, Cambridge.
+
+\bibitem[Petra and Stadler, 2011]{Petra2011}
+Petra, N. and Stadler, G. (2011).
+\newblock Model variational inverse problems governed by partial differential
+  equations.
+\newblock ICES Report 11-05, {The Institute for Computational Engineering and
+  Sciences, The University of Texas at Austin}.
+
+\bibitem[Ramirez, 1987]{Ramirez:book}
+Ramirez, W. (1987).
+\newblock {\em Application of Optimal Control Theory to Enhanced Oil Recovery}.
+\newblock Elsevier Science Ltd, Amsterdam.
+
+\bibitem[Romero-Zeran, 2012]{Romero}
+Romero-Zeran, L. (2012).
+\newblock {\em Advances in Enhanced Oil Recovery Processes}.
+\newblock University of New Brunswick, Canada.
+
+\bibitem[Sarma et~al., 2008]{Pallav:2008}
+Sarma, P., Chen, W., Durlofsky, L.~J., and Aziz, K. (2008).
+\newblock Production optimization with adjoint models under nonlinear
+  control-state path inequality constraints.
+\newblock {\em SPE Reservoir Evaluation and Engineering}, 11(2):326--339.
+
+\bibitem[Sarma et~al., 2006]{Pallav:2006}
+Sarma, P., Durlofsky, L.~J., Aziz, K., and Chen, W.~H. (2006).
+\newblock Efficient real-time reservoir management using adjoint-based optimal
+  control and model updating.
+\newblock {\em Computational Geosciences}, 10(1):3--36.
+
+\bibitem[Shine and Holtz, 2008]{Shine}
+Shine, J. and Holtz, M. (2008).
+\newblock Reserve growth \& higher recovery using nitrogen gas injection.
+\newblock {\em Proc. 2008 Wyoming EOR/IOR Conference}.
+
+\bibitem[Stengel, 1986]{Stengel:1986}
+Stengel, R. (1986).
+\newblock {\em Stochastic Optimal Control Theory and Application}.
+\newblock Wiley, New York.
+
+\bibitem[Sudaryanto and Yortsos, 2000]{Sudaryanto:2000}
+Sudaryanto, B. and Yortsos, Y. (2000).
+\newblock Optimization of fluid front dynamics in porous media using rate
+  control.
+\newblock {\em Physics of Fluids}, 12(7):1656--1670.
+
+\bibitem[Suwartadi et~al., 2012]{Suwartadi:2012}
+Suwartadi, E., Krogstad, S., and Foss, B. (2012).
+\newblock Nonlinear output constraints handling for production optimization of
+  oil reservoirs.
+\newblock {\em Computational Geosciences}, 16:499--517.
+
+\bibitem[Syed et~al., 2011]{Syed}
+Syed, F.~I., Tunio, A.~H., and Ghirano, N.~A. (2011).
+\newblock Compositional analysis and screening for enhanced oil recovery
+  processes in different reservoir and operating conditions.
+\newblock {\em International Journal of Applied}, 1(4).
+
+\bibitem[{Van Essen G.} et~al., 2009]{VanEssen}
+{Van Essen G.}, Zandvliet, M., {Van den Hof}, P., Bosgra, O., and Jansen, J.~D.
+  (2009).
+\newblock Robust waterflooding optimization of multiple geological scenarios.
+\newblock {\em SPE Journal}, 14(1):202--210.
+
+\bibitem[Virnovski, 1991]{Virnovski}
+Virnovski, G. (1991).
+\newblock Waterflooding strategy design using optimal control theory.
+\newblock In {\em 6th European IOR Symposium}, pages 437--446, Stavanger,
+  Norway.
+
+\bibitem[Voskov and Tchelepi, 2012]{Voskov:2012}
+Voskov, D. and Tchelepi, H. (2012).
+\newblock Comparison of nonlinear formulations for two-phase multi-component
+  {EoS} based simulation.
+\newblock {\em Journal of Petroleum Science and Engineering}, 82--83:101--111.
+
+\bibitem[Voskov et~al., 2009]{Voskov_nonlinear:2009}
+Voskov, D.~V., Younis, R., and Tchelepi, H.~A. (2009).
+\newblock Comparison of nonlinear formulations for isothermal compositional
+  flow simulation.
+\newblock In {\em SPE paper 118966 presented at the SPE Reservoir Simulation
+  Symposium}, The Woodlands, Texas, USA.
+
+\bibitem[Walther, 2007]{Walther2007}
+Walther, A. (2007).
+\newblock Automatic differentiation of explicit {Runge-Kutta} methods for
+  optimal control.
+\newblock {\em Computational Optimization and Applications}, 36(1):83--108.
+
+\bibitem[Wang et~al., 2009]{Wang:2009}
+Wang, C., Li, G., and Reynolds, A. (2009).
+\newblock Production optimization in closed-loop reservoir management.
+\newblock {\em SPE Journal}, 14(3):506--523.
+
+\bibitem[Young and Stephenson, 1983]{Young:1983}
+Young, L. and Stephenson, R. (1983).
+\newblock A generalized compositional approach for reservoir simulation.
+\newblock {\em Journal of Petroleum Science and Engineering}, 23(5):727--742.
+
+\bibitem[Younis and Aziz, 2007]{Younis:2007}
+Younis, R. and Aziz, K. (2007).
+\newblock {Parallel automatically differentiable data-types for next-generation
+  simulator development}.
+\newblock In {\em SPE Paper 106493 presented at the SPE Reservoir Simulation
+  Symposium}, Houston, Texas.
+
+\bibitem[Younis et~al., 2010]{Younis:2010}
+Younis, R., Tchelepi, H., and Aziz, K. (2010).
+\newblock {Adaptively localized continuation-Newton method--Nonlinear solvers
+  that converge all the time}.
+\newblock {\em SPE Journal}, 15(2):526--544.
+\newblock SPE-119147-PA.
+
+\end{thebibliography}

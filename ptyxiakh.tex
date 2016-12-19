@@ -1,0 +1,507 @@
+%\documentclass[draft]{book}%%% Use for inspecting Overfull boxes.
+
+\documentclass[twoside,a4paper,12pt]{book}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Currently there are very few unicode math fonts so we load fontspec %%
+%% with the no-math option. This means that math fonts are defined %%%%
+%% by traditional LaTeX means. Here we load the Euler fonts. %%%%%%%%%%%
+%% An alternative is to delete the no-math option and enable %%%%%%%%%%
+%% unicode-math and Cambria Math fonts %%%%%%%%%%%%%%%%%%%%%%%%%
+%% If all else fails, you can always load the "kerkis" package %%%%%%%%%%%%
+%% In any case fontspec with or without the no-math option is needed. %%
+%\usepackage[no-math]{fontspec} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{fontspec} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{eulervm} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage[bold-style=tex,math-style=iso]{unicode-math} %%%%%%%%%
+%\setmathfont{Cambria Math} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\usepackage{xltxtra}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Language setup: The proper setup is to use the polyglossia %%%%%%%
+%% package together with setting the main and other languages %%%%%%
+%% and not the xgreek. However, there is still bugs and may %%%%%%%%%
+%% cause problems. So we load xgreek instead but this should %%%%%%%
+%% definitely change in the future. %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{xgreek} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{polyglossia} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\setmainlanguage{greek} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\setotherlanguage{english} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\defaultfontfeatures{Mapping=tex-text}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% We choose our main fonts. Fonts must be installed on the system. %
+%% I.e. in /home/user/.fonts/ for Linux %%%%%%%%%%%%%%%%%%%%%%%%%
+%%       in C:\Windows\Fonts\ for Winows %%%%%%%%%%%%%%%%%%%%%%%%
+%% etc. We should also respect spaces in names. %%%%%%%%%%%%%%%%%%
+%% So Times New Roman is not the same with TimesNewRoman %%%%%%
+%\setmainfont[]{Times New Roman} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\setmainfont[]{Cambria} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\setsansfont[]{Candara} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\setmonofont[]{Consolas} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\setmainfont[]{serif} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\setmainfont[]{Times New Roman} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\setsansfont[]{Times New Roman} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\setmonofont[]{Times New Roman} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% If you need reverse search and your pdf viewer support this %%%%%%%
+%% Currently AcrobatReader does not support this. New Linux %%%%%%%%
+%% and Mac software supports this. %%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%\usepackage{pdfsync} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%% Use custom style %%%%%%%%%%%%%%%%
+\usepackage{ptyxiakh}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\usepackage{amsmath}
+%\usepackage{amssymb}
+%\usepackage{yhmath}
+%\usepackage{amsthm}
+\usepackage{IEEEtrantools}
+\usepackage{graphicx}
+%%CO2 
+\usepackage[version=3]{mhchem}
+\parskip=0.1in
+%%
+\usepackage{pdfpages}
+
+\usepackage{subcaption}
+\usepackage{enumitem}
+
+\usepackage[english]{babel}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{fix-cm}
+\usepackage{mathptmx}      % use Times fonts if available on your TeX system
+\RequirePackage{flushend}
+\RequirePackage[square,sort]{natbib}
+\usepackage{apalike}
+\usepackage{url,amsfonts,amsbsy,amsmath}
+% insert here the call for the packages your document requires
+\usepackage{latexsym}
+\usepackage{parskip}
+\usepackage{ulem}
+\usepackage{tensor}
+\usepackage{graphicx}
+\usepackage{amssymb}    %The caption2.sty file for captions.
+\usepackage{colortbl}
+%sections
+%\usepackage{scrextend}
+%\addtokomafont{labelinglabel}{\sffamily\bfseries}
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\usetikzlibrary{patterns}
+\usepackage{pgfplotstable, booktabs}  % booktabs for \toprule etc
+%\usepackage{times}     %this is optional. You need times.sty file for this
+% etc.
+%
+% please place your own definitions here and don't use \def but
+% \newcommand{}{}
+%
+% Insert the name of "your journal" with
+% \journalname{myjournal}
+%
+% for strike out text
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\brown}[1]{\textcolor{brown}{#1}}
+\newcommand{\green}[1]{\textcolor{green}{#1}}
+\newcommand{\purple}[1]{\textcolor{purple}{#1}}
+\newcommand{\gray}[1]{\textcolor{gray}{#1}}
+
+
+% MATH -----------------------------------------------------------
+\newcommand{\integral}[1]{\int_{t_0}^{t_N} {#1} \, dt}
+\newcommand{\fsum}[3]{\sum_{#1}^{#2}{#3}}
+\newcommand{\pder}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dder}[2]{\frac{d #1}{d #2}}
+\def\u{{\vec u}}
+\def\c{{\vec c}}
+\def\d{{\vec d}}
+\def\w{{\vec w}}
+\def\v{{\vec v}}
+\def\e{{\vec e}}
+\def\b{{\vec b}}
+\def\x{{\vec x}}
+\def\s{{\vec s}}
+\def\g{{\vec{G}}}
+\def\p{{\vec{g}}}
+\def\h{{\vec h}}
+\def\A{{\vec A}}
+\def\H{{\vec H}}
+\def\Z{{\vec Z}}
+\def\W{{\vec W}}
+\def\0{{\vec 0}}
+\def\blambda{{\pmb{\lambda}}}%works with package amsbsy
+\def\bpi{{\boldsymbol{\pi}}}%works with package amsbsy
+\def\bpsi{{\pmb{\psi}}}%works with package amsbsy
+\def\J{{\vec J}}
+\def\M{{\varphi}}
+\def\F{f}
+\def\myobj{J}
+% ----------------------------------------------------------------
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% macros
+
+%\def\A{_{\scriptscriptstyle A}}
+\def\BS{_{\scriptscriptstyle BS}}
+\def\cond{\hbox{\rm cond}}
+\def\D{_{\scriptscriptstyle D}}
+%\def\Deltait{\mit \Delta}
+%\def\Deltait{\mathnormal{\Delta}}
+
+%%%% New code
+\ifx\varDelta\undefined%
+\def\varDelta{{\mathit\Delta}}
+\def\varOmega{{\mathit\Omega}}
+\else
+\fi
+\def\Deltait{\varDelta}
+\def\Omegait{\varOmega}
+%%%% end of new code
+
+\def\disp{\displaystyle}
+\def\drop{^{\null}}
+%\def\etal{{\em et al.\ }}  %%% e.g., Gill \etal (1986)
+\def\etal{et al.}  %%% No italics!!  Also, must say \etal\
+\def\grad{\nabla}
+\def\half  {{\textstyle{\frac12}}}
+\def\Hbar{\skew5\bar H}
+\def\Hess{\nabla^2}
+\def\kp#1{_{k+#1}}
+\def\km#1{_{k-#1}}
+\def\m{\phantom-}
+\def\mat#1#2{(\; #1 \quad #2 \;)}
+\def\Mscr{{\mathcal M}}
+\def\minim{\mathop{\hbox{\rm minimize}}}
+\def\minimize#1{{\displaystyle\minim_{#1}}}
+\def\mod#1{|#1|}
+\def\N{_{\scriptscriptstyle N}}
+\def\R{_{\scriptscriptstyle R}}
+\def\Null{\mathop{\hbox{\rm null}}}
+\def\nbar{\skew2\bar n}
+\def\norm#1{\|#1\|}
+\newcommand{\normm}[1]{\biggl\|#1\biggr\|}
+\def\nthinsp{\mskip -2   mu}
+\def\Lscr{{\mathcal L}}
+%\def\Omegait{{\mathnormal{\Omega}}} %replaced above
+\def\blambdahat{\skew1\widehat \blambda}
+\def\blambdastar{\blambda\superstar}
+\def\bpistar{\bpi\superstar}
+\def\P{_{\scriptscriptstyle P}}
+\def\Q{_{\scriptscriptstyle Q}}
+\def\Rbar{\skew5\bar R}
+\def\Rhat{\widehat R}
+\def\shat{\widehat \s}
+\def\sstar{\s\superstar}
+\def\subject{\mbox{\rm subject to}}
+\def\superstar{^{\raise 0.5pt\hbox{$\nthinsp *$}}}
+\def\Seq#1{\{ #1 \}}
+\def\Set#1{\{\, #1 \,\}}
+\def\T{^T\!}
+\def\inv{^{-1}}
+\def\Tinv{^{-T}\!}
+\def\words#1{\hbox{\quad#1\quad}}
+%\def\Re{I\!\!R}
+%\def\R{\mathbb R}      %oops! (\R defined differently above!) acm
+\def\Re{\mathbb R}
+\newcommand{\ubar}{\skew3\bar u}
+\def\V{_{\scriptscriptstyle V}}
+
+\def\Wbar{\skew3\bar W}
+\def\What{\widehat W}
+\def\xbar{\skew{2.8}\bar \x}
+\def\xhat{\skew{2.8}\widehat \x}
+\def\xstar{\x\superstar}
+\def\ubar{\skew{2.8}\bar \u}
+\def\uhat{\skew{2.8}\widehat \u}
+\def\ustar{\u\superstar}
+
+\def\Y{_{\scriptscriptstyle Y}}
+\def\Z{_{\scriptscriptstyle Z}}
+\def\Zbar{\skew5\bar Z}
+\def\Zhat{\widehat Z}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% snopt macros
+
+ \def\hatbox{\hskip 2pt%
+             \widehat{\phantom{\hbox{\vrule width 2pt height 3pt\hskip 1pt}}}%
+             \hskip 2pt}
+
+ \def\ka#1{k\mskip -0.75 mu\mbox{\it#1}}
+ \def\kb#1{k\mskip -0.90 mu\mbox{\scriptsize\it#1}}
+
+ \def\strut{\rule[-1.25ex]{0pt}{4ex}}%
+ \def\strutl{\rule[-1.25ex]{0pt}{3ex}}%
+ \def\strutu{\rule{0pt}{3ex}}%
+
+ \def\bigtimes{\mbox{\Large $\times$}}
+
+ \def\Deltay{\Deltait y}
+ \def\Deltax{\Deltait x}
+ \def\Deltapi{\Deltait pi}
+
+% \newcommand\Deltay{{\mathnormal\Delta} y}     % trying to get these to work!!
+% \def\Deltax{{\mathnormal{\Delta}} x}
+% \def\Deltapi{{\mathnormal{\Delta}} pi}
+
+ \def\GQP#1{GQP$_{#1}$}
+ \def\GQPk{GQP$_k$}
+ \def\fk{f_k}
+ \def\gk{\g_k}
+ \def\ck{\c_k}
+ \def\Jk{\J_k}
+ \def\gkp{\g_{k+1}}
+ \def\Jkp{\J_{k+1}}
+
+ \def\cL{\c_{\scriptscriptstyle L}} % the constraint linearization
+ \def\dL{\d_{\scriptscriptstyle L}} % the departure from linearity
+ \def\L{L}                    % the modified Lagrangian
+ \def\LQ{\Lscr_q}                  % quadratic approx of the modified Lagr'n
+ \def\LA{\Lscr\A}                  % the augmented modified Lagrangian
+
+ \def\Lmax{\hbox{$\tau_{\scriptscriptstyle L}$}}  % LU factor tol
+ \def\NP#1{NP$(#1)$}
+ \def\GNP#1{GNP$(#1)$}
+ \def\QP#1{QP$_{#1}$}
+ \def\QPk {QP$_k$}
+ \def\RL {\ensuremath{\mathcal{R}_L}}   % linear feasible region
+ \def\Scr{\ensuremath{\mathcal{S}}}
+%\def\v#1{\texttt{#1}}
+%\def\z{\phantom0}
+
+%\def\LA#1#2{{\small LA#1#2}}      % For LA05, but already used above
+ \def\MA#1#2{{\small MA#1#2}}      % For MA28
+ \def\AMPL  {{\small AMPL}}
+ \def\CONOPT{{\small CONOPT}}
+ \def\COPS  {{\small COPS}}
+ \def\CUTE  {{\small CUTE}}
+ \def\CUTEr {{\small CUTEr}}
+ \def\DONLP {{\small DONLP}}
+ \def\GALAHAD{{\small GALAHAD}}
+ \def\GAMS  {{\small GAMS}}
+ \def\IPOPT {{\small IPOPT}}
+ \def\KNITRO{{\small KNITRO}}
+ \def\Knossos{{\small \sc Knossos}}
+ \def\LANCELOT{{\small LANCELOT}}
+ \def\LOQO  {{\small LOQO}}
+ \def\LSQR  {{\small LSQR}}
+ \def\LSSOL {{\small LSSOL}}
+ \def\LSSQP {{\small LSSQP}}
+ \def\LUSOL {{\small LUSOL}}
+ \def\MINOS {{\small MINOS}}
+ \def\NLPQL {{\small NLPQL}}
+ \def\NPSOL {{\small NPSOL}}
+ \def\OTIS  {{\small OTIS}}
+ \def\QPA   {{\small QPA}}
+ \def\QPOPT {{\small QPOPT}}
+ \def\SNOPT {{\small SNOPT}}
+ \def\SQOPT {{\small SQOPT}}
+ \def\SYMMLQ{{\small SYMMLQ}}
+
+\def\problem#1#2#3#4{\fbox
+   {\begin{tabular*}{0.85\textwidth}
+    {@{}l@{\extracolsep{\fill}}l@{\extracolsep{6pt}}l@{\extracolsep{\fill}}c@{}}
+      #1 & $\minimize{#2}$ & $#3$ & $ $ \\[5pt]
+         & $\subject$      & $#4$ & $ $
+    \end{tabular*}}}
+
+\def\newproblem#1#2#3#4#5{\fbox
+   {\begin{tabular*}{0.85\textwidth}
+    {@{}l@{\extracolsep{\fill}}l@{\extracolsep{6pt}}l@{\extracolsep{\fill}}c@{}}
+      #1 & $\minimize{#2}$ & $#3$ & $ $ \\[5pt]
+         & $\subject$      & $#4$ & $ $ \\[5pt]
+         & & $#5$ & $ $
+    \end{tabular*}}}
+
+\def\sb  {\hbox to 0pt{$\null^s$\hss}}
+\def\hp  {\hbox to 0pt{$\null^h$\hss}}
+\def\ff  {\hbox to 0pt{$\null^*$\hss}}
+\def\inf {\hbox to 0pt{$\null^i$\hss}}
+\def\cbi {\hbox to 0pt{$\null^c$\hss}}
+\def\linf{\hbox to 0pt{$\null^l$\hss}}
+\def\itr {\hbox to 0pt{$\null^t$\hss}}
+\def\acc {\hbox to 0pt{$\null^e$\hss}}
+\def\unb {\hbox to 0pt{$\null^u$\hss}}
+\def\Cute#1{\hbox{\it\lowercase{#1}\/}}
+\def\Ampl#1{\hbox{\it#1\/}}
+\def\n#1{{\tt #1}}
+
+
+% New macros for SIGEST article
+
+\newcommand{\pmat}[1]{\begin{pmatrix}#1\end{pmatrix}}
+\newcommand{\pvec}[1]{\begin{pmatrix}#1\end{pmatrix}}
+\newcommand{\till}{\,{:}\,}                 %  Matlab i = 1:n as i = 1\till n
+\newcommand{\rhobar}{\skew4\bar\rho}
+\newcommand{\rhohat}{\skew4\hat\rho}
+\newcommand{\rhostar}{\rho\superstar}
+\newcommand{\twonorm}[1]{\norm{#1}_2}
+\newcommand{\onenorm}[1]{\norm{#1}_1}
+\newcommand{\infnorm}[1]{\norm{#1}_{\infty}}
+\DeclareMathAlphabet{\mathbfsf}{\encodingdefault}{\sfdefault}{bx}{n}
+\newcommand{\tens}[1]{\mathbfsf{#1}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%% Make index %%%%%%%%%%%%%%%%%%%
+\makeindex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%% Information about this work %%%%%%%%%%%
+
+\title{Production optimization through water-front control using adjoint gradient-based techniques}
+
+\author{Christini Fandridi}
+\projectlevel{Master Thesis}
+\date{19 January 2017}
+\advisor{Dr. Drosos Kourounis}
+\committeememberone{Prof. Nikolaos Pasadakis}
+\committeemembertwo{Prof. Dionysios Hristopoulos}
+%% leave empty if less than 3: \committeemembertwo{}
+\committeememberthree{Dr. Vassileios Gaganis}
+\dedication{To my family}
+\university{Technical University of Crete}
+\department{Department of Mineral Resources Engineering}
+\def\master{Master of Science}
+\def\mastertitle{In Petroleum Engineering}
+\separator{,\ }
+%% another separator
+%% \separator{\ $|$\ }
+%% yet another one
+%% \separator{\ \ding{'107}\ }
+%% a simpler separator 
+%% \separator{\ $\cdot$\ }
+\city{Chania}
+%%
+%% University logo and scale factor. File must be in eps.
+\universitylogo{%
+\includegraphics[scale=1]{tuc.jpg}% University of the Aegean
+\hfill{~}
+\includegraphics[scale=.5]{figures/peteng.png} %%%%%%% University of Athens
+%\includegraphics[scale=.125]{uoc_logo.pdf} %%%%%%%% University of Crete
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%% Document starts %%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%% Start Roman numbering %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\includepdf[pages={1}]{eksofyllo.pdf}
+
+\pagenumbering{roman}
+\makecover  % Eksofyllo
+%%%%%%%%%%%%%%%%%%% Table of contents %%%%%%%%%%%%
+\tableofcontents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter*{Abstract}
+The optimization of oil production is a tedious and computationally intensive 
+process that requires the solution of time dependent nonlinear set of partial 
+differential equations describing the flow of hydrocarbons in anisotropic porous 
+media. Optimization of production is usually performed using either gradient 
+free techniques like genetic algorithms, particle swarm algorithms, or 
+gradient-based techniques where the gradients are computed through the solution 
+of the adjoint problem. A gradient-based optimization method, in which the 
+gradient is computed using an adjoint formulation, is often the method of choice 
+since in contrast to numerical perturbation techniques that require as many 
+objective function evaluations as the number of control parameters, the gradient 
+using adjoint-based techniques is obtained  only at a small fraction of the time 
+spent for the evaluation of the objective function. The production optimisation 
+problem is usually subject to industrial constraints, for example, maximum gas 
+rate specification in injection or production wells, when the control variables 
+are well bottom-hole pressures. At the same time optimising  time-varying well 
+settings, such as injection rates, production rates or bottom-hole pressures, is 
+an important aspect of optimal reservoir management that increases significantly 
+the dimension of the search space. It is well known that for non-convex 
+optimisation problems, gradient-based techniques are likely to get trapped in poor 
+local optima. A common practise is to lunch several independent optimisation runs
+from different initial guesses or to combine ideas from gradient-free algorithms 
+with gradient-based to benefit from the merits of both. An adequate sampling of 
+the search space would require an intractable number of simulations and it is 
+thus impossible.
+
+The aim of this work is to exploit an observation in homogeneous reservoirs, 
+where the global optimum, when optimising cumulative oil recovery,  is usually 
+achieved from any initial guess. We perform continuation with 
+respect to a parameter that transforms the homogenous reservoir with respect to 
+porosity and permeability, to the current one, solving an optimal control 
+problem for each distinct value of the parameter, where the objective function 
+now is defined to be the misfit between a subset of the states of the two 
+problems. The proposed technique is tested in several examples of increased 
+complexity.
+\cleardoublepage
+
+
+%%%%%%%%%%% Return to normal numbering %%%%%%%%%%%
+\pagenumbering{arabic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Part One %%%%%%%%%%%%%%%%
+\part{Oil production}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{introduction}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Part two %%%%%%%%%%%%%%%%
+\part{Theory on production optimization and methods}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{chapter1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Part One %%%%%%%%%%%%%%%%
+\part{Numerical examples??}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{chapter2}
+
+
+\part{Numerical examples}
+%%%%%%%%%%%%%%%% Apendices  %%%%%%%%%%%%%%%%%%
+\appendix
+\include{appendix1}
+\include{appendix2}
+\include{appendix3}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%% Back matter starts %%%%%%%%%%%%%%%
+\backmatter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\printindex
+
+\clearpage
+
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliographystyle{apalike}      % mathematics and physical sciences
+\bibliography{ptyxiakh}
+
+
+
+\end{document}
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 

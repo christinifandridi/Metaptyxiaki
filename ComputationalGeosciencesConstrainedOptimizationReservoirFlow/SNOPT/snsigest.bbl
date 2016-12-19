@@ -1,0 +1,397 @@
+\def\cprime{$'$}
+\begin{thebibliography}{10}
+
+\bibitem{Bar80}
+{\sc R.~H. Bartels}, {\em A penalty linear programming method using
+  reduced-gradient basis-exchange techniques}, Linear Algebra Appl., 29 (1980),
+  pp.~17--32.
+
+\bibitem{BF94}
+{\sc J.~T. Betts and P.~D. Frank}, {\em A sparse nonlinear optimization
+  algorithm}, J. Optim. Theory and Applics., 82 (1994), pp.~519--541.
+
+\bibitem{BNS95}
+{\sc L.~T. Biegler, J.~Nocedal, and C.~Schmid}, {\em A reduced {Hessian} method
+  for large-scale constrained optimization}, SIAM J. Optim., 5 (1995),
+  pp.~314--347.
+
+\bibitem{Big72}
+{\sc M.~C. Biggs}, {\em Constrained minimization using recursive equality
+  quadratic programming}, in Numerical Methods for Nonlinear Optimization,
+  F.~A. Lootsma, ed., Academic Press, London and New York, 1972, pp.~411--428.
+
+\bibitem{BKT99a}
+{\sc Paul~T. Boggs, Anthony~J. Kearsley, and Jon~W. Tolle}, {\em A global
+  convergence analysis of an algorithm for large-scale nonlinear optimization
+  problems}, SIAM J. Optim., 9 (1999), pp.~833--862.
+
+\bibitem{BKT99b}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em A practical
+  algorithm for general large scale nonlinear optimization problems}, SIAM J.
+  Optim., 9 (1999), pp.~755--778.
+
+\bibitem{BonDM98}
+{\sc Alexander Bondarenko, David Bortz, and Jorge~J. Mor\'e}, {\em {COPS}:
+  Large-scale nonlinearly constrained optimization problems}, Technical Report
+  ANL/MCS-TM-237, Mathematics and Computer Science division, Argonne National
+  Laboratory, Argonne, IL, 1998.
+\newblock Revised October 1999.
+
+\bibitem{BCGST97a}
+{\sc I.~Bongartz, A.~R. Conn, N.~I.~M. Gould, Michael~A. Saunders, and Ph.~L.
+  Toint}, {\em A numerical comparison between the {LANCELOT} and {MINOS}
+  packages for large-scale constrained optimization}, Report 97/13,
+  D{\'e}partement de Math{\'e}matique, Facult{\'e}s Universitaires de Namur,
+  1997.
+
+\bibitem{BCGST97b}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em A numerical
+  comparison between the {LANCELOT} and {MINOS} packages for large-scale
+  constrained optimization: the complete numerical results}, Report 97/14,
+  D{\'e}partement de Math{\'e}matique, Facult{\'e}s Universitaires de Namur,
+  1997.
+
+\bibitem{BonCGT95}
+{\sc I.~Bongartz, A.~R. Conn, N.~I.~M. Gould, and Ph.~L. Toint}, {\em {\sf
+  CUTE}: Constrained and unconstrained testing environment}, ACM Trans. Math.
+  Software, 21 (1995), pp.~123--160.
+
+\bibitem{BroG75b}
+{\sc G.~G. Brown and G.~W. Graves}, {\em Elastic programming: A new approach to
+  large-scale mixed-integer optimization}, November 1975.
+\newblock Presented at the presented at ORSA/TIMS meeting, Las Vegas, NV.
+
+\bibitem{BroG75a}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em The {XS}
+  mathematical programming system}, working paper, Department of Operations
+  Research, Naval Postgraduate School, Monterey, CA, 1975.
+
+\bibitem{BL83}
+{\sc A.~Buckley and A.~LeNir}, {\em {QN}-like variable storage conjugate
+  gradients}, Math. Program., 27 (1983), pp.~155--175.
+
+\bibitem{BL85}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em {BBVSCG}--a variable
+  storage algorithm for function minimization}, ACM Trans. Math. Software, 11
+  (1985), pp.~103--119.
+
+\bibitem{Byr87}
+{\sc Richard~H. Byrd}, {\em Robust trust-region methods for constrained
+  optimization}.
+\newblock Paper presented at the SIAM Conference on Optimization, Houston, TX,
+  1987.
+
+\bibitem{ByrGN00}
+{\sc Richard~H. Byrd, Jean~Charles Gilbert, and Jorge Nocedal}, {\em A trust
+  region method based on interior point techniques for nonlinear programming},
+  Math. Program., 89 (2000), pp.~149--185.
+
+\bibitem{ByrHN99}
+{\sc Richard~H. Byrd, Mary~E. Hribar, and Jorge Nocedal}, {\em An interior
+  point algorithm for large-scale nonlinear programming}, SIAM J. Optim., 9
+  (1999), pp.~877--900.
+
+\bibitem{Con73}
+{\sc A.~R. Conn}, {\em Constrained optimization using a nondifferentiable
+  penalty function}, {SIAM J. Numer. Anal.}, 10 (1973), pp.~760--779.
+
+\bibitem{Con76}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em Linear programming
+  via a nondifferentiable penalty function}, {SIAM J. Numer. Anal.}, 13 (1976),
+  pp.~145--154.
+
+\bibitem{CGT92a}
+{\sc Andrew~R. Conn, Nicholas I.~M. Gould, and Philippe~L. Toint}, {\em
+  {LANCELOT}: a {Fortran} package for large-scale nonlinear optimization
+  {(Release A)}}, Lecture Notes in Computation Mathematics 17, Springer Verlag,
+  Berlin, Heidelberg, New York, London, Paris and Tokyo, 1992.
+
+\bibitem{ConGT00a}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em Trust-region
+  methods}, Society for Industrial and Applied Mathematics (SIAM),
+  Philadelphia, PA, 2000.
+
+\bibitem{DemES82}
+{\sc Ron~S. Dembo, Stanley~C. Eisenstat, and Trond Steihaug}, {\em Inexact
+  {N}ewton methods}, SIAM J. Numer. Anal., 19 (1982), pp.~400--408.
+
+\bibitem{DS81}
+{\sc J.~E. Dennis, Jr. and Robert~B. Schnabel}, {\em A new derivation of
+  symmetric positive definite secant updates}, in Nonlinear programming, 4
+  (Proc. Sympos., Special Interest Group on Math. Programming, Univ. Wisconsin,
+  Madison, Wis., 1980), Academic Press, New York, 1981, pp.~167--199.
+
+\bibitem{DolM02}
+{\sc Elizabeth~D. Dolan and Jorge~J. Mor{\'e}}, {\em Benchmarking optimization
+  software with performance profiles}, Math. Program., 91 (2002), pp.~201--213.
+
+\bibitem{Dru85}
+{\sc A.~Drud}, {\em {CONOPT}: A {GRG} code for large sparse dynamic nonlinear
+  optimization problems}, Math. Program., 31 (1985), pp.~153--191.
+
+\bibitem{Duff77}
+{\sc I.~S. Duff}, {\em {MA28} -- a set of {F}ortran subroutines for sparse
+  unsymmetric linear equations}, Report AERE R8730, Atomic Energy Research
+  Establishment, Harwell, England, 1977.
+
+\bibitem{Eld91}
+{\sc S.~K. Eldersveld}, {\em Large-Scale Sequential Quadratic Programming
+  Algorithms}, PhD thesis, Department of Operations Research, Stanford
+  University, Stanford, CA, 1991.
+
+\bibitem{f2c}
+{\sc S.~I. Feldman, D.~M. Gay, M.~W. Maimone, and N.~L. Schryer}, {\em A
+  {F}ortran-to-{C} converter}, Computing Science Technical Report 149, AT\&T
+  Bell Laboratories, Murray Hill, NJ, 1990.
+
+\bibitem{Fle85a}
+{\sc Roger Fletcher}, {\em An {$\ell_1$} penalty method for nonlinear
+  constraints}, in Numerical Optimization 1984, P.~T. Boggs, R.~H. Byrd, and
+  R.~B. Schnabel, eds., Philadelphia, 1985, pp.~26--40.
+
+\bibitem{Fle87a}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em Practical Methods of
+  Optimization}, John Wiley and Sons, Chichester and New York, second~ed.,
+  1987.
+
+\bibitem{FleL02}
+{\sc Roger Fletcher and Sven Leyffer}, {\em Nonlinear programming without a
+  penalty function}, Math. Program., 91 (2002), pp.~239--269.
+
+\bibitem{Four85}
+{\sc Robert Fourer}, {\em A simplex algorithm for piecewise-linear programming.
+  {I}. {D}erivation and proof}, Math. Program., 33 (1985), pp.~204--233.
+
+\bibitem{Four88}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em A simplex algorithm
+  for piecewise-linear programming. {I}{I}. {F}initeness, feasibility and
+  degeneracy}, Math. Program., 41 (1988), pp.~281--315.
+
+\bibitem{Four92}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em A simplex algorithm
+  for piecewise-linear programming. {I}{I}{I}. {C}omputational analysis and
+  applications}, Math. Program., 53 (1992), pp.~213--235.
+
+\bibitem{FGK93}
+{\sc R.~Fourer, D.~M. Gay, and B.~W. Kernighan}, {\em {AMPL}: A Modeling
+  Language for Mathematical Programming}, The Scientific Press, South San
+  Francisco, 1993.
+
+\bibitem{GL89}
+{\sc J.~Ch. Gilbert and C.~Lemar{\'e}chal}, {\em Some numerical experiments
+  with variable-storage quasi-{Newton} algorithms}, Math. Program.,  (1989),
+  pp.~407--435.
+
+\bibitem{GilGMS74}
+{\sc Philip~E. Gill, Gene~H. Golub, Walter Murray, and Michael~A. Saunders},
+  {\em Methods for modifying matrix factorizations}, Math. Comput., 28 (1974),
+  pp.~505--535.
+
+\bibitem{GilM79b}
+{\sc Philip~E. Gill and Walter Murray}, {\em The computation of {Lagrange}
+  multiplier estimates for constrained minimization}, Math. Program., 17
+  (1979), pp.~32--60.
+
+\bibitem{GilMS97b}
+{\sc Philip~E. Gill, Walter Murray, and Michael~A. Saunders}, {\em User's guide
+  for {SQOPT 5.3}: a {Fortran} package for large-scale linear and quadratic
+  programming}, Numerical Analysis Report 97-4, Department of Mathematics,
+  University of California, San Diego, La Jolla, CA, 1997.
+
+\bibitem{GilMS02}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em {SNOPT}: An {SQP}
+  algorithm for large-scale constrained optimization}, SIAM J. Optim., 12
+  (2002), pp.~979--1006.
+
+\bibitem{GilMSW84b}
+{\sc Philip~E. Gill, Walter Murray, Michael~A. Saunders, and Margaret~H.
+  Wright}, {\em Sparse matrix methods in optimization}, SIAM J. Sci. and
+  Statist. Comput., 5 (1984), pp.~562--589.
+
+\bibitem{GilMSW86a}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em User's guide for
+  {NPSOL (Version 4.0)}: a {Fortran} package for nonlinear programming}, Report
+  SOL 86-2, Department of Operations Research, Stanford University, Stanford,
+  CA, 1986.
+
+\bibitem{GilMSW87c}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em Maintaining {LU}
+  factors of a general sparse matrix}, Linear Algebra and its Applications,
+  88/89 (1987), pp.~239--270.
+
+\bibitem{GilMSW91}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em Inertia-controlling
+  methods for general quadratic programming}, SIAM Rev., 33 (1991), pp.~1--36.
+
+\bibitem{GilMSW92}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em Some theoretical
+  properties of an augmented {Lagrangian} merit function}, in Advances in
+  Optimization and Parallel Computing, P.~M. Pardalos, ed., North Holland,
+  North Holland, 1992, pp.~101--128.
+
+\bibitem{GilMW81}
+{\sc Philip~E. Gill, Walter Murray, and Margaret~H. Wright}, {\em Practical
+  Optimization}, Academic Press, London and New York, 1981.
+
+\bibitem{Gol76a}
+{\sc D.~Goldfarb}, {\em Factorized variable metric methods for unconstrained
+  optimization}, Math. Comput., 30 (1976), pp.~796--811.
+
+\bibitem{GouldT99}
+{\sc Nicholas I.~M. Gould and Philippe~L. Toint}, {\em S{Q}{P} methods for
+  large-scale nonlinear programming}, in System modelling and optimization
+  (Cambridge, 1999), Kluwer Acad. Publ., Boston, MA, 2000, pp.~149--178.
+
+\bibitem{Han76}
+{\sc S.~P. Han}, {\em Superlinearly convergent variable metric algorithms for
+  general nonlinear programming problems}, Math. Program., 11 (1976),
+  pp.~263--282.
+
+\bibitem{HP87}
+{\sc C.~R. Hargraves and S.~W. Paris}, {\em Direct trajectory optimization
+  using nonlinear programming and collocation}, J. of Guidance, Control, and
+  Dynamics, 10 (1987), pp.~338--348.
+
+\bibitem{Hig88}
+{\sc N.J. Higham}, {\em {FORTRAN} codes for estimating the one-norm of a real
+  or complex matrix, with applications to condition estimation}, ACM Trans.
+  Math. Software, 14 (1988), pp.~381--396.
+
+\bibitem{LNP98}
+{\sc Marucha Lalee, Jorge Nocedal, and Todd Plantenga}, {\em On the
+  implementation of an algorithm for large-scale equality constrained
+  optimization}, SIAM J. Optim., 8 (1998), pp.~682--706.
+
+\bibitem{LN89}
+{\sc D.~C. Liu and J.~Nocedal}, {\em On the limited memory {BFGS} method for
+  large scale optimization}, Math. Program., 45 (1989), pp.~503--528.
+
+\bibitem{MorN00}
+{\sc Jos{\'e}~Luis Morales and Jorge Nocedal}, {\em Automatic preconditioning
+  by limited memory quasi-{N}ewton updating}, SIAM J. Optim., 10 (2000),
+  pp.~1079--1096.
+
+\bibitem{Mur97}
+{\sc Walter Murray}, {\em Sequential quadratic programming methods for
+  large-scale problems}, J. Comput. Optim. Appl., 7 (1997), pp.~127--142.
+
+\bibitem{MurP95}
+{\sc Walter Murray and Francisco~J. Prieto}, {\em A sequential quadratic
+  programming algorithm using an incomplete solution of the subproblem}, SIAM
+  J. Optim., 5 (1995), pp.~590--640.
+
+\bibitem{MurS78}
+{\sc B.~A. Murtagh and Michael~A. Saunders}, {\em Large-scale linearly
+  constrained optimization}, Math. Program., 14 (1978), pp.~41--72.
+
+\bibitem{MurS82}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em A projected
+  {Lagrangian} algorithm and its implementation for sparse nonlinear
+  constraints}, Math. Program., 16 (1982), pp.~84--117.
+
+\bibitem{NocW99}
+{\sc Jorge Nocedal and Stephen~J. Wright}, {\em Numerical Optimization},
+  Springer-Verlag, New York, 1999.
+
+\bibitem{Omo89}
+{\sc E.~O. Omojokun}, {\em Trust Region Algorithms for Nonlinear Equality and
+  Inequality Constraints}, PhD thesis, Department of Computer Science,
+  University of Colorado, Boulder, 1989.
+
+\bibitem{Pow77}
+{\sc Michael J.~D. Powell}, {\em A fast algorithm for nonlinearly constrained
+  optimization calculations}, Tech. Report 77/NA 2, Department of Applied
+  Mathematics and Theoretical Physics, University of Cambridge, England, 1977.
+
+\bibitem{Pow78a}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em Algorithms for
+  nonlinear constraints that use {Lagrangian} functions}, Math. Program., 14
+  (1978), pp.~224--248.
+
+\bibitem{Pow78b}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em The convergence of
+  variable metric methods for nonlinearly constrained optimization
+  calculations}, in Nonlinear programming, 3 (Proc. Sympos., Special Interest
+  Group Math. Programming, Univ. Wisconsin, Madison, Wis., 1977), Academic
+  Press, New York, 1978, pp.~27--63.
+
+\bibitem{Reid76}
+{\sc J.~K. Reid}, {\em {F}ortran subroutines for handling sparse linear
+  programming bases}, Report AERE R8269, Atomic Energy Research Establishment,
+  Harwell, England, 1976.
+
+\bibitem{Rei82}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em A
+  sparsity-exploiting variant of the {Bartels-Golub} decomposition for linear
+  programming bases}, Math. Program., 24 (1982), pp.~55--69.
+
+\bibitem{Rob72}
+{\sc Stephen~M. Robinson}, {\em A quadratically-convergent algorithm for
+  general nonlinear programming problems}, Math. Program., 3 (1972),
+  pp.~145--156.
+
+\bibitem{SargD00}
+{\sc R.~W.~H. Sargent and M.~Ding}, {\em A new {S}{Q}{P} algorithm for
+  large-scale nonlinear programming}, SIAM J. Optim., 11 (2000), pp.~716--747.
+
+\bibitem{Sch85}
+{\sc K.~Schittkowski}, {\em {NLPQL}: A {Fortran} subroutine for solving
+  constrained nonlinear programming problems}, Ann. Oper. Res., 11 (1985/1986),
+  pp.~485--500.
+
+\bibitem{Spe81}
+{\sc P.~Spellucci}, {\em Han's method without solving {Q}{P}}, in Optimization
+  and optimal control (Proc. Conf., Math. Res. Inst., Oberwolfach, 1980),
+  Springer, Berlin, 1981, pp.~123--141.
+
+\bibitem{Spe98b}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em A new technique for
+  inconsistent {Q}{P} problems in the {S}{Q}{P} method}, Math. Methods Oper.
+  Res., 47 (1998), pp.~355--400.
+
+\bibitem{Spe98}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em An {SQP} method for
+  general nonlinear programs using only equality constrained subproblems},
+  Math. Program., 82 (1998), pp.~413--448.
+
+\bibitem{Tap74b}
+{\sc R.~A. Tapia}, {\em A stable approach to {Newton's} method for general
+  mathematical programming problems in ${\Re^n}$}, J. Optim. Theory and
+  Applics., 14 (1974), pp.~453--476.
+
+\bibitem{TB91}
+{\sc I-B. Tjoa and L.~T. Biegler}, {\em Simultaneous solution and optimization
+  strategies for parameter estimation of differential algebraic equation
+  systems}, Ind. Eng. Chem. Res., 30 (1991), pp.~376--385.
+
+\bibitem{Ton83}
+{\sc Kaoru Tone}, {\em Revisions of constraint approximations in the successive
+  {Q}{P} method for nonlinear programming problems}, Math. Program., 26 (1983),
+  pp.~144--152.
+
+\bibitem{Van82}
+{\sc G.~{Van {der} Hoek}}, {\em Asymptotic properties of reduction methods
+  applying linearly equality constrained reduced problems}, Math. Program., 16
+  (1982), pp.~162--189.
+
+\bibitem{VanS99}
+{\sc Robert~J. Vanderbei and David~F. Shanno}, {\em An interior-point algorithm
+  for nonconvex nonlinear programming}, Comput. Optim. Appl., 13 (1999),
+  pp.~231--252.
+
+\bibitem{IPOPT}
+{\sc Andreas W{\"a}chter, Lorenz~T. Biegler, Yi-Dong Lang, and Arvind
+  Raghunathan}, {\em {IPOPT}: {A}n interior point algorithm for large-scale
+  nonlinear optimization}.
+\newblock http://www.coin-or.org.
+
+\bibitem{Wil63}
+{\sc R.~B. Wilson}, {\em A simplicial method for convex programming}, PhD
+  thesis, Harvard University, 1963.
+
+\bibitem{ZBLN97}
+{\sc C.~Zhu, R.~H. Byrd, P.~Lu, and J.~Nocedal}, {\em Algorithm 778:
+  {L-BFGS-B---Fortran} subroutines for large-scale bound constrained
+  optimization}, ACM Trans. Math. Software, 23 (1997), pp.~550--560.
+
+\end{thebibliography}

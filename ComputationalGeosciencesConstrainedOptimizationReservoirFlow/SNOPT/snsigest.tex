@@ -1,0 +1,2940 @@
+%01/02/05 Submitted (email to Lou Primus)
+%12/21/04 PEG, MAS Started from 35001.tex (SNOPT paper in SIOPT 2002)
+
+%KMK, epub/pagination, 4/18/02
+%MBI PRETEX 11/7/01
+%MSC txcx 2/15/02
+%ACM final correx 4/11/02
+
+%\documentclass[final,leqno,onefignum,onetabnum]{siamltex}
+ \documentclass[draft,leqno,onefignum,onetabnum]{siamltex}
+
+\usepackage{latexsym,pst-node,amsmath,amssymb}
+
+\title{SNOPT: An SQP Algorithm for Large-Scale Constrained Optimization%
+   \thanks{%Received by the editors January 3, 2005;
+           %accepted for publication (in revised form) xxx 00, 2005;
+           Published electronically xxx 00, 2005.
+           This paper originally appeared in
+           \emph{SIAM Journal on Optimization}, Volume 12,
+           Number 4, 2002, pages 979--1006.
+           All sections have been expanded to cover
+           new algorithmic features and more extensive test problems.
+           \URL sirev/00-0/00000.html}}
+
+\author{Philip E. Gill%
+   \thanks{Department of Mathematics, University of California,
+           San Diego, La Jolla, CA 92093-0112
+           (pgill@ucsd.edu).
+           The research of this author was supported by
+           National Science Foundation grants
+           DMI-9424639, CCR-9896198, DMS-9973276 and DMS-0208449.}
+   \and Walter Murray%
+   \thanks{Department of Management Science and Engineering,
+           Stanford University, Stanford, CA 94305-4026
+           (walter@stanford.edu, saunders@stanford.edu).
+           The research of these authors was supported by
+           National Science Foundation grants
+           DMI-9500668, CCR-9988205, and CCR-0306662, and
+           Office of Naval Research grants
+           N00014-96-1-0274 and N00014-02-1-0076.}
+   \and Michael A. Saunders\footnotemark[3]}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% macros
+
+\def\A{_{\scriptscriptstyle A}}
+\def\BS{_{\scriptscriptstyle BS}}
+\def\cond{\hbox{\rm cond}}
+\def\D{_{\scriptscriptstyle D}}
+%\def\Deltait{\mit \Delta}
+%\def\Deltait{\mathnormal{\Delta}}
+
+%%%% New code
+\ifx\varDelta\undefined%
+\def\varDelta{{\mathit\Delta}}
+\def\varOmega{{\mathit\Omega}}
+\else
+\fi
+\def\Deltait{\varDelta}
+\def\Omegait{\varOmega}
+%%%% end of new code
+
+\def\disp{\displaystyle}
+\def\drop{^{\null}}
+%\def\etal{{\em et al.\ }}  %%% e.g., Gill \etal (1986)
+\def\etal{et al.}  %%% No italics!!  Also, must say \etal\
+\def\grad{\nabla}
+\def\half  {{\textstyle{\frac12}}}
+\def\Hbar{\skew5\bar H}
+\def\Hess{\nabla^2}
+\def\kp#1{_{k+#1}}
+\def\km#1{_{k-#1}}
+\def\m{\phantom-}
+\def\mat#1#2{(\; #1 \quad #2 \;)}
+\def\Mscr{{\mathcal M}}
+\def\minim{\mathop{\hbox{\rm minimize}}}
+\def\minimize#1{{\displaystyle\minim_{#1}}}
+\def\mod#1{|#1|}
+\def\N{_{\scriptscriptstyle N}}
+\def\R{_{\scriptscriptstyle R}}
+\def\Null{\mathop{\hbox{\rm null}}}
+\def\nbar{\skew2\bar n}
+\def\norm#1{\|#1\|}
+\newcommand{\normm}[1]{\biggl\|#1\biggr\|}
+\def\nthinsp{\mskip -2   mu}
+\def\Lscr{{\mathcal L}}
+%\def\Omegait{{\mathnormal{\Omega}}} %replaced above
+\def\pihat{\skew1\widehat \pi}
+\def\pistar{\pi\superstar}
+\def\P{_{\scriptscriptstyle P}}
+\def\Q{_{\scriptscriptstyle Q}}
+\def\Rbar{\skew5\bar R}
+\def\Rhat{\widehat R}
+\def\shat{\widehat s}
+\def\sstar{s\superstar}
+\def\subject{\mbox{\rm subject to}}
+\def\superstar{^{\raise 0.5pt\hbox{$\nthinsp *$}}}
+\def\Seq#1{\{ #1 \}}
+\def\Set#1{\{\, #1 \,\}}
+\def\T{^T\!}
+\def\inv{^{-1}}
+\def\Tinv{^{-T}\!}
+\def\words#1{\hbox{\quad#1\quad}}
+%\def\Re{I\!\!R}
+%\def\R{\mathbb R}      %oops! (\R defined differently above!) acm
+\def\Re{\mathbb R}
+\newcommand{\ubar}{\skew3\bar u}
+\def\V{_{\scriptscriptstyle V}}
+
+\def\Wbar{\skew3\bar W}
+\def\What{\widehat W}
+\def\xbar{\skew{2.8}\bar x}
+\def\xhat{\skew{2.8}\widehat x}
+\def\xstar{x\superstar}
+\def\Y{_{\scriptscriptstyle Y}}
+\def\Z{_{\scriptscriptstyle Z}}
+\def\Zbar{\skew5\bar Z}
+\def\Zhat{\widehat Z}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% snopt macros
+
+ \def\hatbox{\hskip 2pt%
+             \widehat{\phantom{\hbox{\vrule width 2pt height 3pt\hskip 1pt}}}%
+             \hskip 2pt}
+
+ \def\ka#1{k\mskip -0.75 mu\mbox{\it#1}}
+ \def\kb#1{k\mskip -0.90 mu\mbox{\scriptsize\it#1}}
+
+ \def\strut{\rule[-1.25ex]{0pt}{4ex}}%
+ \def\strutl{\rule[-1.25ex]{0pt}{3ex}}%
+ \def\strutu{\rule{0pt}{3ex}}%
+
+ \def\bigtimes{\mbox{\Large $\times$}}
+
+ \def\Deltay{\Deltait y}
+ \def\Deltax{\Deltait x}
+ \def\Deltapi{\Deltait pi}
+
+% \newcommand\Deltay{{\mathnormal\Delta} y}     % trying to get these to work!!
+% \def\Deltax{{\mathnormal{\Delta}} x}
+% \def\Deltapi{{\mathnormal{\Delta}} pi}
+
+ \def\GQP#1{GQP$_{#1}$}
+ \def\GQPk{GQP$_k$}
+
+ \def\fk{f_k}
+ \def\gk{g_k}
+ \def\ck{c_k}
+ \def\Jk{J_k}
+ \def\gkp{g_{k+1}}
+ \def\Jkp{J_{k+1}}
+
+ \def\cL{c_{\scriptscriptstyle L}} % the constraint linearization
+ \def\dL{d_{\scriptscriptstyle L}} % the departure from linearity
+ \def\L {\Lscr}                    % the modified Lagrangian
+ \def\LQ{\Lscr_q}                  % quadratic approx of the modified Lagr'n
+ \def\LA{\Lscr\A}                  % the augmented modified Lagrangian
+
+ \def\Lmax{\hbox{$\tau_{\scriptscriptstyle L}$}}  % LU factor tol
+ \def\NP#1{NP$(#1)$}
+ \def\QP#1{QP$_{#1}$}
+ \def\QPk {QP$_k$}
+ \def\RL {\ensuremath{\mathcal{R}_L}}   % linear feasible region
+ \def\Scr{\ensuremath{\mathcal{S}}}
+\def\v#1{\texttt{#1}}
+%\def\z{\phantom0}
+
+%\def\LA#1#2{{\small LA#1#2}}      % For LA05, but already used above
+ \def\MA#1#2{{\small MA#1#2}}      % For MA28
+ \def\AMPL  {{\small AMPL}}
+ \def\CONOPT{{\small CONOPT}}
+ \def\COPS  {{\small COPS}}
+ \def\CUTE  {{\small CUTE}}
+ \def\CUTEr {{\small CUTEr}}
+ \def\DONLP {{\small DONLP}}
+ \def\GALAHAD{{\small GALAHAD}}
+ \def\GAMS  {{\small GAMS}}
+ \def\IPOPT {{\small IPOPT}}
+ \def\KNITRO{{\small KNITRO}}
+ \def\Knossos{{\small \sc Knossos}}
+ \def\LANCELOT{{\small LANCELOT}}
+ \def\LOQO  {{\small LOQO}}
+ \def\LSQR  {{\small LSQR}}
+ \def\LSSOL {{\small LSSOL}}
+ \def\LSSQP {{\small LSSQP}}
+ \def\LUSOL {{\small LUSOL}}
+ \def\MINOS {{\small MINOS}}
+ \def\NLPQL {{\small NLPQL}}
+ \def\NPSOL {{\small NPSOL}}
+ \def\OTIS  {{\small OTIS}}
+ \def\QPA   {{\small QPA}}
+ \def\QPOPT {{\small QPOPT}}
+ \def\SNOPT {{\small SNOPT}}
+ \def\SQOPT {{\small SQOPT}}
+ \def\SYMMLQ{{\small SYMMLQ}}
+
+\def\problem#1#2#3#4{\fbox
+   {\begin{tabular*}{0.84\textwidth}
+    {@{}l@{\extracolsep{\fill}}l@{\extracolsep{6pt}}l@{\extracolsep{\fill}}c@{}}
+      #1 & $\minimize{#2}$ & $#3$ & $ $ \\[5pt]
+         & $\subject$      & $#4$ & $ $
+    \end{tabular*}}}
+
+\def\sb  {\hbox to 0pt{$\null^s$\hss}}
+\def\hp  {\hbox to 0pt{$\null^h$\hss}}
+\def\ff  {\hbox to 0pt{$\null^*$\hss}}
+\def\inf {\hbox to 0pt{$\null^i$\hss}}
+\def\cbi {\hbox to 0pt{$\null^c$\hss}}
+\def\linf{\hbox to 0pt{$\null^l$\hss}}
+\def\itr {\hbox to 0pt{$\null^t$\hss}}
+\def\acc {\hbox to 0pt{$\null^e$\hss}}
+\def\unb {\hbox to 0pt{$\null^u$\hss}}
+\def\Cute#1{\hbox{\it\lowercase{#1}\/}}
+\def\Ampl#1{\hbox{\it#1\/}}
+\def\n#1{{\tt #1}}
+
+
+% New macros for SIGEST article
+
+\newcommand{\pmat}[1]{\begin{pmatrix}#1\end{pmatrix}}
+\newcommand{\pvec}[1]{\begin{pmatrix}#1\end{pmatrix}}
+\newcommand{\till}{\,{:}\,}                 %  Matlab i = 1:n as i = 1\till n
+\newcommand{\rhobar}{\skew4\bar\rho}
+\newcommand{\rhohat}{\skew4\hat\rho}
+\newcommand{\rhostar}{\rho\superstar}
+\newcommand{\twonorm}[1]{\norm{#1}_2}
+\newcommand{\onenorm}[1]{\norm{#1}_1}
+\newcommand{\infnorm}[1]{\norm{#1}_{\infty}}
+
+\begin{document}
+
+\maketitle
+\vspace{-1.2in}
+\slugger{sirev}{2005}{00}{0}{00--00}
+\vspace{.9in}
+
+\setcounter{page}{1}
+
+\begin{abstract}
+Sequential quadratic programming (SQP) methods have proved highly
+effective for solving constrained optimization problems with smooth
+nonlinear functions in the objective and constraints.  Here we
+consider problems with general inequality constraints (linear and
+nonlinear).  We assume that first derivatives  are available and that
+the constraint gradients are sparse.  Second derivatives are
+assumed to be unavailable or too expensive to calculate.
+
+We discuss an SQP algorithm that uses a smooth augmented Lagrangian
+merit function and makes explicit provision for infeasibility in the
+original problem and the QP subproblems.  The Hessian of the
+Lagrangian is approximated using a limited-memory quasi-Newton method.
+
+SNOPT is a particular implementation that uses a reduced-Hessian
+semidefinite QP solver (SQOPT) for the QP subproblems. It
+is designed for problems with many thousands of constraints and
+variables, but is best suited for problems with a moderate number of
+degrees of freedom (say, up to 2000).
+Numerical results are given for most of the
+CUTEr and COPS test collections (about 1020 examples of all
+sizes up to 40000 constraints and variables,
+and up to 20000 degrees of freedom).
+\end{abstract}
+
+\begin{keywords}
+          large-scale optimization, nonlinear programming,
+          nonlinear inequality constraints,
+          sequential quadratic programming, quasi-Newton methods,
+          limited-memory methods
+\end{keywords}
+
+\begin{AMS}
+   49J20, 49J15, 49M37, 49D37, 65F05, 65K05, 90C30
+\end{AMS}
+
+\begin{PII}
+S1052623499350013
+\end{PII}
+
+\pagestyle{myheadings}
+\thispagestyle{plain}
+\markboth{P. E. GILL,  W. MURRAY,  AND  M. A. SAUNDERS}
+         {SNOPT: A LARGE-SCALE SQP ALGORITHM}
+
+
+
+ \section{Introduction}  \label{sec-intro}
+ %%%%%%%%%%%%%%%%%%%%%
+
+The algorithm to be described applies to constrained optimization
+problems of the form
+$$
+   \problem{(NP)}{x \in \mathbb R^n}{f(x)}
+      {l \le \pmat{x\\c(x)\\Ax \strutl} \le u,}
+$$
+where $f(x)$ is a linear or nonlinear objective function,
+$c(x)$ is a vector of nonlinear constraint functions $c_i(x)$
+with sparse derivatives, $A$ is a sparse matrix, and $l$ and $u$
+are vectors of lower and upper bounds.
+We assume that the nonlinear functions are smooth and that their first
+derivatives are available (and possibly expensive to evaluate).
+
+The idea of sequential quadratic programming (SQP) methods is to solve
+the nonlinearly constrained problem using a sequence of
+\emph{quadratic programming} (QP) subproblems.  The constraints
+of each QP subproblem are linearizations of the constraints in
+the original problem, and the objective function of the
+subproblem is a quadratic approximation to the Lagrangian function.
+
+\SNOPT{} (Sparse Nonlinear OPTimizer) \cite{SNOPT7} is the
+implementation of a particular SQP algorithm that exploits sparsity in
+the constraint Jacobian and maintains a limited-memory quasi-Newton
+approximation $H_k$ to the Hessian of the Lagrangian.  A new method
+is used to update $H_k$ in the presence of negative curvature.  The QP
+subproblems are solved using an inertia-controlling reduced-Hessian
+active-set method (\SQOPT) that allows for variables appearing
+linearly in the objective and constraint functions.  (The
+limited-memory Hessian is then semidefinite.)  Other features include
+the treatment of infeasible nonlinear constraints using elastic
+programming, use of a well-conditioned nonorthogonal basis for the
+null-space of the QP working set (assisted by sparse rank-revealing LU
+factors), early termination of the QP subproblems, and
+finite-difference estimates of missing gradients.
+
+The method used by the QP solver \SQOPT{} is based on solving a sequence of
+linear systems involving the reduced Hessian $Z\T H_k Z$, where $Z$ is
+defined implicitly using the sparse LU factorization.  Reduced-Hessian
+methods are best suited to problems with few degrees of freedom;
+i.e., problems for which many constraints are
+active.  However, the implementation allows for
+problems with an arbitrary number of degrees of freedom.
+
+
+
+
+\subsection{Infeasible constraints} \label{sec-infeas}
+
+\SNOPT{} deals with infeasibility using $\ell_1$ penalty functions.
+First, infeasible linear constraints are detected by solving a problem
+of the form
+%
+%First, a conventional Phase 1 simplex algorithm is applied to the
+%linear constraints and bounds on $x$.  (This starts with any convenient
+%basis and minimizes the one-norm of infeasibilities for the
+%basic variables.)  If the linear constraints prove to be infeasible,
+%\SNOPT{} solves a problem of the form
+\[
+   \problem{(FLP)}{x,v,w}{e^T(v + w)}{%
+                   l \le \pmat{x\\ Ax - v + w \strutl} \le u, \ \ %
+                   v \ge 0,\ \ w \ge 0,}
+\]
+where $e$ is a vector of ones and $v$ and $w$ are handled implicitly.
+This is equivalent to minimizing the one-norm of the general linear
+constraint violations subject to the simple bounds---often called
+\emph{elastic programming} in the linear programming literature
+\cite{BroG75b}.  Elastic programming has long been a feature of the
+XS system of Brown and Graves \cite{BroG75a}.  Other algorithms based
+on minimizing one-norms of infeasibilities are given by Conn
+\cite{Con76} and Bartels \cite{Bar80}.
+
+  If the linear constraints are infeasible ($v \ne 0$ or $w \ne 0$),
+\SNOPT{} terminates without computing the nonlinear functions.
+Otherwise, all subsequent iterates satisfy the linear constraints.
+%(As with \NPSOL, such a strategy allows linear constraints to be used
+%to define a region in which $f$ and $c$ can be safely evaluated.)
+(Sometimes this feature helps ensure that the functions and gradients are well
+defined; see section~\ref{sec-undefined-f}.)
+
+\SNOPT{} then proceeds to solve (NP) as given, using QP subproblems
+based on linearizations of the nonlinear constraints.
+If a QP subproblem proves to be infeasible or unbounded (or if the
+Lagrange multiplier estimates for the nonlinear constraints become
+large), \SNOPT{} enters \emph{nonlinear elastic mode} and solves the problem
+\[
+   \problem{(\NP{\gamma})}{x,v,w}{f(x) + \gamma e^T(v + w)}
+                 { l \le \pmat{x\\ c(x) - v + w \\Ax \strutl} \le u,
+                   \ \ v \ge 0,\ \ w \ge 0,}
+\]
+where $f(x) + \gamma e^T(v + w)$ is called a \emph{composite objective},
+and the penalty parameter $\gamma$ ($\gamma \ge 0$) may take a
+finite sequence of increasing values.
+If (NP) has a feasible solution and $\gamma$ is sufficiently large,
+the solutions to (NP) and (\NP{\gamma}) are identical.
+If (NP) has no feasible solution, (\NP{\gamma}) will tend to
+determine a ``good'' infeasible point if $\gamma$ is again sufficiently
+large.  (If $\gamma$ were infinite, the nonlinear constraint violations would
+be minimized subject to the linear constraints and bounds.)
+
+A similar $\ell_1$ formulation of (NP) is used in the SQP method of Tone
+\cite{Ton83} and is fundamental to the S$\ell_1$QP algorithm of
+Fletcher \cite{Fle85a}.  See also Conn \cite{Con73} and Spellucci
+\cite{Spe98b}.  An attractive feature is that only linear terms are
+added to (NP), giving no increase in the expected degrees of freedom at
+each QP solution.
+
+\subsection{The SQP approach}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+An SQP method was first suggested by Wilson \cite{Wil63} for the
+special case of convex optimization.  The approach was popularized
+mainly by Biggs \cite{Big72}, Han \cite{Han76} and Powell
+\cite{Pow77,Pow78b} for general nonlinear constraints.  Further
+history of SQP methods and extensive bibliographies are given in
+\cite{GilMW81,Fle87a,Mur97,NocW99,ConGT00a}.  For a survey of recent
+results, see Gould and Toint \cite{GouldT99}.
+
+Several general-purpose SQP solvers have proved reliable and efficient
+during the last 20 years.  For example, under mild conditions the solvers
+\NLPQL{} \cite{Sch85}, \NPSOL{} \cite{GilMSW86a,GilMSW92}, and \DONLP{} \cite{Spe98}
+typically find a (local) optimum from an arbitrary starting point,
+and they require relatively few evaluations of the problem functions
+and gradients compared to traditional solvers such as
+\MINOS{} \cite{MurS78,MurS82,MurS98} and \CONOPT{} \cite{Dru85,CONOPT}.
+
+SQP methods have been particularly successful in solving the
+optimization problems arising in optimal trajectory calculations.  For
+many years, the optimal trajectory system \OTIS{} (Hargraves and Paris
+\cite{HP87}) has been applied successfully within the aerospace
+industry, using \NPSOL{} to solve the associated optimization
+problems.  \NPSOL{} is a transformed Hessian method that treats the
+Jacobian of the general constraints as a dense matrix and updates an
+explicit quasi-Newton approximation to $Q_k^T H_k Q_k$, the
+transformed Hessian of the Lagrangian, where $Q_k$ is orthogonal.  The
+QP subproblem is solved using a linearly constrained linear
+least-squares method that exploits the properties of the transformed
+Hessian.
+
+Although \NPSOL{} has solved \OTIS{} examples with as many as two
+thousand constraints and over a thousand variables, the need to handle
+increasingly large models has provided strong motivation for the
+development of new sparse SQP algorithms.  Our aim is to describe a
+new SQP method that has the favorable theoretical properties of the
+\NPSOL\ algorithm but is suitable for a broad class of large problems,
+including those arising in trajectory optimization.
+
+There has been considerable interest in extending SQP
+methods to the large-scale case (sometimes using exact
+second derivatives).  Some of this work has focused on
+problems with nonlinear \emph{equality} constraints.  The method of
+Lalee, Nocedal, and Plantenga \cite{LNP98},
+% is a large-scale version of
+%somewhat
+related to the trust-region method of Byrd \cite{Byr87}
+and Omojokun \cite{Omo89},
+uses either the exact Lagrangian Hessian or a limited-memory
+quasi-Newton approximation defined by the method of Zhu \etal\ \cite{ZBLN97}.
+The method of Biegler, Nocedal, and Schmid \cite{BNS95}
+is in the class of \emph{reduced-Hessian methods}, which maintain a
+dense approximation to the reduced Hessian, using quasi-Newton
+updates.
+
+For large problems with general inequality constraints as in
+problem~(NP), SQP methods have been proposed by Eldersveld \cite{Eld91},
+Tjoa and Biegler \cite{TB91}, Fletcher and Leyffer \cite{FleL98,FleL02}, and
+Betts and Frank \cite{BF94}.  The first three approaches are also
+reduced-Hessian methods.  Eldersveld forms a full Hessian
+approximation from the reduced Hessian, and his implementation \LSSQP\
+solves the same class of problems as \SNOPT{}\@.  In Tjoa and Biegler's
+method, the QP subproblems are solved by eliminating variables using
+the (linearized) equality constraints, and the remaining variables are
+optimized using a dense QP solver.  As bounds on the eliminated
+variables become dense constraints in the reduced QP, the method is
+best suited to problems with many nonlinear equality constraints but
+few bounds on the variables.  The filter-SQP method of Fletcher and
+Leyffer uses a reduced Hessian QP-solver in conjunction with an exact
+Lagrangian Hessian. This method is also best suited for problems with
+few degrees of freedom.  In contrast, the method of Betts and Frank
+employs an exact or finite-difference Lagrangian Hessian and a QP
+solver based on sparse KKT factorizations (see
+section~\ref{sec-future}).  It is therefore applicable to problems
+with many degrees of freedom.
+
+Several large-scale methods solve the QP subproblems by an interior
+method.  They typically require an exact or finite-difference
+Lagrangian Hessian but can accommodate many degrees of freedom.
+Examples are Boggs, Kearsley, and Tolle \cite{BKT99a,BKT99b} and
+Sargent and Ding \cite{SargD00}.
+
+
+\subsection{Other large-scale methods} \label{sec-Other-methods}
+
+\MINOS{} and versions 1 and 2 of \CONOPT{} are reduced-Hessian methods
+for general large-scale optimization.
+Like \SNOPT, they use first derivatives and were originally designed
+for large problems with few degrees of freedom (up to 2000, say).
+%although \MINOS{} can allow for any number; see section \ref{sec-CG}).
+For nonlinear constraints, \MINOS{} uses a \emph{linearly constrained
+  Lagrangian} method, whose subproblems require frequent evaluation of
+the problem functions.
+% These methods were first suggested by Robinson \cite{Rob72}
+% and Rosen and Kreuser \cite{RK72}.
+\CONOPT{} uses a \emph{generalized reduced gradient} method,
+which has the advantage of maintaining near-feasibility
+with respect to the nonlinear constraints,
+but again at the expense of many function evaluations.
+\SNOPT{} is likely to outperform \MINOS{} and \CONOPT{} when
+the functions (and their derivatives) are expensive to evaluate.
+Relative to \MINOS, an added advantage is \SNOPT's rigorous control of
+the augmented Lagrangian merit function to ensure global convergence,
+and explicit provision for infeasible subproblems.
+This is especially important when the constraints are highly
+nonlinear.
+
+A stabilized form of \MINOS{} named \Knossos{} has recently been
+developed \cite{FriS05} (it makes use of \MINOS{} or \SNOPT{}
+as subproblem solvers), and \CONOPT{} version 3 \cite{CONOPT}
+is now able to use second derivatives.
+
+ \LANCELOT{} \cite{CGT92a,Gould:2003:GLT} is another widely used
+package for large-scale constrained optimization.  It uses a
+\emph{bound constrained augmented Lagrangian} method,
+%(see, e.g., Bertsekas \cite{Ber82}).
+%Most constraints are
+%included in an augmented Lagrangian function, which is minimized
+%subject to the bounds.
+is effective with either first or second derivatives,
+and is suitable for large problems with many degrees of freedom.
+It complements \SNOPT{} and the other methods discussed above.
+A comparison between  \LANCELOT{}
+and \MINOS{} has been made in \cite{BCGST97a,BCGST97b}.
+
+ \LOQO{} \cite{VanS99}, \KNITRO{} \cite{ByrHN99,ByrGN00}
+and \IPOPT{} \cite{IPOPT} are
+examples of large-scale optimization packages that treat inequality
+constraints by a \emph{primal-dual interior method}.  They require
+second derivatives but can accommodate many degrees of freedom.
+
+All of the solvers mentioned are well suited to algebraic modeling
+environments such as \GAMS{} \cite{GAMS} and \AMPL{} \cite{AMPL}
+because the functions and derivatives are then available cheaply
+and to high precision.
+
+
+ \subsection{Notation}  \label{sec-notation}
+
+Some important quantities follow:
+$$
+\begin{tabular}{ll}
+        $(x, \pi, s)$               & primal, dual and slack variables for problem (GNP)
+                                      (section \ref{sec-GNP}),
+\\[2pt] $(\xstar, \pistar, \sstar)$ & optimal variables for problem (GNP),
+\\[2pt] $(x_k, \pi_k, s_k)$         & the $k$th estimate of $(\xstar,\pistar,\sstar)$,
+\\[2pt] $f_k$, $g_k$, $c_k$, $J_k$  & functions and gradients evaluated at $x_k$,
+\\[2pt] $(\xhat_k,\pihat_k,\shat_k)$& optimal variables for QP subproblem (\GQPk)
+                                      (section \ref{sec-GQP}).
+\end{tabular}
+$$
+
+ \section{The SQP iteration} \label{sec-SQP}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Here we discuss the main features of an SQP method for solving a
+generic nonlinear program.  All features are readily specialized to
+the more general constraints in problem (NP).
+
+ \subsection{The generic problem}  \label{sec-GNP}
+
+In this section we take the problem to be
+$$
+   \problem{(GNP)}{x}{f(x)}{c(x) \ge 0,}
+$$
+where $x \in \mathbb R^n$, $c \in \mathbb R^m$, and the functions $f(x)$ and $c_i(x)$
+have continuous second derivatives. The gradient of $f$ is denoted
+by the vector $g(x)$, and the gradients of each element of $c$ form
+the rows of the Jacobian matrix $J(x)$.
+
+We assume that a KKT point $(\xstar,\pistar)$
+exists for (GNP), satisfying the first-order optimality conditions:
+\begin{equation}                                       \label{eqn-KKT1}
+  c(\xstar) \ge 0, \qquad \pistar \ge 0,
+                   \qquad c(\xstar)^T \pistar = 0,
+                   \qquad J(\xstar)^T \pistar = g(\xstar).
+\end{equation}
+
+ \subsection{Structure of the SQP method}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ An SQP method obtains search directions from a sequence of QP subproblems.  Each QP subproblem minimizes a quadratic
+model of a certain Lagrangian function subject to linearized
+constraints.  Some merit function is reduced along each search
+direction to ensure convergence from any starting point.
+
+ The basic structure of an SQP method involves \emph{major} and
+\emph{minor} iterations.  The major iterations generate a sequence of
+iterates $(x_k,\pi_k)$ that converge to $(\xstar,\pistar)$.
+At each iterate a QP subproblem is used to generate a search direction
+towards the next iterate $(x\kp1,\pi\kp1)$.  Solving such a subproblem
+is itself an iterative procedure, with the \emph{minor} iterations of an
+SQP method being the iterations of the QP method.
+
+% For an overview of SQP methods, see, for example, Boggs and Tolle
+% \cite{BoggsT95}, Fletcher \cite{Fle87a}, Gill, Murray, and Wright
+% \cite{GilMW81},
+% Murray \cite{Mur97}, and Powell \cite{Pow83}.
+
+ \subsection{The modified Lagrangian}  \label{sec-Lagrangians}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Let $x_k$ and $\pi_k$ be estimates of $\xstar$ and $\pistar$.
+For several reasons, our SQP algorithm is based on the
+\emph{modified Lagrangian} associated with (GNP), namely,
+\begin{equation}                                 \label{eqn-def-ML}
+        \L(x,x_k,\pi_k) = f(x) - \pi_k^T \dL(x,x_k),
+\end{equation}
+which is defined in terms of the \emph{constraint linearization}
+and the \emph{departure from linearity}:
+\begin{eqnarray*}
+        \cL(x,x_k) &=& \ck  + \Jk(x - x_k),
+     \\ \dL(x,x_k) &=& c(x) - \cL(x,x_k);
+\end{eqnarray*}
+see Robinson \cite{Rob72} and Van der Hoek \cite{Van82}.
+The first and second derivatives of the modified Lagrangian with
+respect to $x$ are
+\begin{eqnarray*}
+        \grad\L(x,x_k,\pi_k) &=& g(x) - (J(x) - \Jk)\T \pi_k, \\[3pt]
+        \Hess\L(x,x_k,\pi_k) &=& \disp \Hess f(x)
+                                           - \sum_i (\pi_k)_i \Hess c_i(x).
+\end{eqnarray*}
+Observe that $\Hess\L$ is independent of $x_k$
+(and is the same as the Hessian of the conventional Lagrangian).
+At $x = x_k$, the modified Lagrangian has the same function and
+gradient values as the objective:
+% and the same Hessian as the conventional Lagrangian:
+$
+           \L(x_k,x_k,\pi_k) = \fk, \ %\qquad
+     \grad \L(x_k,x_k,\pi_k) = \gk.
+$
+
+ \subsection{The QP subproblem}  \label{sec-GQP}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Let the quadratic approximation to $\L$ at $x_k$ be
+$$
+    \LQ(x,x_k,\pi_k) =  \fk + \gk\T (x - x_k)
+                      + \half (x - x_k)^T \Hess\L(x_k,x_k,\pi_k) (x - x_k).
+$$
+If $(x_k,\pi_k) = (\xstar, \pistar)$, optimality conditions for the
+QP
+$$
+   \problem{(GQP$^*$)}{x}
+           {\LQ(x,x_k,\pi_k)}
+           {\hbox{linearized constraints \ \ }\cL(x,x_k) \ge 0}
+$$
+are identical to those for the original problem (GNP)\@.  This suggests
+that if $H_k$ is an approximation to $\Hess\L$ at the point $(x_k,\pi_k)$,
+an improved estimate of the solution may be found from $(\xhat_k,\pihat_k)$,
+the solution of the following QP subproblem:
+$$
+   \problem{(\GQPk)}{x}
+           {\fk + \gk^T(x-x_k) + \half(x-x_k)\T H_k (x-x_k)}
+           {\ck + \Jk(x-x_k) \ge 0.}
+$$
+Optimality conditions for (\GQPk) may be written as
+$$
+  \begin{array}{r@{\hspace{4pt}}c@{\hspace{4pt}}l@{\hspace{20pt}}%
+                                r@{\hspace{4pt}}c@{\hspace{4pt}}l}
+   \ck + \Jk(\xhat_k-x_k)      &=  & \shat_k,              &%
+                      \pihat_k &\ge&  0,  \quad \shat_k\ge 0,        \\[1ex]
+   \gk + H_k(\xhat_k-x_k)      &=  &  \Jk^T\pihat_k,       &%
+             \pihat_k^T\shat_k &=  &  0,
+  \end{array}
+$$
+where $\shat_k$ is a vector of slack variables for the linearized
+constraints.  In this form, $(\xhat_k,\pihat_k,\shat_k)$ may be
+regarded as estimates of $(\xstar, \pistar, \sstar)$, where the
+slack variables $\sstar$ satisfy $c(\xstar) - \sstar = 0$, $\sstar \ge 0$.
+The vector $\shat_k$ is needed explicitly for the line search
+(section~\ref{sec-merit}).
+
+
+ \subsection{The working-set matrix \protect\boldmath$W_k$} \label{sec-WS}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ The \emph{working set} is an important quantity for both the major and
+the minor iterations.  It is the current estimate of the set of
+constraints that are binding at a solution.
+More precisely, suppose that (\GQPk) has just been solved.
+Although we try to regard the QP solver as a ``black box,''
+we expect it to return an independent set of constraints
+that are active at the QP solution
+(even if the QP constraints are degenerate).
+This is an optimal working set for subproblem (\GQPk).
+
+The same constraint indices define a working set for (GNP)
+and for subproblem (GQP$\kp1$).  The corresponding gradients
+form the rows of the \emph{working-set matrix} $W_k$,
+an $n\Y \!\times n$ full-rank submatrix of the Jacobian $\Jk$.
+
+
+ \subsection{The null-space matrix \protect\boldmath$Z_k$} \label{sec-Z}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Let $Z_k$ be an $n\times n\Z$ full-rank matrix that spans
+the null space of $W_k$.  (Thus, $n\Z = n - n\Y$, and $W_k Z_k =0$.)
+The QP solver will often return $Z_k$ as part of some
+matrix factorization.  For example, in \NPSOL{} it is part of an
+orthogonal factorization of $W_k$, while in \LSSQP{} \cite{Eld91}
+(and in the current \SNOPT) it is defined implicitly from a sparse LU
+factorization of part of $W_k$.
+In any event, $Z_k$ is useful for theoretical discussions,
+and its column dimension has strong practical implications.
+Important quantities are the \emph{reduced Hessian} $Z_k\T H_k Z_k$
+and the \emph{reduced gradient} $Z_k\T g_k$.
+
+
+ \subsection{The merit function and line search}  \label{sec-merit}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ Once the QP solution $(\xhat_k,\pihat_k,\shat_k)$ has been
+determined, new estimates of the (GNP) solution are computed using a line
+search from the current solution $(x_k,\pi_k,s_k)$ toward the
+QP solution.  The line search must achieve a \emph{sufficient decrease}
+in the augmented Lagrangian merit function
+\begin{equation}                              \label{eqn-def-merit}
+        \Mscr_\rho(x,\pi,s)
+          = f(x) - \pi\T \bigl( c(x) - s \bigr)
+            + \half \sum_{i=1}^m \rho_i\big( c_i(x) - s_i\big)^2,
+\end{equation}
+where $\rho$ is a vector of penalty parameters.
+% that may first need to be changed.
+For step lengths $\alpha \in (0,1]$, let $v(\alpha)$ be points
+along the line, and let $\varphi_\rho(\alpha)$ denote $\Mscr_\rho$
+as a univariate function of $\alpha$:
+\begin{equation*}                               \label{eqn-def-newvars}
+   v(\alpha) = \pmat{ x_k   \\ \pi_k   \\ s_k   }
+        + \alpha \pmat{  \xhat_k -  x_k
+                     \\ \pihat_k -\pi_k
+                     \\  \shat_k -  s_k },
+      \qquad
+   \varphi_\rho(\alpha) = \Mscr_\rho(v(\alpha)).
+\end{equation*}
+%gives a \emph{sufficient decrease} in the merit function
+%(\ref{eqn-def-merit}).
+Also let $\varphi'_\rho(0)$ denote the
+directional derivative of the merit function at the
+base point $\alpha = 0$ for a given vector $\rho$.
+
+The default initial value for the penalty parameters is
+$\rho = 0$ (for $k=0$).  Before each line search,
+some elements of $\rho$ may need to be changed
+to ensure that the directional derivative $\varphi'_\rho(0)$ is
+sufficiently negative \cite{GilMSW92}.
+First we find the vector $\rhostar$ that solves the
+linearly constrained least-squares problem
+\[
+   \problem{(LSP$_\rho$)}{\rho}
+           {\twonorm{\rho}^2}
+           {\varphi'_\rho(0) = -\half p_k\T H_k p_k,\ \ \rho \ge 0,}
+\]
+where $p_k \equiv \xhat_k - x_k$.  The solution of (LSP$_\rho$)
+can be obtained analytically, and it can be shown that
+$\varphi'_\rho(0) \le -\half p_k\T H_k p_k$
+for any $\rho \ge \rhostar$ \cite{Eld91,GilMSW86a,GilMSW92}.
+
+It is important to allow the penalty parameters to decrease during
+the early major iterations.  However, to guarantee convergence, this
+must be done in such a way that the penalty parameters cannot
+oscillate indefinitely.  The reduction scheme involves a damping factor
+$\Deltait_\rho \ge 1$.  Let $\rho$ denote
+the vector of penalty parameters at the start of iteration $k$.
+The idea is to define the new parameter $\rhobar_i$
+as the geometric mean of $\rho_i$ and a damped value of
+$\rhostar_i$ as long as this mean is sufficiently positive and not too
+close to $\rho_i$:
+\begin{equation} \label{eqn-penalty-update}
+  \rhobar_i = \max\{ \rhostar_i, \rhohat_i \},
+  \ \ \mbox{where}\ \
+  \rhohat_i = \left\{
+    \begin{array}{ll}
+       \rho_i           & \hbox{if $\rho_i < 4(\rhostar_i +\Deltait_\rho)$}
+ \\[2pt]
+      \big(\rho_i(\rhostar_i + \Deltait_\rho)\big)^{1/2} & \hbox{otherwise.}
+    \end{array}
+  \right.
+\end{equation}
+Initially $\Deltait_\rho=1$ (for $k=0$).  Thereafter it is increased
+by a factor of two whenever $\twonorm{\rho}$ increases after a
+consecutive sequence of iterations in which the penalty norm
+decreased, or, alternatively, $\twonorm{\rho}$ decreases after a
+consecutive sequence of iterations in which the penalty norm
+increased.  This choice of $\Deltait_\rho$ ensures that the penalty
+parameters can oscillate only a finite number of times.
+
+With $\rho \leftarrow \rhobar$ in the merit function (\ref{eqn-def-merit}),
+a safeguarded line search is used to find a step length $\alpha\kp1$
+that reduces $\Mscr_\rho$ to give the next solution
+estimate $v(\alpha\kp1) = (x\kp1,\pi\kp1,s\kp1)$.
+As in \NPSOL, $s\kp1$ is then redefined
+to minimize the merit function as a function of $s$ prior to the
+solution of (\GQP{k+1}) \cite{GilMSW86a,Eld91}.
+
+
+
+ \subsection{Bounding the constraint violation} \label{sec-viol-lim}
+
+In the line search, the following condition is enforced
+for some vector $b > 0$:
+\begin{equation}                 \label{eqn-expand-c}
+        c(x_k +\alpha_k p_k) \ge - b  \qquad (p_k \equiv \xhat_k - x_k).
+\end{equation}
+We use $b_i = \tau\V \max\{1,-c_i(x_0) \}$, where $\tau\V$ is a
+specified constant, e.g., $\tau\V = 10$.  This defines a region in
+which the objective is expected to be defined and bounded below.  (A
+similar condition is used in \cite{Spe81}.)  Murray and Prieto
+\cite{MurP95} show that under certain conditions, convergence can be
+assured if the line search enforces (\ref{eqn-expand-c}).  If the
+objective is bounded below in $\mathbb R^n$, then $b$ may be any large positive
+vector.
+
+If $\alpha_k$ is essentially zero (because $\norm{p_k}$ is very large),
+the objective is considered ``unbounded'' in the expanded region.
+Elastic mode is entered (or continued) as described in section~\ref{sec-unbounded}.
+
+
+ \subsection{The approximate Hessian} \label{sec-H}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+As suggested by Powell \cite{Pow78a}, we maintain a positive-definite
+approximate Hessian $H_k$.  On completion of the line search, let the
+change in $x$ and the gradient of the modified Lagrangian be
+$$
+%\begin{equation}                                      \label{eqn-delta-def}
+   \delta_k = x\kp1 - x_k  \words{and}
+        y_k = \grad\L(x\kp1,x_k,\pi) - \grad\L(x_k,x_k,\pi),
+%\end{equation}
+$$
+for some vector $\pi$.  An estimate of the curvature of the modified
+Lagrangian along $\delta_k$ is incorporated using the BFGS
+quasi-Newton update,
+$$
+%\begin{equation}                                      \label{eqn-BFGS}
+        H\kp1 = H_k + \theta_k y_k\drop y_k\T - \phi_k q_k\drop q_k\T,
+%\end{equation}
+$$
+where $q_k = H_k \delta_k$, $\theta_k = 1 / y_k\T \delta_k$,
+                        and $\phi_k   = 1 / q_k\T \delta_k$.
+When $H_k$ is positive-definite, $H\kp1$ is positive-definite if and
+only if the approximate curvature $y_k\T\delta_k$ is positive.  The
+consequences of a negative or small value of $y_k\T\delta_k$ are
+discussed in the next section.
+
+There are several choices for $\pi$, including the QP multipliers
+$\pihat_k$ and least-squares multipliers $\lambda_k$ (see, e.g.,
+\cite{GilM79b}).  Here we use the updated multipliers $\pi\kp1$
+from the line search, because they are responsive to short steps in
+the search and are available at no cost.  The definition of $\L$ from
+(\ref{eqn-def-ML}) yields
+$$
+%\begin{equation*} \label{eqn-y-def}
+   \begin{array}{r@{\hspace{4pt}}c@{\hspace{4pt}}l}
+      y_k &=& \grad\L(x\kp1,x_k,\pi\kp1) - \grad\L(x_k,x_k,\pi\kp1) \\[3pt]
+          &=& \gkp - \gk - (\Jkp - \Jk)^T \pi\kp1.
+   \end{array}
+%\end{equation*}
+$$
+
+ \subsection{Maintaining positive-definiteness} \label{sec-pd-H}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Since the Hessian of the modified Lagrangian need not be positive-definite
+at a local minimizer, the approximate curvature $y_k\T\delta_k$ can be
+negative or very small at points arbitrarily close to $(\xstar,\pistar)$.
+The curvature is considered not sufficiently positive if
+\begin{equation}                                 \label{eqn-min-curv}
+   y_k\T\delta_k < \sigma_k,
+   \qquad \sigma_k = \alpha_k(1 - \eta) p_k\T H_k p_k,
+\end{equation}
+where $\eta$ is a preassigned constant $(0 < \eta < 1)$ and $p_k$ is
+the search direction $\xhat_k - x_k$ defined by the QP subproblem.  In
+such cases, if there are nonlinear constraints, two
+attempts are made to modify the update: the first modifying $\delta_k$
+and $y_k$, the second modifying only $y_k$.  If neither modification
+provides sufficiently positive approximate curvature, no update is
+made.
+
+\subsection*{First modification}
+
+The purpose of this modification is to exploit the properties of the
+reduced Hessian at a local minimizer of (GNP)\@.
+We define a new point $z_k$ and evaluate the nonlinear
+functions there to obtain new values for $\delta_k$ and $y_k$:
+$$
+   \delta_k = x\kp1 - z_k, \qquad
+   y_k      = \grad\L(x\kp1,x_k,\pi\kp1) - \grad\L(z_k,x_k,\pi\kp1).
+$$
+We choose $z_k$ by recording $\xbar_k$, the first \emph{feasible}
+iterate found for problem (\GQPk) (see section~\ref{sec-SQOPT}).
+The search direction may be regarded as
+$$
+   p_k = (\xbar_k - x_k)  +  (\xhat_k - \xbar_k) \equiv p\R + p\N.
+$$
+We set $z_k = x_k + \alpha_k p\R$, giving $\delta_k = \alpha_k p\N$ and
+$$
+   y_k\T \delta_k  =      \alpha_k y_k\T p\N
+                  \approx \alpha_k^2 p\N^T \Hess\L(x_k,x_k,\pi_k) p\N,
+$$
+so that $y_k\T \delta_k$ approximates the curvature along $p\N$.
+If $W_k$, the final working set of problem (\GQPk), is also the working
+set at $\xbar_k$, then $W_k p\N = 0$, and it follows that
+$y_k\T\delta_k$ approximates the curvature for the reduced Hessian,
+which must be positive semidefinite at a minimizer of (GNP)\@.
+
+ The assumption that the QP working set does not change once $z_k$ is
+known is always justified for problems with equality constraints.  (See
+Byrd and Nocedal \cite{ByrN91} for a similar scheme in this context.)
+With inequality constraints, we observe that $W_k p\N \approx 0$,
+particularly during later major iterations, when the working set has
+settled down.
+
+ This modification exploits the fact that \SNOPT{} maintains
+feasibility with respect to any linear constraints in (GNP)\@.
+%(Such a strategy allows linear constraints to be used to define a
+%region in which $f$ and $c$ can be safely evaluated.)
+Although an additional function evaluation is required at $z_k$,
+we have observed that even when the Hessian of the
+Lagrangian has negative eigenvalues at a solution,
+the modification is rarely needed more than a few times if used
+in conjunction with the augmented Lagrangian modification discussed next.
+
+
+\subsection*{Second modification}
+
+ If $(x_k,\pi_k)$ is not close to $(\xstar,\pistar)$, the modified
+approximate curvature $y_k\T\delta_k$ may not be sufficiently
+positive, and a second modification may be necessary.  We
+choose $\Deltay_k$ so that $(y_k+\Deltay_k)\T\delta_k = \sigma_k$
+(if possible) and redefine $y_k$ as $y_k + \Deltay_k$. This
+approach was suggested by Powell \cite{Pow78b}, who proposed
+redefining $y_k$ as a linear combination of $y_k$ and $H_k\delta_k$.
+
+To obtain $\Deltay_k$, we consider the \emph{augmented} modified Lagrangian
+\cite{MurS82}:
+\begin{equation} \label{eqn-LA-def}
+        \LA(x,x_k,\pi_k)
+           = f(x) - \pi_k^T \dL(x,x_k)
+                  +   \half \dL(x,x_k)\T \Omegait \dL(x,x_k),
+\end{equation}
+where $\Omegait$ is a matrix of parameters to be determined:
+$\Omegait = \diag(\omega_i)$, $\omega_i \ge 0$, $i=1\till m$.
+The perturbation
+$$
+%\begin{equation} \label{eqn-Deltay}
+  \Deltay_k = (\Jkp - \Jk)\T \Omegait \dL(x\kp1,x_k)
+%\end{equation}
+$$
+is equivalent to redefining the gradient difference as
+\begin{equation} \label{eqn-newy}
+        y_k = \grad \LA(x\kp1,x_k,\pi\kp1) - \grad \LA(x_k,x_k,\pi\kp1).
+\end{equation}
+We choose the smallest (minimum two-norm) $\omega_i$'s that increase
+$y_k\T\delta_k$ to $\sigma_k$ (see (\ref{eqn-min-curv})).
+They are determined by the linearly constrained least-squares problem
+\[
+   \problem{(LSP$_\omega$)}{\omega}
+           {\twonorm{\omega}^2}
+           {a\T \omega = \beta,\ \ \omega \ge 0,}
+\]
+where $\beta = \sigma_k - y_k\T\delta_k$ and $a_i = v_i w_i$ ($i=1\till m$),
+with $v = (\Jkp - \Jk)\delta_k$ and $w = \dL(x\kp1,x_k)$.
+If no solution exists, or if $\norm{\omega}$
+is very large, no update is made.
+
+The approach just described is related to the idea of updating an
+approximation of the Hessian of the augmented Lagrangian, as suggested
+by Han \cite{Han76} and Tapia \cite{Tap74b}.  However, we emphasize
+that the second modification is not required in the neighborhood of a
+solution, because as $x \to \xstar$, $\Hess\LA$ converges to
+$\Hess\L$, and the first modification will already have been successful.
+
+
+ \subsection{Convergence tests}  \label{sec-convergence}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+A point $(x,\pi)$ is regarded as a satisfactory solution
+if it satisfies the first-order optimality conditions (\ref{eqn-KKT1})
+to within certain tolerances.
+Let $\tau\P$ and $\tau\D$ be specified small positive constants,
+and define $\tau_x = \tau\P(1 + \infnorm{x})$,
+$\tau_{\pi} = \tau\D(1 + \infnorm{\pi})$.  The SQP algorithm terminates if
+\begin{equation}                                \label{eqn-conv}
+         c_i(x) \ge -\tau_x,     \quad
+          \pi_i \ge -\tau_{\pi}, \quad
+   c_i(x) \pi_i \le  \tau_{\pi}, \quad
+          |d_j| \le  \tau_{\pi},
+\end{equation}
+where $d = g(x) - J(x)\T\pi$.
+These conditions cannot be satisfied if (GNP) is infeasible,
+but in that case the SQP algorithm will eventually enter
+elastic mode and satisfy analogous tests for a series of problems
+$$
+   \problem{(GNP($\gamma$))}{x,v}{f(x) + \gamma e\T v}
+                               {c(x) + v \ge 0,\ \ v \ge 0,}
+$$
+with $\gamma$ taking an increasing set of values $\Seq{\gamma_{\ell}}$
+up to some maximum.
+The optimality conditions for (GNP($\gamma$)) include
+$$
+           0  \le  \pi_i  \le \gamma,  \quad
+        (c_i(x) + v_i)\pi_i = 0,       \quad
+        v_i(\gamma - \pi_i) = 0.
+$$
+The fact that $\infnorm{\pistar} \le \gamma$ at a solution of (GNP($\gamma$))
+leads us to initiate elastic mode if $\infnorm{\pi_k}$ exceeds
+some value $\gamma_1$ (or if (\GQPk) is infeasible).
+We use
+\begin{equation}                                \label{eqn-gamma}
+   \gamma_{1} \equiv \gamma_0 \infnorm{g(x_{\kb1})}, \qquad
+   \gamma_{\ell} = 10^{\ell(\ell-1)/2} \gamma_1 \quad (\ell = 2, 3, \ldots\,),
+\end{equation}
+where $\gamma_0$ is a parameter ($10^4$ in our numerical results)
+and $x_{\kb1}$ is the iterate at which $\gamma$ is first needed.
+
+
+
+ \section{Large-scale Hessians}  \label{sec-Hessian}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In the large-scale case, we cannot treat $H_k$ as an $n \times n$
+dense matrix.  Nor can we maintain dense triangular factors of a
+transformed Hessian $Q\T H_k Q = R\T R$ as in \NPSOL\@.  We discuss the
+alternatives implemented in \SNOPT{}\@.
+
+ \subsection{Linear variables}  \label{sec-lin-vars}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ If only some of the variables occur nonlinearly in the objective and
+constraint functions, the Hessian of the Lagrangian has structure that
+can be exploited during the optimization.  We assume that the
+nonlinear variables are the first $\nbar$ components of $x$.  By
+induction, if $H_0$ is zero in its last $n-\nbar$ rows and columns,
+the last $n-\nbar$ components of the BFGS update vectors $y_k$ and
+$H_k \delta_k$ are zero for all $k$, and every $H_k$ has the form
+\begin{equation}                                   \label{eqn-Hbar-def}
+        H_k = \pmat{ \Hbar_k & 0
+                  \\   0     & 0 },
+\end{equation}
+where $\Hbar_k$ is $\nbar\times\nbar$.  Simple modifications of the
+methods of section~\ref{sec-pd-H} can be used to keep $\Hbar_k$
+positive-definite.  A QP subproblem with a Hessian of this form is
+either unbounded or has at least $n - \nbar$ constraints in the final
+working set. This implies that the reduced Hessian need never have
+dimension greater than $\nbar$.
+
+Under the assumption that the objective function is bounded below in
+some expanded feasible region $c(x) \ge - b$ (see
+(\ref{eqn-expand-c})), a sequence of positive-definite matrices
+$\Hbar_k$ with uniformly bounded condition numbers is sufficient for
+the SQP convergence theory to hold.  (This case is analogous to
+converting inequality constraints to equalities by adding slack
+variables---the Hessian is singular only in the space of the slack
+variables.)  However, in order to treat semidefinite Hessians such as
+(\ref{eqn-Hbar-def}), the QP solver must include an
+\emph{inertia-controlling} working-set strategy, which ensures that
+the reduced Hessian has at most one zero eigenvalue.  See
+sections~\ref{sec-inertia}--\ref{sec-unbounded}.
+
+
+ \subsection{Dense Hessians}  \label{sec-DenseH}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The Hessian approximations $\Hbar_k$ are matrices of order $\nbar$, the
+number of nonlinear variables.  If $\nbar$ is not too large, it is
+efficient to treat each $\Hbar_k$ as a dense matrix and apply the BFGS
+updates explicitly.  The storage requirement is fixed, and the number
+of major iterations should prove to be moderate.  (We can expect
+one-step Q-superlinear convergence.)
+
+
+ \subsection{Limited-memory Hessians} \label{sec-LM}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+To treat problems where the number of nonlinear variables $\nbar$ is very
+large, we use a limited-memory procedure to update an initial Hessian
+approximation $H_r$ a limited number of times.  The present
+implementation is quite simple and has an advantage in the SQP
+context when the constraints are linear: the reduced Hessian
+for the QP subproblem can be updated between major iterations
+(see section~\ref{sec-linear-constraints}).
+
+Initially, suppose $\nbar = n$.  Let $\ell$ be preassigned (say $\ell
+= 10$), and let $r$ and $k$ denote two major iterations such that $r
+\le k \le r + \ell$.  At iteration $k$ the BFGS approximate Hessian
+may be expressed in terms of $\ell$ updates to a positive-definite
+$H_r$:
+\begin{equation}                                \label{eqn-LMH}
+        H_k = H_r + \sum_{j=r}^{k-1}
+                \big(\theta_j y_j\drop y_j\T - \phi_j q_j\drop q_j^T \big),
+\end{equation}
+where $q_j = H_j \delta_j$, $\theta_j = 1 / y_j\T \delta_j$, and
+$\phi_j = 1 / q_j\T \delta_j$.  It is better numerically to write
+$H_k$ in the form $H_k = G_k^T G_k$, where $G_k$ is the product of
+elementary matrices
+\begin{equation}                                \label{eqn-LMH0}
+        G_k =  H_r^{1/2}(I + \delta_r v_r^T)
+                      (I + \delta_{r+1} v_{r+1}^T)
+                        \cdots (I + \delta\km1 v\km1^T),
+\end{equation}
+with $v_j = \pm (\theta_j \phi_j)^{1/2}y_j -\phi_j q_j$
+\cite{BroGG73}.  (The sign may be chosen to minimize the rounding
+error in computing $v_j$.)  The quantities $(\delta_j, v_j)$ are stored for
+each $j$. During major iteration $k$, the QP solver accesses $H_k$ by
+requesting products of the form $H_k u$.  These are computed with work
+proportional to $k-r$ using the recurrence relations:
+$$
+ \begin{array}{r@{\hspace{4pt}}c@{\hspace{4pt}}l%
+              cr@{\hspace{4pt}}c@{\hspace{4pt}}l}
+  u &\gets& u + (v_j\T u) \delta_j, \ \ j=k-1\till r; &\ \ & u &\gets& H_r^{1/2}u;  \\[3pt]
+  w &\gets& H_r^{1/2}u;                               &    & w &\gets&  w + (\delta_j\T w) v_j, \ \ j=r\till k-1.
+    \end{array}
+$$
+Note that products of the form $u\T Hu$ are easily and safely computed as
+$\twonorm{z}^2$ with $z = G_k u$.
+
+A separate calculation is used to update the \emph{diagonals} of $H_k$
+from (\ref{eqn-LMH}).  On completion of iteration $k = r + \ell$, these
+diagonals form the next positive-definite $H_r$ (with $r =
+k+1$).  Storage is then ``reset'' by discarding the previous updates.
+(Similar schemes are described by Buckley and LeNir \cite{BL83,BL85}
+and Gilbert and Lemar\'echal \cite{GL89}.  More elaborate schemes are
+given by Liu and Nocedal \cite{LN89}, Byrd, Nocedal, and Schnabel
+\cite{ByrNS94}, and Gill and Leonard \cite{GilL03}, and some have been
+evaluated by Morales \cite{Mor02}.  However, as already indicated,
+these schemes would require refactorization of the reduced Hessian in
+the linearly constrained case.)
+
+An alternative approach is to store the quantities $(y_j, q_j,
+\theta_j, \phi_j)$ for each $j$ and compute the product $H_k u$ as
+$$
+%\begin{equation}                                \label{eqn-crudeLM}
+        H_k v = H_r v + \sum_{j=r}^{k-1}
+                \big(\theta_j (y_j\T v) y_j - \phi_j (q_j\T v) q_j\big).
+%\end{equation}
+$$
+This form requires the same amount of work to compute the product, and may
+be appropriate for certain types of QP solver (see section~\ref{sec-SC}).
+
+If $\nbar < n$, $H_k$ has the form (\ref{eqn-Hbar-def}),
+and the same procedure is applied to $\Hbar_k$.
+Note that the vectors $\delta_j$ and $v_j$  (and  $y_j$ and $q_j$)
+have length $\nbar$---a benefit when $\nbar \ll n$.
+The modified Lagrangian $\LA$ from (\ref{eqn-LA-def})
+retains this property for the modified $y_k$ in (\ref{eqn-newy}).
+
+
+
+
+
+
+
+ \section{The QP solver SQOPT} \label{sec-SQOPT}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Since \SNOPT{} solves nonlinear programs of the form (NP),
+it requires solution of QP subproblems of the same form,
+with $f(x)$ replaced by a convex quadratic function,
+and $c(x)$ replaced by its current linearization:
+$$
+   \problem{(\QPk)}{x}
+           {f_k + g_k^T(x-x_k)  +  \half(x-x_k)\T H_k (x-x_k)}
+           {l \le \pmat{x \\ c_k + J_k(x-x_k) \\ Ax \strutl} \le u.}
+$$
+At present, (\QPk) is solved by the package \SQOPT{} \cite{GilMS97b},
+which employs a two-phase active-set algorithm and implements
+elastic programming implicitly when necessary.  The Hessian $H_k$
+may be positive-semidefinite and is defined by a routine for
+forming products $H_k v$.
+% (effectively a third phase)???
+% Not really if elastic mode can have ninf > 0 and ninf = 0!
+% Can it?
+
+
+\subsection{Elastic bounds}    \label{sec-elastic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\SQOPT{} can treat any of the bounds in (\QPk) as elastic.
+Let $x_j$ refer to the $j$th variable or slack.
+For each $j$, an input array specifies which of the bounds
+$l_j$, $u_j$ is elastic (either, neither, or both).
+A parallel array maintains the current state of each $x_j$.
+If the variable or slack is currently outside its bounds by more
+than the \v{Minor feasibility tolerance}, it is given a linear
+penalty term $\gamma \times \hbox{\emph{infeasibility}}$
+in the objective function.  This is a much-simplified but useful
+form of piecewise linear programming (Fourer \cite{Four85,Four88,Four92}).
+
+\SNOPT{} uses elastic bounds in three different ways:
+\begin{itemize}
+\item to solve problem (FLP) (section~\ref{sec-infeas})
+      if the linear constraints are infeasible,
+\item to solve problem (PP1) (section~\ref{sec-x0}),
+\item to solve the QP subproblems associated with problem (NP($\gamma$))
+      after nonlinear elastic mode is initiated.
+\end{itemize}
+
+
+
+\subsection{QP search directions} \label{sec-KKT}
+
+At each minor iteration, active-set methods for solving (\QPk)
+should obtain a search direction $d$ satisfying the so-called KKT system
+\begin{equation}  \label{eqn-KKT}
+   \pmat{ H_k & W^T
+       \\ W        } \pmat{d\\y}  =  - \pmat{g_q \\ 0},
+\end{equation}
+where $W$ is the current working-set matrix and
+$g_q$ is the QP objective gradient.
+\SQOPT{} implements several \emph{null-space methods},
+as described in the next three sections.
+
+
+
+\subsection{The null-space approach}    \label{sec-nullspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+One way to obtain $d$ in (\ref{eqn-KKT})
+is to solve the reduced-Hessian system
+\begin{equation} \label{eqn-ZHZsystem}
+   Z\T H_k Z d\Z = - Z\T g_q, \qquad d = Z d\Z,
+\end{equation}
+where $Z$ is a null-space matrix for $W$.
+\SQOPT{} maintains $Z$ in ``reduced-gradient'' form as in \MINOS, using
+sparse LU factors of a square matrix $B$ whose columns change as the
+working set $W$ changes:
+\begin{equation}    \label{eqn-WBS}
+   W = \pmat{B & S & N \\ & & I} P, \qquad
+   Z = P^T \pmat{-B\inv S \\ I \\ 0},
+\end{equation}
+where $P$ is a permutation such that $B$ is nonsingular.
+Variables associated with $B$ and $S$ are called basic and superbasic;
+the remainder are called nonbasic.  The number of degrees of freedom
+is the number of superbasic variables $n\Z$
+(the column dimension of $S$ and $Z$).
+Products of the form $Zv$ and $Z\T g$ are obtained by solving with
+$B$ or $B\T$.
+
+If $n\Z$ is small enough, \SQOPT{} uses a dense Cholesky factorization:
+\begin{equation} \label{eqn-ZHZ}
+   Z\T H_k Z = R\T R,
+\end{equation}
+Normally, $R$ is computed from (\ref{eqn-ZHZ})
+when the nonelastic constraints are first satisfied. It
+is then updated as the QP working set changes.  For efficiency, the
+dimension of $R$ should not be excessive (say, $n\Z \le 2000$).  This
+is guaranteed if the number of nonlinear variables is moderate
+(because $n\Z \le \nbar$ at a solution), but it is often true
+even if $\nbar = n$.
+
+
+
+
+\subsection{Approximate reduced Hessians}   \label{sec-QN}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+As the major iterations converge, the QP subproblems require fewer
+changes to their working set, and with warm starts they eventually
+solve in one minor iteration.  Hence, the work required by \SQOPT{}
+becomes dominated by the computation of the reduced Hessian $Z\T H_k Z$
+and its factor $R$ from (\ref{eqn-ZHZ}), especially if there are
+many degrees of freedom.
+
+For this reason, \SQOPT{} can optionally maintain
+a quasi-Newton approximation $Z\T H_k Z \approx R\T R$
+as in MINOS \cite{MurS78}.  It also allows $R$ to be
+input from a previous problem of the same dimensions
+(a ``hot start'' feature of special benefit in the
+SQP context).
+
+Note that the SQP updates to $H_k$ could be applied to $R$ between
+major iterations as for the linear-constraint case
+(section~\ref{sec-linear-constraints}).  However, the quasi-Newton updates
+during the first few minor iterations of each QP should achieve a
+similar effect.
+
+
+\subsection{CG methods} \label{sec-CG}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+By construction, the QP Hessians $H_k$ are positive definite
+or semidefinite.  Hence, the conjugate-gradient (CG) method is
+a natural tool for very large systems.  \SQOPT{} includes a CG option
+for finding approximate solutions to
+\begin{equation} \label{eqn-CG}
+ (Z\T H_k Z + \delta^2 I) d\Z = - Z\T g_q,
+\end{equation}
+where $\delta \approx 10^{-3}$ is a small regularization parameter to
+allow for singular $Z\T H_k Z$.  When $Z$ has many columns, the main
+concern is that many CG iterations may be needed to obtain a useful
+approximation to $d\Z$.
+Normally CG methods require some sort of problem-dependent
+preconditioner, but unexpectedly good results have been
+obtained on many large problems \emph{without preconditioning}.
+This can be largely explained by the diagonal-plus-low-rank structure
+of both $H_k$ and $Z\T Z$ (with both diagonal parts being close to $I$,
+especially if there are few general constraints).
+
+For problems with many degrees of freedom, \SQOPT{} optionally
+maintains a reduced-Hessian approximation in the form
+  \begin{equation} \label{eqn:RD}
+    R = \pmat{ R_r & 0
+             \\    & D},
+  \end{equation}
+where $R_r$ is a dense triangle of specified size and $D$ is
+a positive diagonal.
+This structure partitions the superbasic variables into two sets
+and allows the cost per minor iteration to be controlled.
+The only unpredictable quantity is the total number of minor iterations.
+
+In \MINOS{}, this structure is used to generate search directions
+directly.  After a few minor iterations involving all superbasics
+(with quasi-Newton updates to $R_r$ and $D$), the variables associated
+with $D$ are temporarily frozen.  Iterations proceed with updates to
+$R_r$ only, and superlinear convergence can be expected within that
+subspace.  A frozen superbasic variable is then interchanged with one
+from $R_r$, and the process is repeated.
+
+In \SQOPT{}, our aim has been to use $R$ in (\ref{eqn:RD}) as a
+preconditioner for (\ref{eqn-CG})
+\cite[pp.\ 151--153]{GilMW81}, \cite{MorN00}.
+To date this has produced mixed
+results,
+but fortunately the CG option without preconditioning has performed
+well, as already mentioned.
+
+
+
+
+
+\subsection{Inertia control}    \label{sec-inertia}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+If (NP) contains linear variables, $H_k$ in (\ref{eqn-Hbar-def}) is
+positive semi\-definite.  In \SQOPT, only the last diagonal of $R$
+in (\ref{eqn-ZHZ}) is allowed to be zero.  (See \cite{GilMSW91} for
+discussion of a similar strategy for indefinite QP\@.)
+If the initial $R$ is singular, enough temporary
+constraints are added to the working set to give a nonsingular $R$.
+Thereafter, $R$ can become singular only when a constraint is deleted
+from the working set (in which case no further constraints are deleted
+until $R$ becomes nonsingular).  When $R$ is singular at a nonoptimal
+point, it is used to define a direction $d\Z$ such that
+\begin{equation}                                  \label{eqn-singQP-d}
+        Z\T H_k Z d\Z = 0  \words{and}   g_q\T Z d\Z < 0,
+\end{equation}
+where $g_q = g_k + H_k(x-x_k)$ is the gradient of the quadratic
+objective.  The vector $d = Zd\Z$ is a direction of unbounded descent
+for the QP in the sense that the QP objective is linear and decreases
+without bound along $d$.  Normally, a step along $d$ reaches a new
+constraint, which is then added to the working set for the next
+iteration.
+
+
+ \subsection{Unbounded QP subproblems} \label{sec-unbounded}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ If the QP objective is unbounded along $d$, subproblem (\QPk)
+terminates. The final QP search direction $d = Zd\Z$ is also a
+direction of unbounded descent for the objective of (NP)\@.  To show this,
+we observe from (\ref{eqn-singQP-d}) that
+$$
+         H_k d = 0   \words{and}   \gk\T d < 0.
+$$
+The imposed nonsingularity of $\Hbar_k$ (see (\ref{eqn-Hbar-def})) implies
+that the nonlinear components of $d$ are zero, and so the nonlinear
+terms of the objective and constraint functions are unaltered by steps
+of the form $x_k+\alpha d$.  Since $\gk\T d < 0$, the objective of
+(NP) is unbounded along $d$, because it must include a term in the linear
+variables that decreases without bound along $d$.
+
+In short, (NP) behaves like an unbounded linear program (LP) along
+$d$, with the nonlinear variables (and functions) frozen at their
+current values.  Thus if $x_k$ is feasible for (NP), unboundedness in
+(\QPk) implies that the objective $f(x)$ is unbounded for feasible
+points, and the problem is declared unbounded.
+
+If $x_k$ is infeasible, unboundedness in (\QPk) implies that $f(x)$ is
+unbounded for some expanded feasible region $c(x) \ge - b$
+(see (\ref{eqn-expand-c})).
+We enter or continue elastic mode (with an increased value of $\gamma$
+if it has not already reached its maximum permitted value).
+Eventually the QP subproblem will be bounded,
+or $x_k$ will become feasible,
+or the iterations will converge to a point that approximately
+minimizes the one-norm of the constraint violations.
+
+
+
+
+
+
+
+
+
+ \section{Basis handling in SQOPT} \label{sec-basis}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The null-space methods in sections \ref{sec-nullspace}--\ref{sec-CG}
+require frequent solution of systems involving $B$ and $B\T$.
+\SQOPT{} uses the package \LUSOL{} \cite{GilMSW87c} for four
+purposes:
+\begin{itemize}
+\item To obtain sparse LU factors of a given basis $B$.
+\item To replace certain columns of $B$
+      when it appears singular or ill-conditioned.
+\item To find a better-conditioned $B$ by reordering
+      the columns of a given set $(B\ \;S)$.
+\item To update the LU factors when a column of $B$ is
+      replaced by a column of $S$.
+\end{itemize}
+The next sections discuss each function in turn.
+
+
+ \subsection{Threshold pivoting in LUSOL}   \label{sec-TCP}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Stability in the LU factorization of a square or rectangular
+matrix $A$ is achieved by bounding
+the off-diagonal elements of $L$ and/or $U$.  There are many ways
+to do this, especially in the sparse case.
+In \LUSOL{} \cite{GilMSW87c}, $L$ has unit diagonals.
+Each elimination step chooses $\ell$ and $u\T$,
+the next column of $L$ and row of $U$,
+and then updates the remaining rows and columns of $A$
+according to $A \leftarrow A - \ell u^T$ (creating an
+empty row and column).  Let
+$$
+\begin{tabular}{rcl}
+     $\Lmax$ &=& the \emph{factor tolerance} such that $|L_{ij}| \le \Lmax$
+                 \ \ ($1 < \Lmax \le 100$ say),
+\\[2pt]$A_l$ &=& the remaining matrix to be factored after $l$ steps.
+\end{tabular}
+$$
+
+For most factorizations, \LUSOL{} uses a
+\emph{threshold partial pivoting} (TPP) strategy
+similar to that in {\small LA05} \cite{Reid76} and \MA28 \cite{Duff77}.
+A classical Markowitz criterion is used to choose an entry
+$a_{pq}$ from a sparse row and column of $A_l$
+to become the next pivot element (the next diagonal of $U$).
+To be acceptable, $a_{pq}$ must be sufficiently large compared to
+\emph{other nonzeros in its own column}:
+$|a_{pq}| \ge \max_i |a_{iq}| / \Lmax$.
+
+With $\Lmax \in [2,100]$, TPP usually performs well
+in terms of balancing stability and sparsity, but
+it cannot be classed as a \emph{rank-revealing LU} (RRLU)
+factorization method, because it is not especially good at
+revealing near-singularity and its cause.
+For example, any triangular matrix $A$ gives $L=I$ and $U=A$
+for all values of $\Lmax$ (a perfect $L$ with maximum sparsity
+but little hint of possible ill-conditioning).
+
+For greater reliability, \LUSOL{} includes two RRLU factorizations
+as follows:
+
+\smallskip
+
+\begin{itemize}
+
+\item \emph{Threshold rook pivoting} (TRP),
+in which $a_{pq}$ must be sufficiently large compared to
+other nonzeros in its \emph{own column} and its \emph{own row}:
+\\ \hspace*{60pt} \strut
+$|a_{pq}| \ge \max_i |a_{iq}| / \Lmax$ \ and \
+$|a_{pq}| \ge \max_j |a_{pj}| / \Lmax$.
+
+\smallskip
+
+\item \emph{Threshold complete pivoting} (TCP),
+in which $a_{pq}$ must be sufficiently large compared to
+\emph{all nonzeros in} $A_l$:
+\\ \hspace*{60pt} \strut
+$|a_{pq}| \ge \max_{i,j} |a_{ij}| / \Lmax$.
+
+\end{itemize}
+
+\smallskip
+
+\noindent The TCP option was implemented first \cite{OSS2002SIAM}
+and has proved valuable for rank-detection during the
+optimization of Markov decision chains \cite{OS02}
+and within \SNOPT{} \cite{GilMS02}.  In some cases its
+strict pivot test leads to rather dense LU factors.
+The TRP option is typically more efficient \cite{OSS2002HH}
+and in practice its rank-revealing properties are essentially
+as good as for TCP.  (Note that all options can fail to
+detect near-singularity in certain matrices with regular structure.
+A classic example is a triangular matrix with $1$s on the diagonal
+and $-1$s above the diagonal.)
+
+In general, \SQOPT{} uses TPP with tolerance
+$\Lmax < 4.0$ for all basis factorizations.
+If tests suggest instability for a certain basis $B$
+(large $\infnorm{b - Bx}$ or $\infnorm{x}$ or $\infnorm{\pi}$ following
+solution of $Bx = b$ or $B\T\pi = c$), the factorization
+is repeated as often as necessary with a decreasing
+sequence of tolerances.  In the current version of \SQOPT{},
+the sequence is $\Lmax = 3.99$, 2.00, 1.41, 1.19, 1.09, 1.02, 1.01
+(powers of $\sqrt{3.99}$).
+If necessary, a switch is made to TRP with the same
+decreasing sequence of $\Lmax$ values, and then
+TCP is used with the same values.
+If all three sequences are exhausted, \SQOPT{} terminates
+with a ``Numerical error'' condition.
+However, certain Basis repairs may be invoked beforehand,
+as described next.
+
+
+
+
+ \subsection{Basis repair (square or singular case)}    \label{sec-BRfac}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Whenever a basis is factored, \LUSOL{} signals ``singularity''
+%(For cold starts, stricter tolerances are used for the first basis.)
+if any diagonals of $U$ are judged small,
+% in absolute terms or relative to other nonzeros in the same column.
+and indicates which unit vectors (corresponding to slack variables)
+should replace the associated columns of $B$.  The modified $B$ is
+then factored.
+%
+%Partial pivoting (TPP) is tried first because it usually performs
+%well enough, but
+%
+
+The process may need to be repeated if the factors of $B$
+are not sufficiently rank-revealing.
+Behavior of this kind is exhibited by
+one of the \CUTEr{} problems (section \ref{sec-cute-results})
+if we use only the TPP pivoting option in \LUSOL{}
+when the first basis is factored.
+Problem \Cute{DRCAVTY2} is a large square system of nonlinear equations
+(10000 constraints and variables, 140000 Jacobian nonzeros).
+The first TPP factorization with $\Lmax = 3.99$
+indicated 249 singularities.  After slacks were inserted,
+the next factorization with $\Lmax = 2.0$
+indicated 88 additional singularities,
+then a further (39, 16, 8, 7, 4) as
+$\Lmax$ decreased from 1.41 to 1.02,
+and then (7, 7, 7, 5, 1) with $\Lmax = 1.01$
+before the basis was regarded as suitably nonsingular
+(a total of 13 TPP factorizations and 438 slacks replacing
+rejected columns of $B$).
+Since $L$ and $U$ each had about a million nonzeros
+in all factorizations, the repeated failures were rather expensive.
+
+In contrast, a single TRP factorization with $\Lmax = 2.5$
+indicated 102 singularities, after which the modified $B$
+proved to be very well-conditioned.
+The factors were of similar sparsity, and the optimization
+proceeded significantly more quickly.
+
+For such reasons, \SQOPT{} includes a special
+``BR factorization'' for estimating the rank of a given $B$,
+using the \LUSOL{} options shown in Figure~\ref{fig-BR}.
+$P$ and $Q$ are the row and column permutations that make $L$
+unit triangular and $U$ upper triangular, with small elements
+in the bottom right if $B$ is close to singular.
+To save storage, the factors are discarded as they are computed.
+A normal ``B factorization'' then follows.
+
+\begin{figure}[t]
+ $$
+ \fbox{\begin{tabular}{l@{\qquad}l@{\qquad}l}
+       $B = \raisebox{-5pt}{\fbox{\phantom{\rule{15pt}{15pt}}}} = LU$,
+                    & $ PLP^T = \pmat{L_1 \\ L_2 & L_3}, $
+                    & $ PUQ   = \pmat{U_1 & U_2 \\ & \ddots} $
+       \\[15pt]
+         \rlap{\LUSOL{} options: \quad TRP or TCP,
+                                \quad $\Lmax \le 2.5$,
+                                \quad discard factors}
+       \end{tabular}
+      }
+ $$
+ \caption{BR factorization (rank detection for square $B$).}
+ \label{fig-BR}
+\end{figure}
+
+BR factorization is the primary recourse when $B$ seems singular
+or when unexpected growth occurs in $\infnorm{x}$ or $\infnorm{\pi}$.
+It has proved valuable for some other \CUTEr{} problems
+arising from partial differential equations
+(\Cute{BRATU2D}, \Cute{BRATU3D}, \Cute{POROUS1}, and \Cute{POROUS2}).
+A regular ``marching pattern'' is sometimes present in $B$, particularly
+in the first \emph{triangular} basis following a cold start.
+With TPP, the factors display no small diagonals in $U$,
+yet the BR factors reveal a large number of dependent columns.
+%
+%Sometimes the 3.99 tolerance is not small enough for TCP to detect
+%singularities during the BR factorization.  The above sequences of
+%$\Lmax$ values are then tried in turn with TPP and then TCP factorizations.
+%On problems \Cute{POROUS2} and  \Cute{BRATU2D}, significant rank deficiency
+%is finally found with TCP and $\Lmax = 2.5$.
+%
+Thus, although condition estimators are known that could tell us
+``this $B$ is ill-conditioned'' (e.g., \cite{Hig88}),
+\LUSOL's RRLU options are more useful in telling us
+\emph{which columns} are causing the poor condition,
+and which slacks should replace them.
+
+
+\subsection{Basis repair (rectangular case)}    \label{sec-BSfac}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+When superbasic variables are present,
+the permutation $P$ in (\ref{eqn-WBS}) clearly affects
+the condition of $B$ and $Z$.
+\SQOPT{} therefore applies an occasional rectangular ``BS factorization''
+to choose a new $P$, using the options shown in Figure~\ref{fig-BS}.
+
+\begin{figure}[t]
+ $$
+ \fbox{\begin{tabular}{l@{\qquad}l@{\qquad}l}
+       $W^T = \raisebox{-10pt}{\fbox{\phantom{\rule{15pt}{25pt}}}} = LU$,
+                    & $ PLP^T = \pmat{L_1 \\ L_2 & I}, $
+                    & $ PUQ   = \pmat{U_1 \\ 0} $ \phantom{$U_2$}
+       \\[15pt]
+         \rlap{\LUSOL{} options: \quad TPP or TRP,
+                                \quad $\Lmax \le 2.5$,
+                                \quad discard factors}
+       \end{tabular}
+      }
+ $$
+ \caption{BS factorization (basis detection for rectangular $W$).}
+ \label{fig-BS}
+\end{figure}
+
+For simplicity we assume that there are no nonbasic columns in $W$.
+A basis partition is given by
+$$
+   P W^T \equiv \pmat{B^T \\ S^T} = \pmat{L_1 \\ L_2} U_1 Q^T,
+$$
+and the required null-space matrix satisfying $WZ = 0$ is
+\begin{equation}                                \label{eqn-Z}
+   Z \equiv P^T \pmat{-  B^{-1}   S   \\ I}
+          = P^T \pmat{-L_1^{-T} L_2^T \\ I}.
+\end{equation}
+With $\Lmax \le 2.5$,  $L$ and $L_1$ are likely to be well-conditioned,
+and $\zeta \equiv \norm{L_1^{-T} L_2^T}$ is unlikely to be large.
+(It can be bounded by a polynomial function of $\Lmax$.)
+The extreme singular values of $Z$ are
+$\sigma_{\min} \ge 1$ and $\sigma_{\max} \approx 1 + \zeta$.
+It follows that $Z$ should be well-conditioned
+\emph{regardless of the condition of} $W$.
+
+\SQOPT{} applies this basis repair at the beginning of a warm start
+(when a potential $B$-$S$ ordering is known).
+To prevent basis repair at \emph{every} warm start---i.e., every major
+iteration of \SNOPT---a normal $B = LU$ factorization is computed first
+with the current (usually larger) tolerance $\Lmax$.
+If $U$ appears to be more ill-conditioned than after the last repair,
+a new repair is invoked.  The relevant test on the diagonals of $U$
+is tightened gradually to ensure that basis repair occurs periodically
+(even during a single major iteration if a QP subproblem requires
+many iterations).
+
+Although the rectangular factors are discarded,
+we see from (\ref{eqn-Z}) that a normal factorization of $B$ allows
+iterations to proceed with an equivalent $Z$.
+(A BR factorization may be needed to repair $B$ first if
+$W$ happens to be singular.)
+
+
+
+\subsection{Basis updates} \label{sec-Bupdates}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+When a QP iteration requires replacement of a column of $B$,
+the LU factors must be updated in a stable way.
+\LUSOL{} uses the approach suggested by Bartels and Golub \cite{Bar71}.
+The sparse implementation is analogous to that of Reid \cite{Reid76,Rei82}.
+
+
+
+\section{SQP algorithm details} \label{sec-details}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+A practical SQP algorithm requires many features to achieve
+reliability and efficiency.  We discuss some more of them here
+before summarizing the main algorithmic steps.
+
+
+\subsection{The initial point} \label{sec-x0}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+To take advantage of a good starting point $x_0$, we apply
+\SQOPT{} to one of the ``proximal-point" problems
+$$
+   \problem{(PP1)}{x}{\onenorm{\xbar - \xbar_0}}
+               {\hbox{the linear constraints and bounds}}
+$$
+or
+$$
+   \problem{(PP2)}{x}{\twonorm{\xbar - \xbar_0}^2}
+               {\hbox{the linear constraints and bounds},}
+$$
+where $\xbar$ and $\xbar_0$ correspond to the nonlinear variables in $x$
+and $x_0$.  The solution defines a new starting point $x_0$ for the SQP
+iteration.  The nonlinear functions are evaluated at this point, and a
+``crash'' procedure is executed to find a working set $W_0$ for the
+linearized constraints.
+
+In practice we prefer problem (PP1), as it is linear and can use \SQOPT's
+implicit elastic bounds. (We temporarily set the bounds on the nonlinear
+variables to be $\xbar_0 \le \xbar \le \xbar_0$.)  Note that problem (PP2)
+may be ``more nonlinear'' than the original problem (NP), in the sense that
+its exact solution may lie on fewer constraints (even though it is
+nonlinear in the same subset of variables, $\xbar$).  To prevent the
+reduced Hessian from becoming excessively large with this option, we
+terminate \SQOPT{} early by specifying a loose optimality tolerance.
+
+
+\subsection{Undefined functions} \label{sec-undefined-f}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  If the constraints in (PP1) or (PP2) prove to be infeasible, \SNOPT{} solves
+problem (FLP) (see section~\ref{sec-infeas}) and terminates without computing
+the nonlinear functions.  The problem was probably formulated incorrectly.
+
+Otherwise, the linear constraints and bounds define a certain
+``linear feasible region'' \RL, and all iterates satisfy $x_k \in \RL$
+to within a feasibility tolerance (as with \NPSOL)\@.
+Although SQP algorithms might converge more rapidly sometimes
+if all constraints were treated equally, the aim is to help prevent
+function evaluations at obvious singularities.
+
+In practice, the functions may not be defined everywhere
+within \RL, and it may be an unbounded region.
+Hence, the function routines are permitted to return an
+``undefined function'' signal.  If the signal is received from the \emph{first}
+function call (before any line search takes place), \SNOPT{} terminates.
+Otherwise, the line search backtracks and tries again.
+
+
+\subsection{Early termination of QP subproblems}  \label{sec-EarlyTerm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+SQP theory usually assumes that the QP subproblems are solved
+to optimality.  For large problems with a poor starting point
+and $H_0 = I$, many thousands of iterations may be needed for the
+first QP, building up many degrees of freedom (superbasic variables)
+that are promptly eliminated by more thousands of iterations
+in the second QP\@.
+
+In general, it seems wasteful to expend much effort on any QP
+before updating $H_k$ and the constraint linearization.
+Murray and Prieto \cite{MurP95} suggest one approach to terminating
+the QP solutions early, requiring that at least one QP stationary point
+be reached.  The associated theory implies that any subsequent point $\xhat_k$
+generated by a QP solver is suitable, provided that $\norm{\xhat_k - x_k}$ is nonzero.
+In \SNOPT{} we have implemented a method within this framework
+that has proved effective on many problems.
+Conceptually we could perform the following steps:
+\begin{itemize}
+\item Fix many variables at their current value.
+\item Perform one SQP major iteration on the reduced problem
+      (solving a smaller QP to get a search direction
+      for the nonfixed variables).
+\item Free the fixed variables, and complete the major iteration
+      with a ``full'' search direction that happens to leave
+      many variables unaltered.
+\item Repeat.
+\end{itemize}
+%
+Normal merit-function theory should guarantee progress
+at each stage on the associated reduced \emph{nonlinear} problem.
+We are simply suboptimizing.
+
+In practice, we are not sure which variables to fix at each stage,
+the reduced QP could be infeasible, and degeneracy could
+produce a zero search direction.
+Instead, the choice of which variables to fix is made within
+the QP solver. The following steps are performed:
+%
+\begin{itemize}
+\item Perform QP iterations on the full problem until a feasible
+      point is found or elastic mode is entered.
+\item Continue iterating until certain limits are reached
+      and not all steps have been degenerate.
+\item Freeze nonbasic variables that have not yet moved.
+\item Solve the reduced QP to optimality.
+\end{itemize}
+Rather arbitrary limits may be employed and perhaps combined.
+We have implemented the following as user options:
+%
+\begin{itemize}
+\item \v{Minor iterations limit} (default 500) suggests termination
+      if a reasonable number of QP iterations have been performed
+      (beyond the first feasible point).
+\item \v{New superbasics limit} (default 99) suggests termination
+      if the number of free variables has increased significantly
+      (since the first feasible point).
+\item \v{Minor optimality tolerance} (default $10^{-6}$) specifies an
+      optimality tolerance for the final QPs.
+%\item \v{Major feasibility tolerance} and
+%      \v{Major optimality tolerance} specify separately
+%      the \emph{final} primal and dual infeasibility requirements.
+%      They define $\tau\P$ and $\tau\D$ in section \ref{sec-convergence}
+%      (default $10^{-6}$ for both).
+\end{itemize}
+%
+Internally, \SNOPT{} sets a loose but decreasing
+optimality tolerance for the early QPs (somewhat smaller
+than a measure of the current primal-dual infeasibility for (NP))\@.
+This ``loose tolerance'' strategy provides a dynamic balance between
+major and minor iterations in the manner of inexact Newton methods
+%(Dembo, Eisenstat, and Steihaug \cite{DemES82}).
+\cite{DemES82}.
+
+\subsection{Linearly constrained problems} \label{sec-linear-constraints}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ For problems with linear constraints only, the maximum step length is
+not necessarily one. Instead, it is the maximum feasible step along
+the search direction.  If the line search is not restricted by the
+maximum step, the line search ensures that the approximate curvature
+is sufficiently positive and the BFGS update can always be applied.
+Otherwise, the update is skipped if the approximate curvature is not
+sufficiently positive.
+
+ For linear constraints, the working-set matrix $W_k$ does not change
+at the new major iterate $x\kp1$, and the basis $B$ need not be
+refactorized.  If $B$ is constant, then so is $Z$, and the only change
+to the reduced Hessian between major iterations comes from the
+rank-two BFGS update.  This implies that the reduced Hessian need not
+be refactorized if the BFGS update is applied explicitly to the
+reduced Hessian.  This obviates factorizing the reduced Hessian at the
+start of each QP, saving considerable computation.
+
+Given \emph{any} nonsingular matrix $Q$, the BFGS update to $H_k$
+implies the following update to $Q\T H_k Q$:
+\begin{equation}                                      \label{eqn-HBFGS}
+        \Hbar\Q = H\Q + \theta_k y\Q\drop y\Q^T - \phi_k q\Q\drop q\Q^T,
+\end{equation}
+where $\Hbar\Q = Q\T H\kp1 Q$, $H\Q = Q\T H_k Q$, $y\Q = Q\T y_k$,
+$\delta\Q = Q\inv \delta_k$,
+ $q\Q = H\Q \delta\Q$, $\theta_k = 1 / y\Q^T \delta\Q$,
+                   and $\phi_k   = 1 / q\Q^T \delta\Q$.
+If $Q$ is of the form $\mat{Z}{Y}$ for some matrix $Y$,
+the reduced Hessian is the leading principal submatrix of $H\Q$.
+
+ The Cholesky factor $R$ of the reduced Hessian is simply the
+upper-left corner of the $\nbar\times n$ upper-trapezoidal matrix
+$R\Q$ such that $H\Q = R\Q^T R\Q$.  The update for $R$ is derived from
+the rank-one update to $R\Q$ implied by (\ref{eqn-HBFGS}).  Given
+$\delta_k$ and $y_k$, if we had all of the Cholesky factor $R\Q$, it could be
+updated directly as
+$$
+        R\Q + uv\T, \qquad
+        w = R\Q \delta\Q, \quad
+        u = w/\twonorm{w}, \quad
+        v = \sqrt{\theta_k} y\Q - R\Q^T u
+$$
+(see Goldfarb \cite{Gol76a}, Dennis and Schnabel \cite{DS81}).  This
+rank-one modification of $R\Q$ could be restored to upper-triangular
+form by applying two sequences of plane rotations from the left
+\cite{GilGMS74}.
+
+The same sequences of rotations can be generated even though not all
+of $R\Q$ is present.  Let $v\Z$ be the first $n\Z$ elements of $v$.
+The following algorithm determines the Cholesky factor $\Rbar$ of
+the first $n\Z$ rows and columns of $\Hbar\Q$ from (\ref{eqn-HBFGS}):
+
+\begin{enumerate}
+ \item Compute $q_k = H_k \delta_k$ and $t = Z\T q_k$.
+
+ \item Define $\mu = \phi_k^{1/2}
+                   = 1/\twonorm{w} = 1/(\delta_k\T H_k  \delta_k)^{1/2}
+                                   = 1/(           q_k\T\delta_k)^{1/2}$.
+
+ \item Solve $R\T w\Z = t$.
+
+ \item Define $u\Z = \mu w\Z$ and $\sigma = (1-\twonorm{u\Z}^2)^{1/2}$.
+
+ \item Apply a backward sweep of $n\Z$ rotations $P_1$ in the planes
+        $(n\Z+1, i)$, $i = n\Z\till 1$,
+        to give a triangular $\Rhat$ and a ``row spike'' $r^T$:
+\[
+        P_1 \pmat{ R    &  u\Z   \\
+                        &  \sigma }
+          = \pmat{\Rhat &  0     \\
+                   r^T  &  1      }.
+\]
+
+ \item Apply a forward sweep of $n\Z$ rotations $P_2$ in the planes
+        $(i, n\Z+1)$, $i = 1\till n\Z+1$,
+        to restore the upper-triangular form:
+\[
+        P_2 \pmat{ \Rhat      \\
+                    r^T + v\Z^T }
+          = \pmat{\, \Rbar \, \\ 0}.
+\]
+\end{enumerate}
+
+
+\subsection{Summary of the SQP algorithm}  \label{sec-SQP-iteration}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The main steps of the \SNOPT{} algorithm follow.  We
+assume that a starting point $(x_0$, $\pi_0)$ is available, and that the
+reduced-Hessian QP solver \SQOPT{} is being used.
+We describe elastic mode qualitatively.  Specific values for $\gamma$
+are given in section~\ref{sec-convergence}.
+
+\smallskip
+
+\begin{enumerate}
+ \item[0.] Apply the QP solver to problem (PP1) or (PP2) to find a
+point close to $x_0$ satisfying the linear constraints. If
+the PP problem is infeasible, declare problem~(NP) infeasible. Otherwise,
+a working-set matrix $W_0$ is returned.
+Set $k = 0$, evaluate functions and gradients at $x_0$,
+and initialize penalty parameters $\rho_i = 0$.
+
+ \item[1.]  Factorize $W_k$.  % To Factor or Factorize, that is the question.
+
+ \item[2.]  Define $s_k$ to minimize the merit function as a
+   function of the slacks $s$.
+
+ \item[3.]  Find $\xbar_k$, a feasible point for the QP
+subproblem. (This is an intermediate point for the QP solver, which
+also provides a working-set matrix $\Wbar_k$ and its null-space matrix
+$\Zbar_k$.)  If no feasible point exists, initiate elastic mode
+and restart the QP\@.
+
+ \item[4.]  Form the reduced Hessian $\Zbar_k^T H_k \Zbar_k$,
+and compute its Cholesky factor.
+
+ \item[5.]  Continue solving the QP subproblem to find
+$(\xhat_k,\pihat_k)$, an optimal QP solution. (This provides a
+working-set matrix $\What_k$ and its null-space matrix $\Zhat_k$.)
+
+If elastic mode has not been initiated but $\infnorm{\pihat_k}$
+is ``large,'' enter elastic mode and restart the QP\@.
+
+    If the QP is unbounded and $x_k$ satisfies the nonlinear
+constraints, declare the problem unbounded  ($f$ is unbounded below
+in the feasible region).  Otherwise (if the QP is unbounded),
+go to Step~7  ($f$ is unbounded below
+in the feasible region if a feasible point exists).
+
+ \item[6.]  If $(x_k, \pi_k)$ satisfies the convergence tests for (NP)
+analogous to (\ref{eqn-conv}), declare the solution optimal.
+If similar convergence tests are satisfied for (\NP{\gamma}), go to Step~7.
+Otherwise, go to Step~8.
+
+\item[7.] If elastic mode has not been initiated, enter elastic mode
+and repeat Step~5.
+Otherwise, if $\gamma$ has not reached its maximum value, increase
+$\gamma$ and repeat Step~5.
+Otherwise, declare the problem infeasible.
+
+\item[8.] Update the penalty parameters as in (\ref{eqn-penalty-update}).
+
+\item[9.]  Find a step length $\alpha_k$ that gives a sufficient
+reduction in the merit function (\ref{eqn-def-merit}).  Set
+$  x\kp1 =   x_k + \alpha_k ( \xhat_k -   x_k)$, and
+$\pi\kp1 = \pi_k + \alpha_k (\pihat_k - \pi_k)$.
+In the process, evaluate functions and gradients at $x\kp1$.
+
+\item[10.] Define $\delta_k = x\kp1 - x_k$ and $y_k =
+\grad\L(x\kp1,x_k,\pi\kp1) - \grad\L(x_k,x_k,\pi\kp1)$.  If
+$y_k\T\delta_k < \sigma_k$ (\ref{eqn-min-curv}),
+recompute $\delta_k$ and $y_k$, with $x_k$
+redefined as $x_k + \alpha_k (\xbar_k - x_k)$. (This requires an extra
+evaluation of the problem derivatives.)  If necessary, increase $y_k\T
+\delta_k$ (if possible) by adding an augmented Lagrangian term to
+$y_k$.
+
+\item[11.] If $y_k\T \delta_k \ge \sigma_k$, apply the BFGS update
+to $H_k$, using the  pair
+$(H_k\delta_k,y_k)$.
+
+ \item[12.] Define $W\kp1$ from $\What_k$, set $k \gets k+1$,
+and repeat from Step 1.
+\end{enumerate}
+
+\smallskip \noindent
+Apart from the function and gradient evaluations,
+most of the computational effort lies in Steps~1 and 4.  Steps~3 and 5
+may also involve significant work if the QP subproblem requires many
+minor iterations. Typically this will happen only during the early
+major iterations.
+
+%Note that all points $x_k$ satisfy the linear constraints and bounds
+%(as do the points used to define extra derivatives in Step~9).
+%Thus, \SNOPT{} evaluates the nonlinear functions only at points
+%where it is reasonable to assume that they are defined.
+
+ \section{Numerical results} \label{sec-results}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\SNOPT{} and \SQOPT{} implement all of the techniques described
+in sections~\ref{sec-SQP}--\ref{sec-details}.  The Fortran 77 coding
+is compatible with Fortran 90 and 95 compilers and permits recursive calls,
+or re-entrant calls in a multithreaded environment, as well as translation
+into C via \textit{f}2\textit{c} \cite{f2c} (though these features are not used here).
+
+We give the results of applying \SNOPT~7.1 of January 2005 to problems in
+the \CUTEr{} and \COPS~3.0 test collections
+\cite{BonCGT95,BonDM98,DolM00,DolMM04}.
+Function and gradient values were used throughout (but not second
+derivatives).
+All runs were made on a Linux PC with 2GB of RAM and
+two 3.06GHz Xeon processors (only one being used for each problem
+solution).  The g77 compiler was used with \v{-O} option
+specifying full code optimization.
+The floating-point precision was $2.22 \times 10^{-16}$.
+Table~\ref{table_notation} defines the notation used in the tables of
+results.
+
+\begin{table}[ht] \footnotesize
+\caption{Notation in tables of results.}
+\label{table_notation}
+\begin{center}
+ \begin{tabular}{|l|l|}
+\hline\strutu $n\Z$ & The number of degrees of freedom at a solution (columns in $Z$).
+\\            Mnr   & The number of QP minor iterations.
+\\            Mjr   & The number of major iterations required by the optimizer.
+\\            Fcn   & The number of function and gradient evaluations.
+\\            cpu   & The number of cpu seconds.
+\\            Obj   & The final objective value (to help classify local solutions).
+\\            Con   & The final constraint violation norm (to identify infeasible problems).
+\\            $e$   & Essentially optimal
+                      (i.e., optimal if $\tau\P$ or $\tau\D$
+                      were increased by a factor of 10).
+\\            $c$   & Final nonoptimal point could not be improved.
+\\\strutl     $h$   & The number of Hessian-vector products required by the QP solver.
+\\\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+
+ \subsection{Options for SNOPT}   \label{sec-SNOPTparams}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Figure~\ref{fig-optionsS} gives the \SNOPT{} run-time options used,
+most of which are default values.  Linear constraints and variables
+are scaled (\v{Scale option 1}), and the first basis is
+essentially triangular (\v{Crash option 3}).
+
+\v{Elastic weight} sets  $\gamma_0 = 10^4$ in (\ref{eqn-gamma}).
+
+ For the Hessian approximations $H_k$, if the number of
+nonlinear variables is small enough ($\nbar \le 75$), a full dense
+BFGS Hessian is used. Otherwise, a limited-memory BFGS Hessian is
+used, with \v{Hessian updates} specifying that $H_k$ should
+be reset to the current Hessian diagonal every $\ell = 5$
+major iterations (see section \ref{sec-LM}).
+
+The \v{Major feasibility} and \v{optimality} tolerances
+set $\tau\P$ and $\tau\D$ in section~\ref{sec-convergence} for problem (NP)\@.
+The \v{Minor} tolerances are analogous options for \SQOPT{} as it
+solves (\QPk).  The \v{Minor feasibility tolerance} incidentally applies
+to the bound and linear constraints in (NP) as well as (\QPk).
+
+\v{Penalty parameter} initializes the penalty parameters
+$\rho_i$ for the merit function.
+
+\v{Reduced Hessian dimension} specifies the maximum size of the
+dense reduced Hessian available for \SQOPT. If the number of
+superbasics exceeds this value during the QP solution,
+\SQOPT{} solves (\ref{eqn-CG}) using the CG-type solver \SYMMLQ{}
+\cite{PaiS75}.
+
+\v{Violation limit} sets $\tau\V$ in section~\ref{sec-merit}
+to define an expanded feasible region in which the objective is
+expected to be bounded below.
+
+
+\begin{figure}[tb]  \scriptsize %\footnotesize
+\begin{center}
+\begin{tabular}{|c|}
+\hline
+\\[0pt]
+\begin{minipage}{4.0in}
+\begin{verbatim}
+   BEGIN SNOPT Problem
+      Minimize
+      Crash option                      3
+      Derivative level                  3
+      Elastic weight               1.0E+4
+      Hessian updates                   5
+      Iterations                    90000
+      Major iterations               2000
+      Minor iterations                500
+      LU partial pivoting
+      Major feasibility tolerance  1.0E-6
+      Major optimality  tolerance  2.0E-6
+      Minor feasibility tolerance  1.0E-6
+      Minor optimality  tolerance  1.0E-6
+      New superbasics                  99
+      Line search tolerance           0.9
+      Penalty parameter               0.0
+      Proximal point method             1
+      Reduced Hessian dimension       750
+      Scale option                      1
+      Step limit                      2.0
+      Unbounded objective         1.0E+15
+      Verify level                     -1
+      Violation limit              1.0E+6
+   END SNOPT Problem
+\end{verbatim}
+\end{minipage}
+\\[0pt]
+\\ \hline
+\end{tabular}
+\end{center}
+\caption{The SNOPT options file.}
+\label{fig-optionsS}
+\end{figure}
+
+
+ \subsection{Results on the CUTEr test set}  \label{sec-cute-results}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  The \CUTEr{} distribution of December 20, 2004 contains 1020 problems in
+standard interface format (SIF)\@.  A list of the \CUTEr{} problem types
+and their frequency is given in Table~\ref{table_CUTE}.  Although many
+problems allow for the number of variables and constraints to be
+adjusted in the SIF file, our tests used the dimensions set in the
+\CUTEr{} distribution. This gave problems ranging in size from
+\Cute{HS1} (two variables and no constraints) to
+\Cute{CONT5-QP} (40601 variables and 40201 constraints)
+and \Cute{PORTSNQP} (100000 variables and 3 constraints).
+
+
+\begin{table}[tb]
+\caption{The\/ {\rm1020} CUTEr problems listed by type and frequency.}
+\label{table_CUTE}
+\begin{center} \footnotesize %  Table dated Dec 28, 2004
+  \def\t{\phantom2} 
+\begin{tabular}{|c|c|l|}\hline
+  \multicolumn{1}{|c|}{\strut Frequency}& \multicolumn{1}{|c|}{Type}&
+  \multicolumn{1}{c|}{Characteristics}
+\\\hline\strutu \t24   &    LP   &   Linear obj,    linear constraints
+\\               167   &    QP   &   Quadratic obj, linear constraints
+\\               160   &    UC   &   Nonlinear obj, no constraints
+\\               129   &    BC   &   Nonlinear obj, bound constraints
+\\              \t70   &    LC   &   Nonlinear obj, linear constraints
+\\               380   &    NC   &   Nonlinear obj, nonlinear constraints
+\\\strutl       \t90   &    FP   &   No objective
+\\\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+From the complete set of 1020 problems, 13 were omitted as follows:
+\begin{itemize}
+ \item 4  nonsmooth problems
+(\Cute{BIGBANK},
+\Cute{GRIDGENA},
+\Cute{HS87}, and
+\Cute{NET4}),
+
+ \item 4 problems with undefined variables or floating-point
+  exceptions in the SIF file
+({\it lhaifam},
+\Cute{RECIPE},
+\Cute{S365},
+and
+\Cute{S365MOD}),
+
+ \item 5 problems too large for the SIF decoder
+({\it chardis0},
+\Cute{CHARDIS1},
+\Cute{HARKERP2},
+\Cute{YATP1SQ},
+and \Cute{YATP2SQ}).
+\end{itemize}
+
+% \SNOPT\ was applied to the remaining 870 problems, using the
+% options listed in Figure~\ref{fig-optionsS}.  No special information
+% was used in the case of LP, QP, and FP problems---i.e., each problem
+% was assumed to have a general nonlinear objective.  The results are
+% summarized in Table~\ref{table_compareALL}.
+
+Some of the \CUTEr{} problems have many degrees of freedom at the
+solution.  Of the 1007 problems attempted, 183 have more than 2000
+degrees of freedom, with the largest nonlinearly constrained problem
+(\Cute{JANNSON3}) having almost 20000 superbasic variables at the
+solution.  \SNOPT{} was applied to these problems using the options
+listed in Figure~\ref{fig-optionsS}.  The 824 problems with fewer than
+2000 degrees of freedom were solved with the option \v{Reduced Hessian
+  dimension 2000}, which allows the dimension of $R$ in (\ref{eqn-ZHZ})
+to grow to 2000, thereby preventing use of the CG solver.
+In all the runs, no special information was used in the case of
+QP and FP problems---i.e., each problem was assumed to have a general
+nonlinear objective.  The results are summarized in
+Table~\ref{table_compareALL}.
+
+
+\begin{table}[htp]
+\caption{Summary: SNOPT on the smooth CUTEr problems.}
+\label{table_compareALL}
+\begin{center} \footnotesize
+  \def\t{\phantom2} 
+\begin{tabular}{|l|c|c|}\hline
+\strut                         &$n\Z \le2000$&$n\Z >2000$\\\hline
+\strut   Problems attempted    &      824    &    183    \\\hline
+\strutu  Optimal               &      735    &    115    \\
+         Unbounded             &    \t\t3    &  \t\t1    \\
+\strutl  Infeasible            &     \t16    &  \t\t0    \\\hline % LC and 2 conjectured inf problems
+\strutu  Optimal, low accuracy &     \t12    &   \t17    \\
+         Cannot be improved    &    \t\t9    &  \t\t3    \\       % includes gnf cases
+         False infeasibility   &     \t17    &  \t\t0    \\       % currently  all nl inf cases
+\strutl  Terminated            &     \t32    &   \t47    \\\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\subsection*{Discussion}
+
+Problems
+\Cute{A2NNDNIL}, % 1
+\Cute{A5NNDNIL}, % 2
+\Cute{ARGLALE},  % 3
+\Cute{ARGLBLE},  % 4
+\Cute{ARGLCLE},  % 5
+\Cute{FLOSP2HH}, % 6
+\Cute{FLOSP2HL}, % 7
+\Cute{FLOSP2HM}, % 8
+\Cute{KTMODEL},  % 9
+\Cute{LINCONT},  %10
+\Cute{MODEL},    %11
+\Cute{NASH},     %12
+\Cute{SAWPATH},  %13
+and
+\Cute{WOODSNE}   %14
+have infeasible linear constraints, but were included anyway. The
+objectives for \Cute{FLETCHBV}, \Cute{INDEF}, \Cute{MESH}, and
+\Cute{STATIC3} are unbounded below in the feasible region. \SNOPT{}
+correctly diagnosed the special features of these problems.
+
+The declaration of optimality by \SNOPT{} means that the final point
+satisfies the first-order optimality conditions (\ref{eqn-conv}) for
+the default feasibility and optimality tolerances
+$\tau_{\P} = 10^{-6}$ and $\tau_{\D} = 2\times 10^{-6}$.
+We emphasize that this point may not be a
+constrained local minimizer for the problem.  For example, the final
+``optimal'' point for the problem \Cute{HS13} is not a constrained
+local minimizer because the constraint qualification does not hold
+there.  Similarly, the final point for the problem \Cute{OPTMASS}
+satisfies the \emph{first-order} but not \emph{second-order}
+conditions for optimality. Verifying  second-order conditions requires
+second derivatives.
+
+\section*{Performance on problems with few superbasics}
+A total of  12 problems
+(\Cute{CHEBYQAD},  % 1
+\Cute{CRESC132},  % 2
+\Cute{CRESC50},   % 3
+\Cute{DJTL},      % 4
+\Cute{HUES-MOD},  % 5
+\Cute{LAKES},     % 6
+\Cute{LISWET4},   % 7
+\Cute{MANCINO},   % 8
+\Cute{MARINE},    % 9
+{\it ncb\-20b},    %10
+\Cute{NCVXBQP3},  %11
+and
+\Cute{PFIT4})     %12
+were terminated at a point that is essentially optimal; i.e.,
+a point that would be considered optimal if the
+feasibility \emph{or} the optimality tolerance were ten
+times the default.  The \AMPL{}
+implementation of \Cute{MARINE} was solved successfully as part of the
+\COPS~3.0 collection (see section~\ref{sec-cops-results}).
+
+ \SNOPT{} reported 19 problems
+(\Cute{ARGAUSS},   % 1 Feasible
+\Cute{ARWDHNE},   % 2 Unknown
+\Cute{CONT6-QQ},  % 3 Unknown
+\Cute{DRCAVTY3},  % 4 n =  4489  bigger versions feasible?
+\Cute{EIGENB},    % 5 Feasible  UC problem in Ampl.
+\Cute{EIGENC},    % 6 Feasible
+\Cute{EIGMAXB},   % 7 feasible
+\Cute{FLETCHER},  % 8 feasible
+\Cute{FLOSP2TH},  % 9 no known feasible point
+\Cute{GROWTH},    %10  Feasible in Ampl
+\Cute{HIMMELBD},  %11 Infeasible using Ampl LOQO finds FP
+\Cute{HS90},      %12 feasible problem  found with feasible point option
+\Cute{JUNKTURN},  %13 maximum infeas = 7.2E-05
+\Cute{LEWISPOL},  %14 infeasible using Ampl, Philippe Toint has found a feasible point
+{\it loots\-ma},  %15 feasible problem
+\Cute{LUBRIFC},   %16 feasible problem for the smaller case
+\Cute{NYSTROM5},  %17 Philippe Toint has found a feasible point
+\Cute{OPTCDEG3},  %18
+and
+\Cute{VANDERM3})  %19
+with infeasible nonlinear constraints.  Since \SNOPT{} is not assured
+of finding a \emph{global} minimizer of the sum of infeasibilities,
+failure to find a feasible point does not imply that none exists.  Of
+these 19 problems, all but two cases must be counted as failures
+because they are known to have feasible points.  The two exceptions,
+\Cute{FLOSP2TH} and \Cute{JUNKTURN}, have no known feasible points. To
+gain further assurance that these problems are indeed infeasible, they
+were re-solved using \SNOPT's \v{Feasible Point} option, in which the
+true objective is ignored but elastic mode is invoked (as usual)
+if the constraint linearizations prove to be infeasible (i.e., $f(x) =
+0$ and $\gamma = 1$ in problem (\NP{\gamma}) of
+section~\ref{sec-infeas}).  In both cases, the final sum of
+constraint violations was comparable to that obtained with the
+composite objective.  We conjecture that these problems are
+infeasible.
+
+Problems \Cute{FLETCHER} and \Cute{LOOTSMA} have feasible solutions,
+but their initial points are infeasible and stationary for the sum of
+infeasibilities, and thus \SNOPT{} terminated immediately. These
+problems are also listed as failures.
+
+ \SNOPT{} was unable to solve 32 cases within the allotted 2000 major
+iterations
+(\Cute{A4X12},    %  1
+\Cute{ALLINQP},   %  2
+\Cute{BQPGAUSS},  %  3
+\Cute{CATENA},    %  4
+\Cute{CATENARY},  %  5
+\Cute{DISCS},     %  6
+\Cute{DIXON3DQ},  %  7
+\Cute{EIGENALS},  %  8
+\Cute{EIGENBLS},  %  9
+{\it eigen\-cls}, % 10
+\Cute{EXTROSNB},  % 11
+\Cute{GLIDER},    % 12
+\Cute{HEART6},    % 13
+\Cute{HEART6LS},  % 14
+\Cute{HYDC20LS},  % 15
+\Cute{LUBRIF},    % 16
+\Cute{MSQRTALS},  % 17
+\Cute{MSQRTBLS},  % 18
+\Cute{NONMSQRT},  % 19
+\Cute{NUFFIELD},  % 20
+\Cute{OPTCTRL3},  % 21
+\Cute{OPTCTRL6},  % 22
+\Cute{PALMER5E},  % 23
+\Cute{PALMER7E},  % 24
+\Cute{PFIT3},     % 25
+\Cute{QR3DLS},    % 26
+\Cute{READING4},  % 27
+\Cute{ROBOTARM},  % 28
+\Cute{SINROSNB},  % 29
+\Cute{UBH1},      % 30
+\Cute{VANDERM1},  % 31
+and
+\Cute{VANDERM2}). % 32
+\AMPL{} implementations of \Cute{GLIDER} and \Cute{ROBOTARM} were
+solved successfully (see section~\ref{sec-cops-results}).
+% These were two of a number of failures were \SNOPT{} was able to solve the
+% \AMPL{} implementation.
+
+Another 9 problems could not be improved at a nonoptimal point:
+\Cute{ARGLINB},  % 1
+\Cute{ARGLINC},  % 2
+\Cute{BLEACHNG}, % 3
+\Cute{BROWNBS},  % 4
+\Cute{MEYER3},   % 5
+\Cute{PENALTY3}, % 6
+\Cute{SEMICN2U}, % 7
+\Cute{UBH5},     % 8
+and
+\Cute{VANDERM4}. % 9
+\SNOPT{} essentially found the solution of the badly scaled problems
+\Cute{BROWNBS} and \Cute{MEYER3} but was unable to declare optimality.
+The problems \Cute{UBH1} and \Cute{UBH5} appear to have singular
+Jacobians near the solution.  \SNOPT{} was unable to find a
+well-conditioned null-space basis at the final (non-optimal) iterate
+of \Cute{UBH5}.
+
+\section*{Performance on problems with many superbasics}
+
+The 183 problems with more than 2000 degrees of freedom at the
+solution provide a substantial test of the CG solver in \SQOPT.  In
+this situation, once the QP working set settles down, the efficiency
+of \SNOPT{}  depends largely on whether or not the limited-memory
+method is able to adequately represent the Lagrangian Hessian.
+
+A total of 17 problems
+(\Cute{BIGGSB1},
+\Cute{CLPLATEA},
+\Cute{CLPLATEB},
+\Cute{FMINSURF},
+\Cute{JIMACK},
+\Cute{LUKVLE1},
+\Cute{LUKVLE4},
+\Cute{LUKVLE6},
+\Cute{LUKVLE17},
+\Cute{LUKVLE18},
+\Cute{LUKVLI13},
+\Cute{LUKVLI16},
+\Cute{LUKVLI17},
+\Cute{MINSURFO},
+\Cute{ODC},
+{\it orth\-regc},
+and
+\Cute{ORTHREGF})
+were terminated at a point that would be considered optimal if the
+feasibility or the optimality tolerance were ten
+times the default.
+
+
+The 3 problems \Cute{LUKVLE15}, \Cute{POWELLSQ}, and \Cute{QRTQUAD}
+could not be improved at a nonoptimal point. \SNOPT{} was unable to
+solve 47 problems within the assigned number of 2000 major iterations
+(\Cute{BRATU1D},     % 1
+\Cute{CHAINWOO},    % 2
+\Cute{CHENHARK},    % 3
+\Cute{CLPLATEC},    % 4
+\Cute{COSHFUN},     % 5
+\Cute{CURLY10},     % 6
+\Cute{CURLY20},     % 7
+\Cute{CURLY30},     % 8
+\Cute{DRCAV1LQ},    % 9
+\Cute{DRCAV2LQ},    %10
+\Cute{DRCAV3LQ},    %11
+\Cute{FLETCBV3},    %12
+\Cute{FLETCHCR},    %13
+\Cute{GENHUMPS},    %14
+\Cute{HANGING},     %15
+\Cute{JNLBRNGB},    %16
+\Cute{LCH},         %17
+\Cute{LMINSURF},    %18
+\Cute{LUKVLE9},     %19
+\Cute{LUKVLE11},    %20
+\Cute{LUKVLE16},    %21
+\Cute{LUKVLI1},     %22
+\Cute{LUKVLI9},     %23
+\Cute{LUKVLI10},    %24
+\Cute{LUKVLI11},    %25
+\Cute{LUKVLI12},    %26
+\Cute{LUKVLI15},    %27
+\Cute{LUKVLI18},    %28
+\Cute{MODBEALE},    %29
+\Cute{NLMSURF},     %30
+\Cute{NONCVXU2},    %31
+\Cute{NONCVXUN},    %32
+\Cute{ODNAMUR},     %33
+{\it orth\-rgds},   %34
+\Cute{POWELLSG},    %35
+\Cute{RAYBENDL},    %36
+\Cute{RAYBENDS},    %37
+\Cute{SBRYBND},     %38
+\Cute{SCOND1LS},    %39
+\Cute{SCOSINE},     %40
+\Cute{SCURLY10},    %41
+\Cute{SCURLY20},    %42
+\Cute{SCURLY30},    %43
+\Cute{SINQUAD},     %44
+\Cute{SPARSINE},    %45
+\Cute{TESTQUAD},    %46
+and
+\Cute{TQUARTIC}).   %47
+Many of these problems have no constraints or only simple bounds, and
+in these cases, the large number of major iterations is consistent
+with results obtained by other limited-memory quasi-Newton methods
+(see, e.g., \cite{ByrLNZ95,GilL03}).
+
+If the infeasible LC problems, the unbounded problems, and the 2
+(conjectured) infeasible problems are counted as successes, \SNOPT{}
+solved a grand total of 870
+%735+3+16 + 115 + 1 = 870
+of the 1007 problems attempted.  In another 29 cases, \SNOPT{} found a
+point that was within a factor $10$ of satisfying the convergence
+test.
+
+Given the size and diversity of the test set, these results
+provide good evidence of the robustness of first-derivative SQP
+methods when implemented with an augmented Lagrangian merit function
+and an elastic variable strategy for treating infeasibility of the
+original problem and the QP subproblems.
+
+
+\subsection{Results on the COPS~3.0 test set}  \label{sec-cops-results}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Next we describe tests on the 22 problems in the \COPS~3.0 test
+collection \cite{BonDM98,DolM00,DolM02} implemented in the \AMPL{}
+modeling language \cite{FGK93,AMPL2,AMPL}.  The dimension of a particular
+instance of a \COPS{} problem is determined by one or more parameters
+assigned in its \AMPL{} data file.  For each of the 22 \COPS{}
+problems, \cite{DolMM04} gives the results of
+several optimization algorithms on a range of cases obtained by
+varying only one of the model parameters.  In all but one of the
+models we consider the largest problem from each set of cases
+(see Table~\ref{table_COPS-dims}).  The exception was the model
+\Cute{dirichlet}, where the second largest size was used. (For this
+problem, the Hessian of the Lagrangian is increasingly ill-conditioned
+as the problem dimension grows and the limited-memory algorithm was
+unable to solve the largest case, regardless of the number of
+limited-memory updates used.)  Problems \Cute{bearing} and
+\Cute{torsion} are quadratic programs with only bound constraints. In
+the case of a QP, the \AMPL{} interface to \SNOPT{} calls \SQOPT{}
+directly.
+
+
+\begin{table}[t]
+\caption{Dimensions of the \AMPL{} versions of the \COPS{} problems.}
+\label{table_COPS-dims}
+\begin{center} \footnotesize
+\begin{tabular}{|c|l|c|r|r|r|r|}\hline
+ \multicolumn{1}{|c|}{\strut No.}&
+ \multicolumn{1}{|c|}{Problem}&
+ \multicolumn{1}{c|}{Type}&
+ \multicolumn{1}{c|}{Variables}&
+ \multicolumn{3}{c|}{Constraints}\\\cline{5-7}
+ \multicolumn{1}{|c|}{\strut }&
+ \multicolumn{1}{|c|}{ }&
+ \multicolumn{1}{c|}{  }&
+ \multicolumn{1}{c|}{  }&
+ \multicolumn{1}{c|}{Linear}&
+ \multicolumn{1}{c|}{Nonlinear}&
+ \multicolumn{1}{c|}{Total}
+\\\hline\strutu 1&\Cute{bearing}    & QP & 5000 &     0 &      0 &     0
+\\              2&\Cute{camshape}   & NC & 1200 &  1200 &   1201 &  2401
+\\              3&\Cute{catmix}     & NC & 2401 &     1 &   1600 &  1601
+\\              4&\Cute{chain}      & NC &  800 &   401 &      1 &   402
+\\              5&\Cute{channel}    & FP & 6398 &  3198 &   3200 &  6398
+\\              6&\Cute{dirichlet}  & FP & 8981 &     1 &     41 &    42
+\\              7&\Cute{elec}       & NC &  600 &     1 &    200 &   201
+\\              8&\Cute{gasoil}     & NC & 4001 &   799 &   3200 &  3999
+\\              9&\Cute{glider}     & NC & 1999 &     1 &   1600 &  1601
+\\             10&\Cute{henon}      & NC &10801 &     1 &     81 &    82
+\\             11&\Cute{lane\_emden}& NC &19240 &     1 &     81 &    82
+\\             12&\Cute{marine}     & NC & 6415 &  3193 &   3200 &  6415
+\\             13&\Cute{methanol}   & NC & 4802 &  1198 &   3600 &  4798
+\\             14&\Cute{minsurf}    & BC & 5000 &     0 &      0 &     0
+\\             15&\Cute{pinene}     & NC & 8000 &  1996 &   6000 &  7996
+\\             16&\Cute{polygon}    & NC &  398 &   199 &  19900 & 20099
+\\             17&\Cute{robot}      & NC & 7198 &     1 &   4800 &  4801
+\\             18&\Cute{rocket}     & NC & 6401 &     1 &   4800 &  4801
+\\             19&\Cute{steering}   & NC & 3999 &     1 &   3200 &  3201
+\\             20&\Cute{tetra}      & NC & 2895 &   193 &   8409 &  8602
+\\             21&\Cute{torsion}    & QP & 5000 &     0 &      0 &     0
+\\\strutl      22&\Cute{triangle}   & NC & 3578 &   243 &   3726 &  3969
+\\\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+
+
+Table~\ref{table_COPS} gives the results of \SNOPT{} on the 22 \COPS{}
+problems. The default \AMPL\ options (including problem preprocessing)
+were used in each case.  With the exception of \Cute{triangle}, the
+default options of Figure~\ref{fig-optionsS} were used.  For
+\Cute{triangle} the option \v{Penalty parameter} initialized the
+penalty parameters to $10^5$ to prevent the objective becoming
+unbounded.
+
+\begin{table}[ht]
+\caption{SNOPT on the COPS\/ {\rm3.0} problems.}
+\label{table_COPS}
+\begin{center}  \footnotesize %%%%% Runs of May 21, 2001
+\begin{tabular}{|c|l|r|r|r|r|c|r|r|}\hline
+ \multicolumn{1}{|c|}{\strut No.}&
+ \multicolumn{1}{|c|}{Problem}&
+ \multicolumn{1}{c|}{Mnr}&
+ \multicolumn{1}{c|}{Mjr}&
+ \multicolumn{1}{c|}{Fcn}&
+ \multicolumn{1}{c|}{Obj}&
+ \multicolumn{1}{c|}{Con}&
+ \multicolumn{1}{c|}{ $n\Z$}&
+ \multicolumn{1}{c|}{ cpu}\\\hline\strutu%
+%                       Problem         Mnr    Mjr     Fcn          Obj               Con        nZ   cpu
+              1&\Cute{bearing}    &  3352 &   -- & 4106\hp &\n{ 1.550420E-01 }&\n{0.0E+00}  & 3350 &  50.3
+\\            2&\Cute{camshape}   &  4908 &   10 &   20    &\n{ 4.234466E+00 }&\n{1.5E-07}  &    0 &   5.8
+\\            3&\Cute{catmix}     &  2949 &   37 &   39    &\n{-4.805546E-02 }&\n{1.8E-07}  &  618 &  39.0
+\\            4&\Cute{chain}      &  1667 &   48 &   73    &\n{ 5.068532E+00 }&\n{1.2E-07}  &  799 &   9.0
+\\            5&\Cute{channel}    &  3999 &    5 &    7    &\n{ 1.000000E+00 }&\n{3.3E-05}  &    0 &  29.8
+\\            6&\Cute{dirichlet}  &  5902 &   82 &  108    &\n{ 1.714656E-02 }&\n{8.0E-07}  & 5355 & 279.4
+\\            7&\Cute{elec}       &   893 &  490 &  550    &\n{ 1.843916E+04 }&\n{5.4E-13}  &  400 &  38.6
+\\            8&\Cute{gasoil}     &  2589 &   18 &   21    &\n{ 5.236596E-03 }&\n{3.1E-07}  &    3 &  12.9
+\\            9&\Cute{glider}     & 17834 &   79 &  164    &\n{ 1.247974E+03 }&\n{6.4E-12}  &  359 &  47.8
+\\           10&\Cute{henon}      & 11002 &  239 &  283    &\n{ 1.179065E+02 }&\n{5.4E-10}  & 9410 & 893.3
+\\           11&\Cute{lane\_emden}&  5795 &  152 &  179    &\n{ 9.284899E+00 }&\n{4.2E-09}  & 5414 & 296.7
+\\           12&\Cute{marine}     &  3375 &   47 &   62    &\n{ 1.974651E+07 }&\n{7.3E-12}  &   22 &  30.9
+\\           13&\Cute{methanol}   &  3990 &  104 &  183    &\n{ 9.022290E-03 }&\n{6.1E-12}  &    4 &  53.2
+\\           14&\Cute{minsurf}    &159809 & 1298 & 1421    &\n{ 2.506950E+00 }&\n{0.0E+00}  & 4782 &1672.1
+\\           15&\Cute{pinene}\acc &  4907 &   38 &  107    &\n{ 1.987217E+01 }&\n{5.8E-13}  &    5 &  82.8
+\\           16&\Cute{polygon}\acc&  7649 & 2000 & 2191    &\n{ 7.853051E-01 }&\n{2.7E-08}  &  197 &1265.8
+\\           17&\Cute{robot}      & 10268 &   16 &   33    &\n{ 9.140942E+00 }&\n{3.3E-08}  &    0 & 105.5
+\\           18&\Cute{rocket}     &  3884 &   11 &   25    &\n{ 1.005380E+00 }&\n{7.1E-10}  &  332 &  27.5
+\\           19&\Cute{steering}   &  1911 &   72 &   95    &\n{ 5.545713E-01 }&\n{2.8E-07}  &  799 &  25.7
+\\           20&\Cute{tetra}      &  2959 &   50 &   55    &\n{ 1.049511E+04 }&\n{0.0E+00}  &  799 &  47.3
+\\           21&\Cute{torsion}    &  3504 &   -- & 4258\hp &\n{-4.182392E-01 }&\n{0.0E+00}  & 3450 &  71.4
+\\\strutl    22&\Cute{triangle}   &  5526 &  153 &  171    &\n{ 4.215232E+03 }&\n{0.0E+00}  & 3578 &  35.3
+\\\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+
+%\begin{table}[htp]
+%\caption{The effects of \AMPL{} preprocessing.}
+%\label{table_presolve}
+%\begin{center} \footnotesize
+% \begin{tabular}{|l|r|r|}\hline
+% \multicolumn{1}{|c|}{\strut }&
+% \multicolumn{1}{|c|}{Presolve on }&
+% \multicolumn{1}{|c|}{Presolve off}%
+%\\\hline\strutu  Major iterations      &  2604 &   1680
+%\\               Minor iterations      & 79910 &  95563
+%\\               Function evaluations  &  9959 &   2351
+%\\\strutl        cpu (secs)            &4522.6 &  6462.5
+%\\\hline
+%\end{tabular}
+%\end{center}
+%\end{table}
+
+ \subsection*{Discussion}
+
+It is not clear why the \AMPL{} formulations of
+\Ampl{glider} and \Ampl{robot} (problem
+\Cute{ROBOTARM} in the \CUTEr{} set) can be solved relatively easily,
+but not the \CUTEr{} versions.
+Reruns with \AMPL{} option \v{presolve 0} did not need
+significantly more cpu time, which implies that preprocessing
+is not the reason for the performance difference.
+
+The \COPS{} problems were also used to investigate the
+effect of the number $\ell$ of limited-memory updates
+(section \ref{sec-LM}) on the performance of \SNOPT\@.
+Tables~\ref{table_COPS_LM} and \ref{table_COPS_LM_major}
+give times and major iterations for different choices for
+$\ell$.
+
+\begin{table}[p]
+\caption{\label{table_COPS_LM}  COPS problems: cpu time for increasing numbers of LM updates.}
+\begin{center}  \footnotesize %%%%% Runs of Dec 28 2004
+\begin{tabular}{|l|r|r|r|r|r|r|r|r|}\hline
+ \multicolumn{1}{|c|}{\strut Problem}&
+ \multicolumn{6}{c|}{Limited-memory updates}\\\cline{2-7}
+ \multicolumn{1}{|c|}{\strut }&
+ \multicolumn{1}{c|}{ 5}&
+ \multicolumn{1}{c|}{10}&
+ \multicolumn{1}{c|}{15}&
+ \multicolumn{1}{c|}{20}&
+ \multicolumn{1}{c|}{25}&
+ \multicolumn{1}{c|}{30}\\\hline\strutu%
+%                  Problem     LM 5       LM 10    LM 15       LM 20      LM 25       LM 30
+          \Cute{bearing}    &  50.3    &  48.7    &  47.4    &  51.5    &  49.4     &  49.6
+\\        \Cute{camshape}   &   5.8    &   6.1    &   6.0    &   5.8    &   5.9     &   5.8
+\\        \Cute{catmix}     &  39.0    &  96.3    &  99.7    &  83.9    & 164.1     &  97.3
+\\        \Cute{chain}      &   9.0    &   9.0    &   8.8    &   9.4    &  10.5     &  10.6
+\\        \Cute{channel}    &  29.8    &  29.6    &  30.1    &  30.2    &  30.4     &  32.1
+\\        \Cute{dirichlet}  & 279.4    & 287.0    & 396.8    & 539.6    & 749.4     & 848.4
+\\        \Cute{elec}       &  38.6    &  38.1    &  24.4    &  40.2    &  45.3     &  43.5
+\\        \Cute{gasoil}     &  12.9    &  12.9    &  12.9    &  13.1    &  13.8     &  13.1
+\\        \Cute{glider}     &  47.8    &  54.8    &  78.1    &  73.9    &  78.4     &  90.5
+\\        \Cute{henon}      & 893.3    & 888.1    &1023.5    &1206.3    &2077.7     &2793.8
+\\        \Cute{lane\_emden}& 296.7    & 461.6    & 731.6    & 891.6    &1333.6     &1734.0
+\\        \Cute{marine}     &  30.9    &  32.7\acc&  34.7\acc&  33.7    &  36.4     &  38.0
+\\        \Cute{methanol}   &  53.2    &  42.5    &  43.0    &  45.0    &  46.1     &  42.0
+\\        \Cute{minsurf}    &1672.1    &1626.7    &1170.5    &1525.1    &2232.3     &2494.7
+\\        \Cute{pinene}     &  82.8\acc&  78.0    &  74.4\acc&  74.4\acc&  72.8\acc &  71.3\acc
+\\        \Cute{polygon}    &1265.8\acc& 645.3    & 358.2    & 393.4    & 404.1     & 221.3
+\\        \Cute{robot}      & 105.5    &  83.0    &  88.2    &  91.8    &  95.9     &  96.7
+\\        \Cute{rocket}     &  27.5    &  27.6    &  27.5    &  29.0    &  29.0     &  29.3
+\\        \Cute{steering}   &  25.7    &  30.5    &  33.1    &  43.1    &  50.5     &  52.8
+\\        \Cute{tetra}      &  47.3    &  51.3    &  56.4    &  59.3    &  67.0     &  73.1
+\\        \Cute{torsion}    &  71.4    &  73.9    &  71.7    &  76.7    &  81.0     &  78.4
+\\\strutl \Cute{triangle}   &  35.3    &  40.2    &  46.0    &  48.9    &  53.6     &  60.0
+\\\hline\strut Total  cpu   &5120.1    &4663.9    &4463.0    &5365.9    &7727.2     &8976.3
+\\\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[p]
+\caption{\label{table_COPS_LM_major} COPS problems: major iterations for increasing
+  numbers of LM updates.}
+\begin{center}  \footnotesize %%%%% Runs of May 26 2001
+\begin{tabular}{|l|r|r|r|r|r|r|r|r|}\hline
+ \multicolumn{1}{|c|}{\strut Problem}&
+ \multicolumn{6}{c|}{Limited-memory updates}\\\cline{2-7}
+ \multicolumn{1}{|c|}{\strut }&
+ \multicolumn{1}{c|}{ 5}&
+ \multicolumn{1}{c|}{10}&
+ \multicolumn{1}{c|}{15}&
+ \multicolumn{1}{c|}{20}&
+ \multicolumn{1}{c|}{25}&
+ \multicolumn{1}{c|}{30}\\\hline\strutu%
+%                       Problem     LM 5  LM 10  LM 15  LM 20  LM 25  LM 30
+               \Cute{camshape}   &    10 &   10 &   10 &   10 &   10 &   10
+\\             \Cute{catmix}     &    37 &  106 &   97 &   64 &  131 &   63
+\\             \Cute{chain}      &    48 &   47 &   35 &   45 &   55 &   57
+\\             \Cute{channel}    &     5 &    5 &    5 &    5 &    5 &    5
+\\             \Cute{dirichlet}  &    82 &   64 &   52 &   57 &   55 &   60
+\\             \Cute{elec}       &   490 &  446 &  270 &  372 &  392 &  392
+\\             \Cute{gasoil}     &    18 &   16 &   16 &   16 &   16 &   16
+\\             \Cute{glider}     &    79 &   73 &  112 &  172 &  224 &  227
+\\             \Cute{henon}      &   239 &  155 &  158 &  145 &  100 &  114
+\\             \Cute{lane\_emden}&   152 &  134 &  114 &  127 &  119 &   99
+\\             \Cute{marine}     &    47 &   42 &   49 &   43 &   46 &   50
+\\             \Cute{methanol}   &   104 &   63 &   59 &   79 &   90 &   59
+\\             \Cute{minsurf}    &  1298 &  915 &  510 &  506 &  513 &  468
+\\             \Cute{pinene}     &    38 &   34 &   28 &   28 &   26 &   26
+\\             \Cute{polygon}    &  2000 &  958 &  465 &  484 &  495 &  218
+\\             \Cute{robot}      &    16 &   20 &   22 &   26 &   26 &   26
+\\             \Cute{rocket}     &    11 &   11 &   11 &   11 &   11 &   11
+\\             \Cute{steering}   &    72 &   82 &   84 &   92 &   88 &   92
+\\             \Cute{tetra}      &    50 &   47 &   48 &   45 &   47 &   48
+\\\strutl      \Cute{triangle}   &   153 &  152 &  163 &  150 &  146 &  152
+\\\hline\strut Total             &  4949 & 3380 & 2308 & 2477 & 2595 & 2193
+\\\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+
+The results are typical of the performance of \SNOPT{} in practical
+situations.
+\begin{itemize}
+ \item Small values of $\ell$ can give low computation times but may
+adversely affect robustness on more challenging problems.  For
+example, $\ell= 5$ gave the one run in which the \AMPL{} formulations of
+\Ampl{pinene} and \Ampl{polygon} could not be solved to full accuracy.
+
+\item As $\ell$ is increased, the number of major iterations tends to
+decrease. However, the numerical performance remains relatively stable.
+(For example, the same local solution was always found for the highly
+nonlinear problem {\it polygon}.)
+
+\item The value $\ell= 5$ often gives the lowest computation
+time---particularly for problems with large numbers of superbasic
+variables.  As $\ell$ is increased, the solution time often
+decreases initially, but then increases as the cost of the products
+$H_k v$ increases. This would be more closely reflected in the total
+computation time for Table~\ref{table_COPS_LM} if it were not for
+{\it polygon}, whose time improves dramatically because of a better
+Hessian approximation.
+\end{itemize}
+
+The choice of default value $\ell = 5$ is intended to provide
+efficiency on problems with many superbasics without a significant
+loss of robustness.
+
+
+\section{Alternative QP solvers} \label{sec-future}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Where possible, we have defined the SQP algorithm to be independent of
+the QP solver.  Of course, \SQOPT's implicit elastic bounds and warm
+start features are highly desirable.
+
+%For example,
+%\SQOPT{} can use a given starting point and working set,
+%and for linearly constrained problems (section~\ref{sec-linear-constraints})
+%it can accept a known Cholesky factor $R$ for the reduced Hessian.
+%The dense QP solvers \LSSOL{} \cite{GHMSW86} and \QPOPT{} \cite{GilMS95}
+%have similar features that are exploited by \NPSOL{} and \NZOPT{} respectively.
+
+
+Here we discuss future possibilities for solving the KKT system
+(\ref{eqn-KKT}) within the QP solver, allowing for many degrees of
+freedom (when $W$ has many more columns than rows).
+Note that the limited-memory Hessians (\ref{eqn-LMH})--(\ref{eqn-LMH0})
+have the form
+\begin{eqnarray}
+   H_k &=& H_0 + UU\T - VV\T \ =\ G_k\T G_k              \label{eqn-Hk}
+\\ G_k &=& H_0^{1/2} \textstyle{\prod_j} (I + u_j v_j^T) \label{eqn-Gk}
+\end{eqnarray}
+for certain quantities $U$, $V$, $u_j$, $v_j$.
+%\SNOPT{} stores $H_0$ and the vectors $u_k$, $v_k$ representing $G_k$.
+
+
+\subsection{Range-space methods} \label{sec-RS}
+
+If all variables appear nonlinearly, $H_k$ is positive-definite.
+A ``range-space'' approach could then be used to solve
+systems (\ref{eqn-KKT}) as $W$ changes.  This amounts to
+maintaining factors of the Schur complement matrix
+$S = W H_k\inv W\T$ = $R_k\T R_k$, where $R_k$ comes from a
+QR factorization of $T_k$ satisfying $G_k^T T_k = W$.
+It would be efficient for problems with only a few hundred
+general constraints, so that $T_k$ and $R_k$ could be treated
+as a dense matrices.
+
+
+\subsection{Least-squares CG formulation} \label{sec-LSQR}
+
+With $g_q = g_k + H_k(x - x_k)$,
+system (\ref{eqn-CG}) is equivalent to the least-squares problem
+\begin{equation}
+   \min_{d\Z}
+   \ \normm{ \pmat{G_k Z \\ \delta I}d\Z + \pmat{t \\ r/\delta} }_2^2,
+   \qquad t = G_k(x-x_k), \quad r = Z\T g_k,
+\end{equation}
+where $t$ and $r$ both become small as the SQP method converges.
+This formulation would allow the use of the CG-type solver \LSQR{} \cite{PaiS82a},
+which has effective stopping rules to control the accuracy of $d\Z$.
+
+
+\subsection{Schur-complement updates} \label{sec-SC}
+
+For limited-memory Hessians of the form $ H_k = H_0 + UU^T - VV^T$
+(\ref{eqn-Hk}), system (\ref{eqn-KKT}) is equivalent to
+$$
+   \pmat{ H_0 & W^T & U & V
+       \\ W
+       \\ U^T &     & I
+       \\ V^T &     &   &-I}
+   \pmat{p\\q\\r\\s} = \pmat{g\\0\\0\\0}.
+$$
+Following \cite[section 3.6.2]{GilMSW84b}, if we define
+$$
+        K_0 = \pmat{ H_0 & W^T
+                  \\ W   &    }, \qquad
+        S   = \pmat{I \\ & -I} - \pmat{U^T \\ V^T} K_0 \inv \pmat{U & V},
+$$
+it would be efficient to work with a sparse factorization of $K_0$
+and dense factors of its Schur complement $S$.  (For a given QP
+subproblem, $U$ and $V$ are constant, but changes to $W$ would be handled
+by appropriate updates to $S$.)
+
+ This approach has been explored by Betts and Frank \cite[section 5]{BF94}
+with $H_0 = I$ (or possibly a sparse finite-difference Hessian
+approximation).  Schur-complement updates have also been implemented
+in the \GALAHAD{} QP solver \QPA{} \cite{Gould:2003:GLT}.
+
+As part of an SQP algorithm, practical success
+depends greatly on the definition of $H_0$ and on the BFGS updates that
+define $U$ and $V$.  Our experience with \SNOPT{} emphasizes the importance of
+updating $H_k$ even in the presence of negative curvature;
+hence the precautions of section~\ref{sec-pd-H}.
+
+%If $H_0$ were defined as in section~\ref{sec-Hessian}, the major iterates
+%would be identical to those currently obtained with \SQOPT\@.
+
+
+\subsection{Schur-complement updates II} \label{sec-SC2}
+
+For a limited-memory Hessian of the form $ H_1 = (I + vu^T)H_0(I + uv^T)$,
+system (\ref{eqn-KKT}) is equivalent to
+\[
+  \pmat{ H_0 & W^T & \ubar & v
+      \\ W
+      \\ \ubar\T & & \gamma & -1
+      \\ v\T     & & \!-1\! }
+  \pmat{p\\q\\r\\s} = \pmat{g\\0\\0\\0},
+  \qquad
+  \ubar = H_0 u, \qquad \gamma = u\T H_0 u.
+\]
+It remains to be seen if this will permit multiple
+product-form updates required by (\ref{eqn-LMH0}).
+
+
+
+
+ \section{Summary and conclusions} \label{sec-conclusions}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+We have presented theoretical and practical details about
+an SQP algorithm for solving nonlinear programs with large numbers
+of constraints and variables, where the nonlinear functions are
+smooth and first derivatives are available.
+The algorithm minimizes a sequence of augmented Lagrangian functions,
+using a QP subproblem at each stage to predict the set of active
+constraints and to generate a search direction
+in both the primal and the dual variables.
+Convergence is assured from arbitrary starting points.
+
+The constraints in the QP subproblems are linearizations of the
+original constraints (requiring only first derivatives),
+but the QP objective must approximate the Lagrangian more closely.
+As with interior-point methods, the most promising way to achieve
+efficiency % with the linear algebra in the QP subproblems
+would be to work with sparse second
+derivatives (i.e., an exact Hessian of the Lagrangian, or a
+sparse finite-difference approximation).  However, indefinite QP
+subproblems raise many practical questions, and alternatives are needed
+when second derivatives are not available.
+
+The present implementation, \SNOPT, uses a positive-semidefinite
+quasi-Newton Hessian approximation $H_k$.
+If the number of nonlinear variables is moderate, $H_k$ is stored as a
+dense matrix.  Otherwise, limited-memory BFGS updates are employed,
+with resets to the current diagonal at a specified frequency
+(typically every 5 or 10 major iterations).
+
+The QP solver, \SQOPT, works with a sequence of
+reduced-Hessian systems of the form $Z\T H_k Z d = - Z\T g$,
+where $Z$ is a rectangular matrix operator with $n\Z$ columns
+(the number of degrees of freedom).  \SQOPT{} can deal with
+the reduced-Hessian systems in various ways, depending on
+the size of $n\Z$.  If many constraints are currently active
+in the QP, $n\Z$ is not excessively large and it is
+efficient to use the dense Cholesky factorization $Z\T H_k Z = R\T R$.
+Alternatively, \SQOPT{} can maintain a dense
+quasi-Newton approximation $Z\T H_k Z \approx R\T R$ to
+avoid the cost of forming and factorizing the reduced
+Hessian.  Another option is to use the conjugate-gradient
+(CG) method.  The structure of the
+reduced Hessian often makes this the most effective
+method for solving problems with many degrees of freedom
+(with no preconditioning for the CG method).  Finally,
+\SQOPT{} has the option of using a dense quasi-Newton
+approximation to part of the reduced Hessian as a
+preconditioner for the CG solver.
+
+The numerical results in section~\ref{sec-results} show that
+the current version of \SNOPT{} is effective on most of the
+problems in the \CUTEr{} and \COPS~3.0 test sets, including
+examples with up to 40000 constraints and variables, and
+some with 20000 degrees of freedom.  Earlier comparisons
+with \MINOS{} have shown greater reliability as a result of
+methodical treatment of the merit function parameters and of
+infeasibility (via ``elastic variables''), and much greater
+efficiency when function and gradient evaluations are
+expensive.  Reliability has also improved relative to
+\NPSOL, and the sparse-matrix techniques have permitted
+production runs on increasingly large trajectory
+problems.
+
+Future work must take into account the fact that second
+derivatives are increasingly available.  The QP solver should
+allow for indefinite QP Hessians, and additional techniques
+are needed to handle even more degrees of freedom.
+
+
+
+\section*{Acknowledgements}
+
+We extend sincere thanks to our colleagues Dan Young and Rocky Nelson
+of the Boeing Company (formerly McDonnell Douglas Space Systems,
+Huntington Beach, CA) for their constant support and feedback during
+the development of \SNOPT{}\@.   We would also
+like to express our thanks to the \AMPL{} \cite{AMPL2}, \CUTE{}
+\cite{BonCGT95} and \CUTEr{} \cite{GouOT03} authors, and to the many
+contributors to the test problem collections.
+We also appreciate many suggestions
+from the referees and SIOPT Associate Editor Jorge Nocedal.
+
+
+\bibliographystyle{siam}
+\bibliography{references}
+
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%

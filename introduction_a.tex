@@ -1,0 +1,99 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter*{Introduction}
+\addcontentsline{toc}{chapter}{Introduction}
+   The optimization of time-varying well settings,
+  such as injection and production rates or bottom-hole pressure, is an
+  important aspect of optimal reservoir management. Both gradient-based and
+  derivative-free methods have been considered for this problem, and both are
+  applicable in different situations. When the simulator source code is
+  accessible, a gradient-based optimization method, in which the gradient is
+  computed using an adjoint formulation, is often the method of choice since it
+  is generally the most efficient.
+
+In this paper we implement an adjoint formulation for compositional reservoir
+simulation problems. Procedures of this type entail the application of optimal
+control theory and have their roots in the calculus of variations
+\citep{Bryson:1975,Stengel:1986}. Adjoint-based optimization techniques have been
+used in a reservoir simulation setting both for history matching (see, e.g.,
+  \citep{Gavalas,Chavent,Li,Oliver,Pallav:2006}) and for production optimization.
+Much of the early work on their use for optimization of oil recovery was performed by
+Ramirez and coworkers, who considered the optimization of several different
+enhanced oil recovery (EOR) processes
+\citep{Ramirez:book,Ramirez:1989,Ramirez:1993}. In subsequent work, the focus was
+on gradient-based optimization (and in some cases on the optimization of `smart
+  wells') for water flooding
+\citep{Asheim,Virnovski,Sudaryanto:2000,Brouwer:2004,Pallav:2006}. Recent studies
+have addressed the implementation of adjoint-based procedures into general
+purpose simulators, the treatment of general constraints, and regularization and
+other numerical issues \citep{Pallav:2008,Brouwer:2008,Doublet:2009,CPRA}. Refer
+to \citep{Jansen:2011} for a more complete overview of adjoint-based optimization
+methods. We note additionally that, although not considered here, derivative-free
+methods can also be applied for production optimization problems -- see
+\citep{echeverria:2011} for discussion and examples.
+
+Although much of the early (1980s) work noted above focused on the application
+of adjoint procedures for EOR problems, there has not been much work on the use
+of adjoint techniques for large-scale (practical) compositional reservoir
+simulation problems. This is likely due to the complexity entailed in
+implementing adjoint procedures into a general purpose compositional reservoir
+simulator and to the challenging computational problems that must be solved to
+perform the optimizations. Compositional simulation is inherently more
+challenging than black-oil simulation because of the need to perform
+phase-equilibrium (flash) calculations for all grid blocks at every iteration of every time step. Adjoint formulations are challenging to code
+because they require analytical derivatives of many variables, and the
+increased complexity of compositional simulators renders these derivatives
+much more cumbersome to calculate than in the case of a black-oil simulator.
+
+
+In this work, we implement an adjoint treatment for multicomponent oil-gas
+compositional systems through use of a recently developed automatic
+differentiation capability \citep{Younis:2010}. The application of automatic
+differentiation in the context of Stanford's General Purpose Research Simulator
+(AD-GPRS) \citep{Cao:Thesis}, a modular simulator with many advanced features,
+enables us to construct a gradient-based optimization framework suitable for
+use in compositional problems. Our formulation includes the treatment of
+bound, linear and nonlinear constraints. Along these lines, we consider two
+different treatments for the nonlinear constraints: a formal treatment within
+the optimizer, and a heuristic approach, where bound constraints are treated in the optimization and nonlinear constraints are satisfied in the forward model.
+
+
+Although the results we present are for a discrete adjoint formulation,
+we have also developed a continuous adjoint formulation. In a discrete
+implementation, the governing equations for the so-called adjoint
+system are constructed based on the discretized-in-time forward model
+equations. In continuous formulations, by contrast, the adjoint
+equations are formed from the continuous forward model. Recent
+formulations for production optimization have generally been based on
+discrete formulations. Consistent with this, Brouwer and Jansen~\citep{Brouwer:2004}
+reviewed previous work and concluded that the discrete adjoint method
+was preferable.
+
+
+
+Recently an adjoint treatment for multicomponent oil-gas
+compositional systems was presented in~\citep{Kourounis2014}. 
+The formulation included an extensive discussion on engineering
+constraints that should usually be taken into account in realistic scenarios. 
+These constraints appear either as bounds (box constraints) 
+on the control variables or as inequality constraints on 
+nonlinear functions of the controls and states of the underlying PDEs.
+ Two treatments were proposed for the nondifferentiable constraints: a formal treatment within
+the optimizer performing lumping for all wells and time steps, and a heuristic approach,
+where bound constraints are treated in the optimization and nondifferentiable 
+constraints are satisfied in the forward model. The investigation showed that although standard
+lumping techniques perform well for simple academic problems, they fail 
+to obtain optimal solutions better than the reference for realistic problems.
+That result motivated further developments of formal constraint-handling techniques.
+In ~\citep{Kourounis2015} the author introduces a new formal treatment for the nondifferentiable 
+constraints where lumping is avoided to allow for a more realistic discretization
+of the nonlinear constraints. The performance of the new approach is compared to
+the ones introduced in~\citep{Kourounis2014} for several different examples
+of increased complexity.
+
+
+
+\endinput
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "ptyxiakn"
+%%% End: 

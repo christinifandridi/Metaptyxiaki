@@ -1,0 +1,322 @@
+408c408,410
+< phase-equilibrium (flash) calculations for all grid blocks at every iteration of every time step. Adjoint formulations are challenging to code
+---
+> phase-equilibrium (flash) calculations for all grid blocks at every time step,
+> and because multiple hydrocarbon components, rather than just oil
+> and gas, are frequently tracked. Adjoint formulations are challenging to code
+552c554
+< poses challenges because the necessary derivatives are generally complicated.
+---
+> poses challenges because the necessary derivatives are frequently complicated.
+928c930
+< optimization problem, and in this section we will provide a concise overview of the underlying theory. This discussion loosely follows \cite{SNOPT}, which provides a much more in-depth description. We note that the adjoint formulation described in this paper may also be used in conjunction with other optimization packages. \SNOPT{} uses a sparse sequential quadratic
+---
+> optimization problem, \red{and in this section we will provide a concise overview of the underlying theory, loosely following reference ~\cite{SNOPT} which provides a much more in-depth description. We note that the adjoint formulation described in our paper may also be used in conjunction with other optimization packages.} \SNOPT{} uses a sparse sequential quadratic
+955c957
+< nonlinear program (NP). This discussion follows~\cite{SNOPT}. As will be discussed in detail in Section~\ref{sec:constr-opt}, all realistic recovery optimization problems involve bound constraints on the inputs, and often several other linear or nonlinear equality or inequality constraints, which together constitute a so-called general nonlinear program (GNP). All features described in this section are readily specialized to the GNP discussed in Section~\ref{sec:constr-opt}. Here we take the problem to be
+---
+> nonlinear program (NP). This discussion follows~\cite{SNOPT}. \red{As will be discussed in detail in Section~\ref{sec:constr-opt}, all realistic recovery optimization problems involve bound constraints on the inputs, and often several other linear or nonlinear equality or inequality constraints, which together constitute a so-called general nonlinear program (GNP) . All features described in this section are readily specialized to the GNP discussed in Section~\ref{sec:constr-opt}}. Here we take the problem to be
+959c961
+< where $\u \in \mathbb R^n$, $\c \in \mathbb R^m$, while the objective function $f(\u)$ and the constraints $c_i(\u), \; i=1,2,\ldots,m$
+---
+> where $\u \in \mathbb R^n$, $\c \in \mathbb R^m$, \red{while the objective} function $f(\u)$ and \red{the constraints} $c_i(\u), \; i=1,2,\ldots,m$
+962c964
+< $\grad f(\u)$, 
+---
+> \red{$ \grad f(\u)$}, 
+967c969,970
+< An SQP method obtains search directions (for the primal $\u$ and dual variables $\bpi$) from an iterative sequence of QP subproblems. Each QP subproblem, in turn, iteratively minimizes a convex quadratic
+---
+>  An SQP method obtains search directions (for the primal $\u$ and dual variables $\bpi$) from \red{an iterative} sequence of QP subproblems.  
+>  Each QP subproblem\red{, in turn, iteratively} minimizes a convex quadratic
+979c982,983
+< subject to linearized constraints. In this formulation $k$ is the SQP (major) iteration counter, and $\bpi$ are Lagrangian multipliers to adjoin $\dL$ to $f$. The first and second derivatives of the modified Lagrangian with
+---
+> subject to linearized constraints. \red{In this formulation $k$ is the SQP (major) iteration counter, and $\bpi$ are Lagrangian multipliers to adjoin $\dL$ to $f$.} 
+> The first and second derivatives of the modified Lagrangian with
+982c986
+<         \grad\Lscr(\u,\u_k,\bpi_k) &=& \grad f(\u) - (\J(\u) - \Jk)\T \bpi_k, \\[3pt]
+---
+>         \grad\Lscr(\u,\u_k,\bpi_k) &=& \red{\grad f(\u)} - (\J(\u) - \Jk)\T \bpi_k, \\[3pt]
+988c992
+< At $\u = \u_k$, i.e., after convergence of the inner iterations, the modified Lagrangian has the same function and
+---
+> At $\u = \u_k$, \red{i.e. after convergence of the inner iterations,} the modified Lagrangian has the same function and
+992c996
+<      \grad \Lscr(\u_k,\u_k,\bpi_k) = \grad \fk.
+---
+>      \grad \Lscr(\u_k,\u_k,\bpi_k) =\red{ \grad \fk}.
+1004c1008
+< where $\rho$ and $\s$ are vectors of penalty parameters and slack variables, respectively, 
+---
+> where $\rho$ \red{and $\s$ are vectors} of penalty parameters \red{and slack variables respectively}, 
+1008c1012
+< In summary, the basic structure of an SQP method involves major and
+---
+> \red{In summary, the} basic structure of an SQP method involves major and
+1011c1015
+< At each major iterate a minor iterative QP subproblem is solved to generate a search direction
+---
+> At each \red{major} iterate a \red{minor iterative} QP subproblem is \red{solved} to generate a search direction
+1023c1027,1034
+< control problem for oil recovery optimization. This includes partial and sometimes heuristic approaches, valid for particular types of constraints \cite{Brouwer:2004,VanEssen,Virnovski,Wang:2009}, and more systematic approaches, valid for a broader range of constraint equations \cite{Chen:2010,Montleau,Kraaijevanger,Pallav:2008,Suwartadi:2012}. An important feature in simulations involving highly compressible fluids, which we have in the systems considered here since we inject gas, is the occurrence of transient peaks in the rate in response to changes in well bottom-hole pressure. These transient effects impact simulation results in our models because they occur over time scales that are larger than a time step (this is in contrast to nearly incompressible systems, where this type of transient decays very quickly and is not resolved by the simulator). These transient effects lead to challenges in constrained optimization of compositional systems, because rate constraints can be easily violated. Here we will present and assess both a formal constraint handling approach and a simpler heuristic procedure for satisfying rate constraints, which can be used in compressible systems.
+---
+> control problem for \red{recovery} optimization. Brouwer and 
+> Jansen~\cite{Brouwer:2004}, van Essen~\cite{VanEssen}, Virnovski~\cite{Virnovski} and
+> Wang~\cite{Wang:2009},
+> described partial and sometimes heuristic approaches, valid for
+> particular types of constraints. Chen~\cite{Chen:2010}, De Montleau~\cite{Montleau},
+>  Kraaijevanger~\cite{Kraaijevanger}, Sarma~\cite{Pallav:2006, Pallav:2008}, \red{Suwartadi~\cite{Suwartadi:2012} and Chen~\cite{Chen:2010}}  
+> presented more systematic approaches, valid for a broader range of constraint equations. However, an important feature in simulations involving highly compressible fluids (which we have in the systems considered here since we inject gas) is the occurrence of sharp, transient peaks in the rate in response to changes in well bottom-hole pressure. This results in
+> particular challenges during constrained optimization, because rate constraints can be easily violated. Here we will present and assess both a formal constraint handling approach and a simpler heuristic procedure for satisfying rate constraints, which can be used in highly compressible systems.
+1088c1099
+< large), \SNOPT{} reverts to a technique known as `elastic programming' to solve the problem
+---
+> large), \SNOPT{} \red{reverts to a technique known as 'elastic programming' to solve the problem}
+1097c1108
+< where $\e$ is a vector containing all ones and $\v$ and $\w$ are `elastic variables' which allow the constraints to stretch in directions that increase the size of the feasible region. The resistance to stretching is obtained by minimizing the composite objective function $f(\u) + \gamma \, \e^T(\v + \w)$, where the penalty parameter $\gamma$ ($\gamma \ge 0$) may take a
+---
+> \red{where $\e$ is a vector of ones and $\v$ and $\w$ are 'elastic variables' which allow the constraints to stretch in directions that increase the size of the feasible region. The resistance to stretching is obtained by minimizing the composite objective function $f(\u) + \gamma \, \e^T(\v + \w)$, where the} penalty parameter $\gamma$ ($\gamma \ge 0$) may take a
+1117,1119c1128,1130
+< This means that the vector $\c(\u)$ in (GNP) can be of dimension $O(N_w N)$, where $N$ is the number of time steps and $N_w$ is the number of wells. Computing the gradients
+< for each of the entries of $\c(\u)$, which is required by SNOPT, will require $N$ adjoint simulations and thus, in total, the solution of $O(N_w N^2)$ linear systems of equations in addition to each forward simulation. This may be
+< computationally intractable for realistically-sized problems.
+---
+> This means that the vector $\c(\u)$ in (GNP) can be of dimension \red{$O(N_w N)$}, where $N$ is the number of time steps and $N_w$ is the number of wells. Computing the gradients
+> for each of the entries of $\c(\u)$, which is required by SNOPT, \red{will require $N$ adjoint simulations and thus, in total, the solution of $O(N_w N^2 )$ linear systems of equations in addition to each forward simulation, which may be
+> computationally intractable for realistically-sized problems.}
+1145c1156
+< function, specifically one suggested by~\cite{Bertsekas}:
+---
+> function, specifically \red{one} suggested by~\cite{Bertsekas}:
+1192c1203
+< the well rate $q_j^w$ for phase $j$ in block $l$ is calculated from the well model, which (subject to some simplifications) is of the general form
+---
+> the well rate $q_j^w$ for phase $j$ in block $l$ is calculated from the well model
+1201,1203c1212,1213
+< Here $p_{w,l}$ is related to the BHP through an additional well equation. 
+< %that also involves $q_j^w$.
+< When well rate is specified, equations of the form of (\ref{eq:wellrate}) 
+---
+> %Here $p_{w,l}$ is related to the BHP through an additional well equation that also involves $q_j^w$.
+> When the total well rate is specified, equations of the form of (\ref{eq:wellrate}) 
+1207c1217,1218
+< 
+---
+> %If $q_j^w$ is specified, $p_{w,l}$ and $p_l$
+> %become the unknowns, and additional well equations are introduced into the system to enable their calculation.
+1215c1226,1227
+< throughout the simulation, but we also have a maximum gas rate of 5,000~m$^3/$d at reservoir conditions (indicated by the blue line in the upper right figure). The well operates at
+---
+> throughout the simulation, but we also have a maximum gas rate of 5,000~m$^3/$d \blue{at reservoir conditions}
+> (indicated by the blue line in the upper right figure). The well operates at
+1222,1244c1234,1243
+< In the results below, we apply this treatment and compare it to the formal approach described in Section~\ref{sec:constr-opt}. Using this procedure, which we refer to as `heuristic constraint handling', we first perform the optimization without including the nonlinear constraints. Bound (linear) constraints are honored during the optimization. Then, after this initial optimization has converged, we run the forward problem once more using the `optimized' BHPs, but this time the simulator is allowed to switch to rate control when required to satisfy the nonlinear constraints. Thus the computational effort for this approach is little more than that required for optimizing the bound (and linearly) constrained problem, as just one additional simulation run is performed.
+< 
+< 
+< In our implementation of the heuristic constraint handling procedure, we also allow wells to switch back to BHP control (after they have switched from BHP control to rate control). The switch in control is accomplished, in either case, by checking (at each Newton iteration) to see if the current active control is violated. This assessment can be performed efficiently through use of the well equation. If the well does switch back to BHP control, it remains on BHP control unless (and until) the rate constraint is again violated. This process generally increases the number of Newton iterations required for convergence, though in most of the cases considered the total simulation time is within a factor of two of that for a typical forward simulation run (and, as noted above, the run using heuristic constraint handling is only performed once). 
+< 
+< 
+< %Control
+< %switching from BHP to rate and vice versa takes place within each Newton
+< %iteration, whenever the rate constraint is violated for a specific well. The
+< %well equation ~\ref{eq:wellrate} provides an estimate of the corresponding
+< %well rate. If the estimated well rate exceeds the specified upper bound the
+< %simulator stops controlling the BHP and controls the rate, in order to enforce
+< %feasibility. The same well equation is used for estimating the BHP when the
+< %well is rate-controlled. As soon as the BHP is estimated to lie within the
+< %specified upper and lower bounds, the well switches back to BHP control and
+< %remains on BHP control until at some future time step the rate constraint is
+< %violated again.  This process usually increases the number of Newton
+< %iterations needed for convergence to the desired tolerance, but in most of the
+< %cases considered we never observed the simulation time increasing further than
+< %two times the simulation times needed for the unconstrained simulation. So
+< %overall our Heuristic approach will always be as efficient as the unconstrained
+< %optimization plus the extra time needed for this additional forward simulation
+< %where control switching takes place to enforce feasibility.
+---
+> In the results below, we apply this treatment and compare it to the formal
+> approach described in Section~\ref{sec:constr-opt}. Using this procedure, which
+> we refer to as `heuristic constraint handling', we first perform the
+> optimization without including the nonlinear constraints. Bound (linear)
+>   constraints are honored during the optimization. Then, once this initial
+>   optimization has converged, we run the forward problem one more time using the
+>   `optimized' BHPs, but this time the simulator is allowed to switch to rate
+>   control when required to satisfy the nonlinear constraints. Thus the
+>   computational effort for this approach is little more than that required for
+>   optimizing the bound (and linearly) constrained problem, as just one additional simulation run is performed.
+1292c1291,1309
+< 
+---
+> %%%xxxLOU THIS IS WHAT YOU WERE TALKING ABOUT, WHERE SHOULD IT GO 
+> %Control
+> %switching from BHP to rate and vice versa takes place within each Newton
+> %%iteration, whenever the rate constraint is violated for a specific well. The
+> %well equation %~\ref{well_equation} provides an estimate of the corresponding
+> %well rate. If the estimated %well rate exceeds the specified upper bound the
+> %simulator stops controlling the BHP and %controls the rate, in order to enforce
+> %feasibility. The same well equation is used %for estimating the BHP when the
+> %well is rate-controlled. As soon as the BHP is estimated %to lie within the
+> %specified upper and lower bounds, the well switches back to BHP control %and
+> %remains on BHP control until at some future time step the rate constraint is
+> %violated again.  %This process usually increases the number of Newton
+> %iterations needed for convergence to %the desired tolerance, but in most of the
+> %cases considered we never observed the simulation %time increasing further than
+> %two times the simulation times needed for the unconstrained %simulation. So
+> %overall our Heuristic approach will always be as efficient as the unconstrained
+> %%optimization plus the extra time needed for this additional forward simulation
+> %where control switching %takes place to enforce feasibility.
+> %
+1342c1359,1360
+< In the first example we maximize cumulative oil recovery under CO$_2$ injection. The two-dimensional geological model is depicted in Fig.~\ref{fig:PImodelPermeabilityMapAndWells}. A $\Pi$-shaped region is located at the center of a homogeneous reservoir. The model is discretized on a grid of dimensions $80\times80$. The permeability in most of the domain (red cells) is set to 4000~mD, while the permeability for the blue cells that comprise the $\Pi$-shaped region is set to $10^{-4}$~mD. In all of our examples we describe the permeability with a diagonal tensor: $\tens{K} = \it{diag}(\tens{k}_x, \tens{k}_y, \tens{k}_z)$; here, in addition, we choose the permeability to be uniform. Four injection wells are placed at the corners of the model, and the single production well is located inside the $\Pi$-shaped region. The model includes a total of four components (three hydrocarbon  components plus CO$_2$), as specified in Table~\ref{table:fluidForPImodel}. Further details on the reservoir model are provided in Table~\ref{table:PI}.
+---
+> In the first example we maximize cumulative oil recovery under CO$_2$ injection. The two-dimensional geological model is depicted in Fig.~\ref{fig:PImodelPermeabilityMapAndWells}. A $\Pi$-shaped region is located at the center of a homogeneous reservoir. The model is discretized on a grid of dimensions $80\times80$. The permeability in most of the domain (red cells) is set to 4000~mD, while the permeability for the blue cells that comprise the $\Pi$-shaped region is set to $10^{-4}$~mD. \red{(In all our examples we describe the permeability with a diagonal tensor: $\tens{K} = \it{diag}(\tens{k}_x, \tens{k}_y, \tens{k}_z)$; here, in addition, we choose the permeability to be uniform.)}
+>  Four injection wells are placed at the corners of the model, and the single production well is located inside the $\Pi$-shaped region. The model includes a total of four components (three hydrocarbon  components plus CO$_2$), as specified in Table~\ref{table:fluidForPImodel}. Further details on the reservoir model are provided in Table~\ref{table:PI}.
+1418c1436,1438
+< given in the first row (`Reference') of Table~\ref{table:PiC500Steps8}. 
+---
+> given in the first row (`Reference') of Table~\ref{table:PiC500Steps8}. %Note that
+> %the values are very similar because the nonlinear constraint violation in the
+> %unconstrained case is small. 
+1442,1443c1462,1466
+< more efficient computationally than the formal treatment. In terms of computational requirements, for this case the formal approach required 49 forward simulations (on average) to converge to the optimal solution, while the heuristic procedure needed only an average of 27 forward simulations. This significant difference results from the need to enforce feasibility within the optimizer in the formal constraint handling approach.
+< 
+---
+> more efficient computationally than the formal treatment. On average,
+> the formal approach required about three times the number of forward
+> simulations used in the corresponding heuristically constrained cases. This
+> large discrepancy results from the need to enforce feasibility within the
+> optimizer in the formal constraint handling approach.
+1447,1448c1470,1471
+< To test the performance of our procedures, we now consider optimizations with 64 control steps, which corresponds to 320 control variables (the results above used eight control steps and 40 control variables). Results for this case are presented in Table~\ref{table:PiC500Steps64}. The best result using heuristic constraint handling provides cumulative oil production of 159,400~m$^3$ (Run~7). This is slightly lower than that achieved using 40 controls, which presumably reflects the fact that this is a more difficult optimization problem. Using the formal constraint handling approach, however, we achieve cumulative oil production of 170,200~m$^3$ (Run~1). This exceeds the feasible reference solution (152,500~m$^3$) by 11.6\%, which represents a substantial improvement. It also exceeds the best solution found using heuristic constraint handling (163,500~m$^3$ in Run~8, using 40 controls) by 4.1\%. In fact, three of the nine local optima achieved in this case using formal constraint handling exceed the best result obtained using heuristic constraint handling. These findings suggest that, for this problem, the formal approach does indeed outperform the heuristic approach given a sufficient number of control variables. 
+< 
+---
+> To test the performance of our procedures, we now consider optimizations with 64 control steps, which corresponds to 320 control variables (the results above used eight control steps and 40 control variables). Results for this case are presented in Table~\ref{table:PiC500Steps64}. The best result using heuristic constraint handling provides cumulative oil production of 159,400~m$^3$ (Run~7). This is slightly lower than that achieved using 40 controls, which presumably reflects the fact that this is a more difficult optimization problem. Using the formal constraint handling approach, however, we achieve cumulative oil production of 170,200~m$^3$ (Run~1). This exceeds the feasible reference solution (152,500~m$^3$) by 11.6\%, which represents a substantial improvement. It also exceeds the best solution found using heuristic constraint handling (163,500~m$^3$ in Run~8, using 40 controls) by 4.1\%. In fact, three of the nine local optima achieved in this case using formal constraint handling exceed the best result obtained using heuristic constraint handling. These findings suggest that, for this problem, the formal approach does indeed outperform the heuristic approach given a sufficient number of control variables.
+> In terms of performance however, the heuristic approach is the winner with an average of 27 forward simulations, whereas the formal approach needs on average 49 iterations for to converge to the optimal solution.
+1468c1491
+<      \caption{Injection wells (blue) and production well (red) for Example~1. Background shows $\tens{k}_x$ ($ \tens{k}_x = \tens{k}_y$).}
+---
+>      \caption{Injection wells (blue) and production well (red) for Example~1. Background shows \red{$\tens{k}_x$ ($ \tens{k}_x = \tens{k}_y$)}.}
+1482c1505
+<    Run & Unconstr. & Heuristic & Formal                       \\
+---
+>     & Unconstr. & Heuristic & Formal                       \\
+1508c1531
+<    Run & Unconstr. & Heuristic & Formal                          \\
+---
+>     & Unconstr. & Heuristic & Formal                          \\
+1572c1595
+<   Gas injection rates are all equal to 500~m$^3$/d during the entire simulation period. }
+---
+>   \blue{Gas injection rates are all equal to 500 m$^3$/d during the whole simulation period.} }
+1598a1622,1680
+> %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+> 
+> 
+> 
+> 
+> %%%%%%%%%%%%%%%%%%%%%%%%%%% Pi 320 controls   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+> 
+> %\begin{figure}
+> %\begin{center}
+> %\includegraphics[totalheight=2.2in,angle=0]{HeuristicC500Steps64OptimalImPb_BHP.pdf}
+> %\includegraphics[totalheight=2.17in,angle=0]{HeuristicC500Steps64OptimalImPb_rate_gas.pdf}
+> %\end{center}
+> %\caption{BHPs (top) and gas rates (bottom) for the best heuristically constrained solution using 320 controls (Example 1, Run 4).}
+> %\label{fig:PIHeuristicControls320Plots}
+> %\end{figure}
+> 
+> 
+> %\begin{figure}
+> %\begin{center}
+> %\includegraphics[totalheight=2.2in,angle=0]{FormalC600Steps64OptimalItPb_BHP.pdf}
+> %\includegraphics[totalheight=2.17in,angle=0]{FormalC600Steps64OptimalItPb_rate_gas.pdf}
+> %\end{center}
+> %\caption{BHPs (top) and gas rates (bottom) for the best formally constrained solution using 320 controls (Example 1, Run 7).}
+> %\label{fig:PIFormalControls320Plots}
+> %\end{figure}
+> 
+> 
+> %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+> 
+> 
+> 
+> 
+> 
+> 
+> %%%%%%%%%%%%%%%%%%%%%%%%%%% Pi 1280 controls %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+> 
+> %\begin{figure}
+> %\begin{center}
+> %\includegraphics[totalheight=2.2in,angle=0]{OptimalC650HeuristicImPb_BHP.pdf}
+> %\includegraphics[totalheight=2.17in,angle=0]{OptimalC650HeuristicImPb_rate_gas.pdf}
+> %\end{center}
+> %\caption{BHPs (top) and gas rates (bottom) for the best heuristically constrained solution using 1280 controls (Example 1, Run 8).}
+> %\label{fig:PIHeuristicControls1280Plots}
+> %\end{figure}
+> 
+> 
+> %\begin{figure}
+> %\begin{center}
+> %\includegraphics[totalheight=2.2in,angle=0]{OptimalC650OptimalImPm_BHP.pdf}
+> %\includegraphics[totalheight=2.2in,angle=0]{OptimalC650OptimalImPm_rate_gas.pdf}
+> %\end{center}
+> %\caption{BHPs (top) and gas rates (bottom) for the best formally constrained solution using 1280 controls (Example 1, Run 4).}
+> %\label{fig:PIFormalControls1280Plots}
+> %\end{figure}
+> 
+> %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+> 
+> 
+> 
+1612a1695,1704
+> %\begin{figure}
+> %\begin{center}
+> %\includegraphics[totalheight=2.2in,angle=0]{OilRatesPiExcel.png}
+> %\end{center}
+> %\caption{Oil rates BHPs (top), gas rates (middle) and oil rates
+> %  (bottom) for the best formally constrained solution (Example 1, Run 8).}
+> %\label{fig:PIOilRatesExcel}
+> %\end{figure}
+> %
+> 
+1718c1810
+<      \caption{Injection wells (blue) and production wells (red) for Example~2. Background shows $\log \tens{k}_x$ ($\tens{k}_x = \tens{k}_y$).}
+---
+>      \caption{Injection wells (blue) and production wells (red) for Example 2. Background shows \red{$\log \tens{k}_x$ ($ \tens{k}_x = \tens{k}_y$).}}
+1768c1860
+< For this example, the formal approach required an average of 56 forward simulations, while the heuristic approach required an average of only 24.
+---
+> For this example, the formal approach again required on average 56 forward simulations while the heuristic one only 24.
+1817c1909
+< Our third example uses the three-dimensional geological model introduced in
+---
+> Our third example uses the three-dimensional geological model introduced by
+1821c1913
+< the $x$-component of permeability (here $\tens{k}_x = \tens{k}_y = 10\tens{k}_z$), along with the
+---
+> the $x$-component of permeability \red{(here $\tens{k}_x = \tens{k}_y = 10\tens{k}_z$)}, along with the
+1837c1929
+<      \caption{Reservoir model and wells for Example 3 (from \cite{VanEssen}). Background shows $\log \tens{k}_x$.}
+---
+>      \caption{Reservoir model and wells for Example 3 (from \cite{VanEssen}). Background shows \red{$\log \tens{k}_x$.}}
+1929,1930c2021,2026
+< In this example, convergence of the optimizations using the formal constraint handling approach 
+< typically required about 48 forward simulations, while the heuristic treatment required only about 26. Our findings for this example clearly illustrate the potential advantages of the heuristic treatment for complex optimization problems involving multiple wells operating under nonlinear constraints.
+---
+> In this example, convergence of the optimization using the formal constraint handling approach 
+> typically required about 48 forward simulations on average, while the heuristic treatment required only 26.
+> Our findings for this example clearly illustrate the potential
+> advantages of the heuristic treatment for complex optimization problems involving multiple wells
+> operating under nonlinear constraints.
+> 
+2157,2158c2253,2254
+< handling, by contrast, required an average of only about 36 forward simulations. Thus, for this example we
+< observe a very substantial improvement in computational efficiency using the
+---
+> handling, by contrast, required about 36 forward simulations on average. Thus we
+> again observe significant improvements in computational efficiency using the
+2217c2313
+< These observations suggest that, although the formal constraint handling approach is theoretically superior, complications related to constraint lumping and the existence of poor local optima (and the additional complexity inherent in problems with large numbers of optimization variables and nonlinear constraints) may render the formal procedure less effective than the heuristic approach in challenging cases. Thus, though we expect (and observe) the formal procedure to be the method of choice in relatively simple cases, the heuristic approach should be considered for use in more complex problems. It may even be beneficial to apply some type of hybrid technique, where the result from the heuristic method is used as the initial guess for the formal procedure. The use of a sequence of optimizations, with increasing numbers of control periods, should also be considered. Finally, it is important to note that the heuristic constraint treatment was found to be significantly more efficient than the formal approach. 
+---
+> These observations suggest that, although the formal constraint handling approach is theoretically superior, complications related to constraint lumping and the existence of poor local optima (and the additional complexity inherent in problems with large numbers of optimization variables and nonlinear constraints) may render the formal procedure less effective than the heuristic approach in challenging cases. Thus, though we expect (and observe) the formal procedure to be the method of choice in relatively simple cases, the heuristic approach should be considered for use in more complex problems. It may even be beneficial to apply some type of hybrid technique, where the result from the heuristic approach is used as the initial guess for the formal procedure. It is also important to note that the heuristic constraint treatment was found to be significantly more efficient than the formal approach. 

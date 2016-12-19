@@ -1,0 +1,1081 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/MacPorts 2016_2) (preloaded format=pdflatex 2016.10.19)  20 OCT 2016 12:41
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**ComputationalGeosciencesAdjoints.tex
+(./ComputationalGeosciencesAdjoints.tex
+LaTeX2e <2016/03/31>
+Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
+(./svjour3.cls
+Document Class: svjour3 2007/05/08 v3.2 
+LaTeX document class for Springer journals
+(/opt/local/share/texmf-texlive/tex/latex/base/fleqn.clo
+File: fleqn.clo 2015/03/31 v1.1i Standard LaTeX option (flush left equations)
+\mathindent=\dimen102
+Applying: [2015/01/01] Make \[ robust on input line 50.
+LaTeX Info: Redefining \[ on input line 51.
+Already applied: [0000/00/00] Make \[ robust on input line 62.
+Applying: [2015/01/01] Make \] robust on input line 74.
+LaTeX Info: Redefining \] on input line 75.
+Already applied: [0000/00/00] Make \] robust on input line 83.
+)
+Class Springer-SVJour3 Info: extra/valid Springer sub-package (-> *.clo) 
+(Springer-SVJour3)           not found in option list of \documentclass
+(Springer-SVJour3)           - autoactivating "global" style.
+ (./svglov3.clo
+File: svglov3.clo 2009/12/18 v3.2 style option for standardised journals
+
+SVJour Class option: svglov3.clo for standardised journals
+)
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 147.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 148.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 149.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 150.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 151.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 152.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 153.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 154.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 155.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 156.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 157.
+\logodepth=\dimen103
+\headerboxheight=\dimen104
+\betweenumberspace=\dimen105
+\aftertext=\dimen106
+\headlineindent=\dimen107
+\c@inst=\count79
+\c@auth=\count80
+\instindent=\dimen108
+\authrun=\box26
+\authorrunning=\toks14
+\titrun=\box27
+\titlerunning=\toks15
+\combirun=\box28
+\c@lastpage=\count81
+\rubricwidth=\dimen109
+\c@section=\count82
+\c@subsection=\count83
+\c@subsubsection=\count84
+\c@paragraph=\count85
+\c@subparagraph=\count86
+\spthmsep=\dimen110
+\c@theorem=\count87
+\c@case=\count88
+\c@conjecture=\count89
+\c@corollary=\count90
+\c@definition=\count91
+\c@example=\count92
+\c@exercise=\count93
+\c@lemma=\count94
+\c@note=\count95
+\c@problem=\count96
+\c@property=\count97
+\c@proposition=\count98
+\c@question=\count99
+\c@solution=\count100
+\c@remark=\count101
+\c@figure=\count102
+\c@table=\count103
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\figcapgap=\dimen111
+\tabcapgap=\dimen112
+\figgap=\dimen113
+\bibindent=\dimen114
+\@tempcntc=\count104
+) (/opt/local/share/texmf-texlive/tex/generic/babel/babel.sty
+Package: babel 2016/04/23 3.9r The Babel package
+
+(/opt/local/share/texmf-texlive/tex/generic/babel-english/english.ldf
+Language: english 2012/08/20 v3.3p English support from the babel system
+
+(/opt/local/share/texmf-texlive/tex/generic/babel/babel.def
+File: babel.def 2016/04/23 3.9r Babel common definitions
+\babel@savecnt=\count105
+\U@D=\dimen115
+)
+\l@canadian = a dialect from \language\l@american 
+\l@australian = a dialect from \language\l@british 
+\l@newzealand = a dialect from \language\l@british 
+))
+(/opt/local/share/texmf-texlive/tex/latex/base/fontenc.sty
+Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
+
+(/opt/local/share/texmf-texlive/tex/latex/base/t1enc.def
+File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
+))
+(/opt/local/share/texmf-texlive/tex/latex/base/fix-cm.sty
+Package: fix-cm 2015/01/14 v1.1t fixes to LaTeX
+
+(/opt/local/share/texmf-texlive/tex/latex/base/ts1enc.def
+File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
+))
+(/opt/local/share/texmf-texlive/tex/latex/psnfss/mathptmx.sty
+Package: mathptmx 2005/04/12 PSNFSS-v9.2a Times w/ Math, improved (SPQR, WaS) 
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 28.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/ztmcm/m/n on input line 28.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/ztmcm/m/n on input line 28.
+LaTeX Font Info:    Redeclaring symbol font `letters' on input line 29.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/ztmcm/m/it on input line 29.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/ztmcm/m/it on input line 29.
+LaTeX Font Info:    Redeclaring symbol font `symbols' on input line 30.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/ztmcm/m/n on input line 30.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/ztmcm/m/n on input line 30.
+LaTeX Font Info:    Redeclaring symbol font `largesymbols' on input line 31.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/ztmcm/m/n on input line 31.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/ztmcm/m/n on input line 31.
+\symbold=\mathgroup4
+\symitalic=\mathgroup5
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/ptm/bx/n on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/ptm/bx/n on input line 34.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/ptm/m/it on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/ptm/m/it on input line 35.
+LaTeX Info: Redefining \hbar on input line 50.
+)
+(/opt/local/share/texmf-texlive/tex/latex/sttools/flushend.sty
+Package: flushend 2015/04/14 v3.1 Balancing columns in twocolumn mode
+\flushend@@lastskip@a=\skip43
+\flushend@@lastskip@b=\skip44
+\flushend@@lastskip@c=\skip45
+\flushend@@penalty@a=\count106
+\flushend@@lastkern@a=\dimen116
+\var@@temp@spread=\dimen117
+\var@@temp@a=\dimen118
+\flushend@@page@rule=\dimen119
+\flushend@@varbox@a=\box29
+\flushend@@varbox@c=\box30
+\flushend@@tempbox@a=\box31
+\flushend@@tempbox@c=\box32
+\@viper=\box33
+\hold@viper=\box34
+\atColsBreak=\toks16
+\atColsEnd=\toks17
+
+(/opt/local/share/texmf-texlive/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2015/08/02 v2.2a e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count107
+))
+(/opt/local/share/texmf-texlive/tex/latex/natbib/natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip46
+\bibsep=\skip47
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count108
+)
+(/opt/local/share/texmf-texlive/tex/latex/url/url.sty
+\Urlmuskip=\muskip10
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+(/opt/local/share/texmf-texlive/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\@emptytoks=\toks18
+\symAMSa=\mathgroup6
+\symAMSb=\mathgroup7
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)
+(/opt/local/share/texmf-texlive/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+
+(/opt/local/share/texmf-texlive/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks19
+\ex@=\dimen120
+)
+\pmbraise@=\dimen121
+)
+(/opt/local/share/texmf-texlive/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2016/03/10 v2.15b AMS math features
+\@mathmargin=\skip48
+
+For additional information on amsmath, use the `?' option.
+(/opt/local/share/texmf-texlive/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+)
+(/opt/local/share/texmf-texlive/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count109
+LaTeX Info: Redefining \frac on input line 199.
+\uproot@=\count110
+\leftroot@=\count111
+LaTeX Info: Redefining \overline on input line 297.
+\classnum@=\count112
+\DOTSCASE@=\count113
+LaTeX Info: Redefining \ldots on input line 394.
+LaTeX Info: Redefining \dots on input line 397.
+LaTeX Info: Redefining \cdots on input line 518.
+\Mathstrutbox@=\box35
+\strutbox@=\box36
+\big@size=\dimen122
+LaTeX Font Info:    Redeclaring font encoding OML on input line 634.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 635.
+
+
+Package amsmath Warning: Unable to redefine math accent \vec.
+
+\macc@depth=\count114
+\c@MaxMatrixCols=\count115
+\dotsspace@=\muskip11
+\c@parentequation=\count116
+\dspbrk@lvl=\count117
+\tag@help=\toks20
+\row@=\count118
+\column@=\count119
+\maxfields@=\count120
+\andhelp@=\toks21
+\eqnshift@=\dimen123
+\alignsep@=\dimen124
+\tagshift@=\dimen125
+\tagwidth@=\dimen126
+\totwidth@=\dimen127
+\lineht@=\dimen128
+\@envbody=\toks22
+\multlinegap=\skip49
+\multlinetaggap=\skip50
+\mathdisplay@stack=\toks23
+LaTeX Info: Redefining \[ on input line 2739.
+LaTeX Info: Redefining \] on input line 2740.
+) (/opt/local/share/texmf-texlive/tex/latex/base/latexsym.sty
+Package: latexsym 1998/08/17 v2.2e Standard LaTeX package (lasy symbols)
+\symlasy=\mathgroup8
+LaTeX Font Info:    Overwriting symbol font `lasy' in version `bold'
+(Font)                  U/lasy/m/n --> U/lasy/b/n on input line 52.
+)
+(/opt/local/share/texmf-texlive/tex/latex/parskip/parskip.sty
+Package: parskip 2001/04/09 non-zero parskip adjustments
+)
+(/opt/local/share/texmf-texlive/tex/generic/ulem/ulem.sty
+\UL@box=\box37
+\UL@hyphenbox=\box38
+\UL@skip=\skip51
+\UL@hook=\toks24
+\UL@height=\dimen129
+\UL@pe=\count121
+\UL@pixel=\dimen130
+\ULC@box=\box39
+Package: ulem 2012/05/18
+\ULdepth=\dimen131
+)
+(/opt/local/share/texmf-texlive/tex/latex/graphics/graphicx.sty
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/opt/local/share/texmf-texlive/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks25
+)
+(/opt/local/share/texmf-texlive/tex/latex/graphics/graphics.sty
+Package: graphics 2016/05/09 v1.0r Standard LaTeX Graphics (DPC,SPQR)
+
+(/opt/local/share/texmf-texlive/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/opt/local/share/texmf-texlive/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/01/02 v1.10 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 96.
+
+(/opt/local/share/texmf-texlive/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+(/opt/local/share/texmf-texlive/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+)
+(/opt/local/share/texmf-texlive/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count122
+))
+\Gin@req@height=\dimen132
+\Gin@req@width=\dimen133
+)
+(/opt/local/share/texmf-texlive/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+)
+(/opt/local/share/texmf-texlive/tex/latex/colortbl/colortbl.sty
+Package: colortbl 2012/02/13 v1.0a Color table columns (DPC)
+
+(/opt/local/share/texmf-texlive/tex/latex/tools/array.sty
+Package: array 2014/10/28 v2.4c Tabular extension package (FMi)
+\col@sep=\dimen134
+\extrarowheight=\dimen135
+\NC@list=\toks26
+\extratabsurround=\skip52
+\backup@length=\skip53
+)
+(/opt/local/share/texmf-texlive/tex/latex/graphics/color.sty
+Package: color 2016/05/09 v1.1c Standard LaTeX Color (DPC)
+
+(/opt/local/share/texmf-texlive/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package color Info: Driver file: pdftex.def on input line 144.
+)
+\everycr=\toks27
+\minrowclearance=\skip54
+)
+(./ComputationalGeosciencesAdjoints.aux)
+\openout1 = `ComputationalGeosciencesAdjoints.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 299.
+LaTeX Font Info:    ... okay on input line 299.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 299.
+LaTeX Font Info:    ... okay on input line 299.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 299.
+LaTeX Font Info:    ... okay on input line 299.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 299.
+LaTeX Font Info:    ... okay on input line 299.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 299.
+LaTeX Font Info:    ... okay on input line 299.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 299.
+LaTeX Font Info:    ... okay on input line 299.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 299.
+LaTeX Font Info:    ... okay on input line 299.
+LaTeX Font Info:    Try loading font information for T1+ptm on input line 299.
+
+(/opt/local/share/texmf-texlive/tex/latex/psnfss/t1ptm.fd
+File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
+)
+Unknown journal: specify \journalname{<name of your journal>} in preambel
+
+(/opt/local/share/texmf-texlive/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count123
+\scratchdimen=\dimen136
+\scratchbox=\box40
+\nofMPsegments=\count124
+\nofMParguments=\count125
+\everyMPshowfont=\toks28
+\MPscratchCnt=\count126
+\MPscratchDim=\dimen137
+\MPnumerator=\count127
+\makeMPintoPDFobject=\count128
+\everyMPtoPDFconversion=\toks29
+) (/opt/local/share/texmf-texlive/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2016/05/10 v0.21 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/opt/local/share/texmf-texlive/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+(/opt/local/share/texmf-texlive/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2016/05/14 v3.1 Provides the ifpdf switch
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(/opt/local/share/texmf-texlive/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
+
+(/opt/local/share/texmf-texlive/tex/latex/oberdiek/grfext.sty
+Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
+
+(/opt/local/share/texmf-texlive/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
+))
+(/opt/local/share/texmf-texlive/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
+
+(/opt/local/share/texmf-texlive/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
+
+(/opt/local/share/texmf-texlive/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 456.
+
+(/opt/local/share/texmf-texlive/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+SVJour3 warning: Missing \journalname
+LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 337.
+LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <16> not available
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 337.
+
+Package mathptmx Warning: There are no bold math fonts on input line 337.
+
+LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 33
+7.
+(/opt/local/share/texmf-texlive/tex/latex/psnfss/ot1ztmcm.fd
+File: ot1ztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ztmcm.
+)
+LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 33
+7.
+
+(/opt/local/share/texmf-texlive/tex/latex/psnfss/omlztmcm.fd
+File: omlztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ztmcm.
+)
+LaTeX Font Info:    Try loading font information for OMS+ztmcm on input line 33
+7.
+
+(/opt/local/share/texmf-texlive/tex/latex/psnfss/omsztmcm.fd
+File: omsztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/ztmcm.
+)
+LaTeX Font Info:    Try loading font information for OMX+ztmcm on input line 33
+7.
+
+(/opt/local/share/texmf-texlive/tex/latex/psnfss/omxztmcm.fd
+File: omxztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/ztmcm.
+)
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 337.
+
+
+(/opt/local/share/texmf-texlive/tex/latex/psnfss/ot1ptm.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 337.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 337.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 337.
+LaTeX Font Info:    Calculating math sizes for size <8.5> on input line 337.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8.5> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 337.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6.29004> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 337.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5.10005> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 337.
+
+Overfull \hbox (4.39282pt too wide) in paragraph at lines 342--361
+\T1/ptm/m/n/10 ti-miza-tion of oil-gas com-po-si-tional reser-voir sim-u-la-tio
+n prob-
+ []
+
+
+Overfull \hbox (1.5039pt too wide) in paragraph at lines 342--361
+\T1/ptm/m/n/10 com-plex-ity of the code and the un-der-ly-ing physics. The trea
+t-
+ []
+
+
+Underfull \vbox (badness 1708) has occurred while \output is active []
+
+
+Overfull \hbox (21.59296pt too wide) in paragraph at lines 370--378
+\T1/ptm/m/n/10 im-por-tant as-pect of op-ti-mal reser-voir man-age-ment. Both g
+radient-
+ []
+
+[1{/opt/local/var/db/texmf/fonts/map/pdftex/updmap/pdftex.map}
+
+
+]
+Overfull \hbox (0.86336pt too wide) in paragraph at lines 400--412
+\T1/ptm/m/n/10 cused on the ap-pli-ca-tion of ad-joint pro-ce-dures for EOR pro
+b-
+ []
+
+
+Overfull \hbox (1.05344pt too wide) in paragraph at lines 414--424
+\T1/ptm/m/n/10 Stan-ford's Gen-eral Pur-pose Re-search Sim-u-la-tor (AD-GPRS)
+ []
+
+
+Overfull \hbox (3.94359pt too wide) in paragraph at lines 426--444
+\T1/ptm/m/n/10 la-tions for pro-duc-tion op-ti-miza-tion have gen-er-ally been 
+based
+ []
+
+
+Overfull \hbox (0.63425pt too wide) in paragraph at lines 426--444
+\T1/ptm/m/n/10 isons have been re-ported (e.g., [[], []]). In par-tic-u-lar, Na
+dara-
+ []
+
+
+Overfull \hbox (5.13322pt too wide) in paragraph at lines 426--444
+\T1/ptm/m/n/10 pres-ence of large dis-cretiza-tion er-rors, which are of-ten pr
+esent
+ []
+
+LaTeX Font Info:    Font shape `U/lasy/b/n' in size <7.4> not available
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 472.
+LaTeX Font Info:    Font shape `U/lasy/b/n' in size <6> not available
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 472.
+[2]
+Overfull \hbox (12.45428pt too wide) in paragraph at lines 566--573
+\T1/ptm/m/n/10 brary' (ADETL), de-vel-oped orig-i-nally by You-nis and Aziz [[]
+].
+ []
+
+[3]
+Overfull \hbox (1.35715pt too wide) in paragraph at lines 631--637
+\T1/ptm/m/n/10 since $[][] \OT1/ztmcm/m/n/10 = []$\T1/ptm/m/n/10 , we can in-tr
+o-duce the aug-mented ob-jec-tive func-
+ []
+
+[4]
+Overfull \hbox (4.9436pt too wide) in paragraph at lines 808--813
+\T1/ptm/m/n/10 The or-di-nary dif-fer-en-tial equa-tion in (3.14[]) is in-te-gr
+ated back-
+ []
+
+
+Overfull \hbox (1.17908pt too wide) in paragraph at lines 844--851
+[]\T1/ptm/m/n/10 To il-lus-trate this, con-sider the sim-pli-fied case where $\
+OML/ztmcm/m/it/10 '\OT1/ztmcm/m/n/10 ([][]) =
+ []
+
+
+Overfull \hbox (0.91312pt too wide) in paragraph at lines 870--891
+\T1/ptm/m/n/10 for-mu-la-tions into our op-ti-miza-tion frame-work. Us-ing a sm
+all
+ []
+
+
+Overfull \hbox (1.50308pt too wide) in paragraph at lines 870--891
+\OML/ztmcm/m/it/10 ^^At[]$ \T1/ptm/m/n/10 was not small, the con-tin-u-ous for-
+mu-la-tion re-quired more
+ []
+
+
+Overfull \hbox (5.30304pt too wide) in paragraph at lines 870--891
+\T1/ptm/m/n/10 gra-di-ent dis-crep-ancy be-tween dis-cretiza-tion/optimization 
+ver-
+ []
+
+
+Underfull \vbox (badness 3058) has occurred while \output is active []
+
+ [5]
+Overfull \hbox (3.43246pt too wide) in paragraph at lines 909--918
+\T1/ptm/m/n/10 RES pre-con-di-tioned by the trans-pose of the CPR (con-strained
+
+ []
+
+
+Overfull \hbox (8.97299pt too wide) in paragraph at lines 925--933
+\T1/ptm/m/n/10 us-ing an inertia-controlling reduced-Hessian active-set method
+ []
+
+
+Overfull \hbox (7.35274pt too wide) in paragraph at lines 967--970
+\T1/ptm/m/n/10 func-tion sub-ject to lin-earized con-straints as-so-ci-ated wit
+h (NP),
+ []
+
+
+Overfull \hbox (5.55292pt too wide) in paragraph at lines 985--997
+\T1/ptm/m/n/10 con-straints dis-ap-pear, es-pe-cially in the quadratic penalty 
+term.
+ []
+
+
+Overfull \hbox (3.72377pt too wide) in paragraph at lines 985--997
+\T1/ptm/m/n/10 The num-ber of non-lin-ear vari-ables in the mod-i-fied aug-ment
+ed
+ []
+
+[6]
+Overfull \hbox (7.98343pt too wide) in paragraph at lines 1022--1024
+\T1/ptm/m/n/10 Several au-thors have dis-cussed the in-cor-po-ra-tion of con-st
+raints
+ []
+
+
+Overfull \hbox (9.02322pt too wide) in paragraph at lines 1022--1024
+\T1/ptm/m/n/10 ture in sim-u-la-tions in-volv-ing highly com-press-ible flu-ids
+, which
+ []
+
+[7]
+Overfull \hbox (6.97305pt too wide) in paragraph at lines 1123--1129
+\T1/ptm/m/n/10 `lump' the con-straints over the full sim-u-la-tion time frame [
+[]].
+ []
+
+
+Overfull \hbox (1.04272pt too wide) in paragraph at lines 1188--1196
+\T1/ptm/m/n/10 A sim-pler way to ren-der an in-fea-si-ble so-lu-tion fea-si-ble
+, when
+ []
+
+[8] <SimpleBHP_BHP.pdf, id=40, 723.70375pt x 503.8825pt>
+File: SimpleBHP_BHP.pdf Graphic file (type pdf)
+
+<use SimpleBHP_BHP.pdf>
+Package pdftex.def Info: SimpleBHP_BHP.pdf used on input line 1254.
+(pdftex.def)             Requested size: 110.32877pt x 76.82234pt.
+
+<SimpleBHP_rate_gas.pdf, id=41, 750.805pt x 503.8825pt>
+File: SimpleBHP_rate_gas.pdf Graphic file (type pdf)
+
+<use SimpleBHP_rate_gas.pdf>
+Package pdftex.def Info: SimpleBHP_rate_gas.pdf used on input line 1256.
+(pdftex.def)             Requested size: 114.46036pt x 76.82234pt.
+
+<SimpleRate_BHP.pdf, id=42, 723.70375pt x 503.8825pt>
+File: SimpleRate_BHP.pdf Graphic file (type pdf)
+ <use SimpleRate_BHP.pdf>
+Package pdftex.def Info: SimpleRate_BHP.pdf used on input line 1258.
+(pdftex.def)             Requested size: 110.32877pt x 76.82234pt.
+
+<SimpleRate_rate_gas.pdf, id=43, 750.805pt x 503.8825pt>
+File: SimpleRate_rate_gas.pdf Graphic file (type pdf)
+
+<use SimpleRate_rate_gas.pdf>
+Package pdftex.def Info: SimpleRate_rate_gas.pdf used on input line 1260.
+(pdftex.def)             Requested size: 114.46036pt x 76.82234pt.
+
+Overfull \hbox (9.82495pt too wide) in paragraph at lines 1252--1262
+ [] 
+ []
+
+LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <8.5> not available
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 1263.
+
+Overfull \hbox (1.85396pt too wide) in paragraph at lines 1298--1313
+\T1/ptm/m/n/10 per-for-mance of the two ap-proaches de-scribed above for treat-
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [9 <./SimpleBHP_BHP.pdf> <./SimpleBHP_rate_gas.pdf> <./SimpleRate_BHP.pdf> <./
+SimpleRate_rate_gas.pdf>]
+Overfull \hbox (0.12354pt too wide) in paragraph at lines 1344--1345
+\T1/ptm/m/n/10 un-der CO$[]$ in-jec-tion. The two-dimensional ge-o-log-i-cal mo
+del
+ []
+
+[10]
+Overfull \hbox (1.98296pt too wide) in paragraph at lines 1447--1448
+\T1/ptm/m/n/10 ables. The-o-ret-i-cally, if the op-ti-miza-tion prob-lem re-mai
+ns suf-
+ []
+
+
+Overfull \hbox (8.2537pt too wide) in paragraph at lines 1449--1450
+\T1/ptm/m/n/10 so-lu-tion found us-ing heuris-tic con-straint han-dling (163,50
+0 m$[]$
+ []
+
+
+Overfull \hbox (0.29375pt too wide) in paragraph at lines 1452--1453
+\T1/ptm/m/n/10 40 con-trol vari-ables (Runs 3 and 5 for the heuris-tic ap-proac
+h;
+ []
+
+<VanEssenModelPermeabilityMapColorBar.png, id=71, 667.49374pt x 32.12pt>
+File: VanEssenModelPermeabilityMapColorBar.png Graphic file (type png)
+
+<use VanEssenModelPermeabilityMapColorBar.png>
+Package pdftex.def Info: VanEssenModelPermeabilityMapColorBar.png used on input
+ line 1464.
+(pdftex.def)             Requested size: 227.6171pt x 14.22644pt.
+
+<PiPermeabilityMapAndWells.png, id=72, 690.58pt x 691.58376pt>
+File: PiPermeabilityMapAndWells.png Graphic file (type png)
+
+<use PiPermeabilityMapAndWells.png>
+Package pdftex.def Info: PiPermeabilityMapAndWells.png used on input line 1468.
+
+(pdftex.def)             Requested size: 216.49065pt x 216.81pt.
+
+<RevenuePI2.pdf, id=73, 717.68124pt x 503.8825pt>
+File: RevenuePI2.pdf Graphic file (type pdf)
+ <use RevenuePI2.pdf>
+Package pdftex.def Info: RevenuePI2.pdf used on input line 1561.
+(pdftex.def)             Requested size: 223.3659pt x 156.82576pt.
+
+<ReferenceC500HeuristicItPb_BHP.pdf, id=74, 702.625pt x 503.8825pt>
+File: ReferenceC500HeuristicItPb_BHP.pdf Graphic file (type pdf)
+
+<use ReferenceC500HeuristicItPb_BHP.pdf>
+Package pdftex.def Info: ReferenceC500HeuristicItPb_BHP.pdf used on input line 
+1570.
+(pdftex.def)             Requested size: 221.70328pt x 158.99377pt.
+
+<ReferenceC500HeuristicItPb_rate_gas.pdf, id=75, 730.73pt x 495.8525pt>
+File: ReferenceC500HeuristicItPb_rate_gas.pdf Graphic file (type pdf)
+
+<use ReferenceC500HeuristicItPb_rate_gas.pdf>
+Package pdftex.def Info: ReferenceC500HeuristicItPb_rate_gas.pdf used on input 
+line 1571.
+(pdftex.def)             Requested size: 231.10661pt x 156.82576pt.
+
+<HeuristicC500Steps8OptimalItPm_BHP.pdf, id=76, 702.625pt x 503.8825pt>
+File: HeuristicC500Steps8OptimalItPm_BHP.pdf Graphic file (type pdf)
+
+<use HeuristicC500Steps8OptimalItPm_BHP.pdf>
+Package pdftex.def Info: HeuristicC500Steps8OptimalItPm_BHP.pdf used on input l
+ine 1585.
+(pdftex.def)             Requested size: 221.70328pt x 158.99377pt.
+
+<HeuristicC500Steps8OptimalItPm_rate_gas.pdf, id=77, 730.73pt x 503.8825pt>
+File: HeuristicC500Steps8OptimalItPm_rate_gas.pdf Graphic file (type pdf)
+
+<use HeuristicC500Steps8OptimalItPm_rate_gas.pdf>
+Package pdftex.def Info: HeuristicC500Steps8OptimalItPm_rate_gas.pdf used on in
+put line 1586.
+(pdftex.def)             Requested size: 227.42711pt x 156.82576pt.
+
+<FormalC550Steps8OptimalImPb_BHP.pdf, id=78, 702.625pt x 503.8825pt>
+File: FormalC550Steps8OptimalImPb_BHP.pdf Graphic file (type pdf)
+
+<use FormalC550Steps8OptimalImPb_BHP.pdf>
+Package pdftex.def Info: FormalC550Steps8OptimalImPb_BHP.pdf used on input line
+ 1594.
+(pdftex.def)             Requested size: 221.70328pt x 158.99377pt.
+
+<FormalC550Steps8OptimalImPb_rate_gas.pdf, id=79, 730.73pt x 495.8525pt>
+File: FormalC550Steps8OptimalImPb_rate_gas.pdf Graphic file (type pdf)
+
+<use FormalC550Steps8OptimalImPb_rate_gas.pdf>
+Package pdftex.def Info: FormalC550Steps8OptimalImPb_rate_gas.pdf used on input
+ line 1595.
+(pdftex.def)             Requested size: 231.10661pt x 156.82576pt.
+
+<OilRatesSteps8.pdf, id=80, 730.73pt x 503.8825pt>
+File: OilRatesSteps8.pdf Graphic file (type pdf)
+ <use OilRatesSteps8.pdf>
+Package pdftex.def Info: OilRatesSteps8.pdf used on input line 1606.
+(pdftex.def)             Requested size: 230.57141pt x 158.99377pt.
+
+[11 <./VanEssenModelPermeabilityMapColorBar.png> <./PiPermeabilityMapAndWells.p
+ng>]
+File: VanEssenModelPermeabilityMapColorBar.png Graphic file (type png)
+ <use VanEssenModelPermeabilityMapColorBar.png>
+Package pdftex.def Info: VanEssenModelPermeabilityMapColorBar.png used on input
+ line 1710.
+(pdftex.def)             Requested size: 227.6171pt x 14.22644pt.
+
+Overfull \hbox (7.91083pt too wide) in paragraph at lines 1707--1711
+ [] 
+ []
+
+
+<SPE10TopModelPermeabilityMapConstantRotated.png, id=86, 559.08875pt x 730.73pt
+>
+File: SPE10TopModelPermeabilityMapConstantRotated.png Graphic file (type png)
+ <use SPE10TopModelPermeabilityMapConstantRotated.png>
+Package pdftex.def Info: SPE10TopModelPermeabilityMapConstantRotated.png used o
+n input line 1714.
+(pdftex.def)             Requested size: 176.94139pt x 231.26378pt.
+ [12 <./RevenuePI2.pdf> <./ReferenceC500HeuristicItPb_BHP.pdf> <./ReferenceC500
+HeuristicItPb_rate_gas.pdf>] [13 <./HeuristicC500Steps8OptimalItPm_BHP.pdf> <./
+HeuristicC500Steps8OptimalItPm_rate_gas.pdf> <./FormalC550Steps8OptimalImPb_BHP
+.pdf> <./FormalC550Steps8OptimalImPb_rate_gas.pdf> <./OilRatesSteps8.pdf>]
+<spe10TopLayerRevenue.pdf, id=134, 724.7075pt x 495.8525pt>
+File: spe10TopLayerRevenue.pdf Graphic file (type pdf)
+
+<use spe10TopLayerRevenue.pdf>
+Package pdftex.def Info: spe10TopLayerRevenue.pdf used on input line 1775.
+(pdftex.def)             Requested size: 229.20189pt x 156.82576pt.
+
+<spe10topLayerReferenceC200_BHP.pdf, id=135, 722.7pt x 495.8525pt>
+File: spe10topLayerReferenceC200_BHP.pdf Graphic file (type pdf)
+
+<use spe10topLayerReferenceC200_BHP.pdf>
+Package pdftex.def Info: spe10topLayerReferenceC200_BHP.pdf used on input line 
+1784.
+(pdftex.def)             Requested size: 231.73187pt x 158.99377pt.
+
+<spe10topLayerReferenceC200_rate_gas.pdf, id=136, 737.75626pt x 495.8525pt>
+File: spe10topLayerReferenceC200_rate_gas.pdf Graphic file (type pdf)
+
+<use spe10topLayerReferenceC200_rate_gas.pdf>
+Package pdftex.def Info: spe10topLayerReferenceC200_rate_gas.pdf used on input 
+line 1785.
+(pdftex.def)             Requested size: 233.3288pt x 156.82576pt.
+
+<spe10topLayerReferenceC200_rate_oil.pdf, id=137, 724.7075pt x 503.8825pt>
+File: spe10topLayerReferenceC200_rate_oil.pdf Graphic file (type pdf)
+
+<use spe10topLayerReferenceC200_rate_oil.pdf>
+Package pdftex.def Info: spe10topLayerReferenceC200_rate_oil.pdf used on input 
+line 1786.
+(pdftex.def)             Requested size: 228.6711pt x 158.99377pt.
+
+<spe10topLayerOptimalChoppedIuPu_BHP.pdf, id=138, 722.7pt x 495.8525pt>
+File: spe10topLayerOptimalChoppedIuPu_BHP.pdf Graphic file (type pdf)
+
+<use spe10topLayerOptimalChoppedIuPu_BHP.pdf>
+Package pdftex.def Info: spe10topLayerOptimalChoppedIuPu_BHP.pdf used on input 
+line 1795.
+(pdftex.def)             Requested size: 231.73187pt x 158.99377pt.
+
+<spe10topLayerOptimalChoppedIuPu_rate_gas.pdf, id=139, 737.75626pt x 495.8525pt
+>
+File: spe10topLayerOptimalChoppedIuPu_rate_gas.pdf Graphic file (type pdf)
+ <use spe10topLayerOptimalChoppedIuPu_rate_gas.pdf>
+Package pdftex.def Info: spe10topLayerOptimalChoppedIuPu_rate_gas.pdf used on i
+nput line 1796.
+(pdftex.def)             Requested size: 233.3288pt x 156.82576pt.
+
+<spe10topLayerOptimalChoppedIuPu_rate_oil.pdf, id=140, 724.7075pt x 503.8825pt>
+File: spe10topLayerOptimalChoppedIuPu_rate_oil.pdf Graphic file (type pdf)
+<use spe10topLayerOptimalChoppedIuPu_rate_oil.pdf>
+Package pdftex.def Info: spe10topLayerOptimalChoppedIuPu_rate_oil.pdf used on i
+nput line 1797.
+(pdftex.def)             Requested size: 228.6711pt x 158.99377pt.
+
+<spe10TopLayerConstrainedOptimalIuPa_BHP.pdf, id=141, 722.7pt x 495.8525pt>
+File: spe10TopLayerConstrainedOptimalIuPa_BHP.pdf Graphic file (type pdf)
+
+<use spe10TopLayerConstrainedOptimalIuPa_BHP.pdf>
+Package pdftex.def Info: spe10TopLayerConstrainedOptimalIuPa_BHP.pdf used on in
+put line 1805.
+(pdftex.def)             Requested size: 231.73187pt x 158.99377pt.
+
+<spe10TopLayerConstrainedOptimalIuPa_rate_gas.pdf, id=142, 737.75626pt x 495.85
+25pt>
+File: spe10TopLayerConstrainedOptimalIuPa_rate_gas.pdf Graphic file (type pdf)
+ <use spe10TopLayerConstrainedOptimalIuPa_rate_gas.pdf>
+Package pdftex.def Info: spe10TopLayerConstrainedOptimalIuPa_rate_gas.pdf used 
+on input line 1806.
+(pdftex.def)             Requested size: 236.55963pt x 158.99377pt.
+
+<spe10TopLayerConstrainedOptimalIuPa_rate_oil.pdf, id=143, 724.7075pt x 503.882
+5pt>
+File: spe10TopLayerConstrainedOptimalIuPa_rate_oil.pdf Graphic file (type pdf)
+ <use spe10TopLayerConstrainedOptimalIuPa_rate_oil.pdf>
+Package pdftex.def Info: spe10TopLayerConstrainedOptimalIuPa_rate_oil.pdf used 
+on input line 1807.
+(pdftex.def)             Requested size: 228.6711pt x 158.99377pt.
+
+Overfull \hbox (10.81319pt too wide) in paragraph at lines 1819--1825
+\T1/ptm/m/n/10 Our third ex-am-ple uses the three-dimensional ge-o-log-i-cal mo
+del
+ []
+
+File: VanEssenModelPermeabilityMapColorBar.png Graphic file (type png)
+<use VanEssenModelPermeabilityMapColorBar.png>
+Package pdftex.def Info: VanEssenModelPermeabilityMapColorBar.png used on input
+ line 1832.
+(pdftex.def)             Requested size: 227.6171pt x 14.22644pt.
+
+Overfull \hbox (3.66083pt too wide) in paragraph at lines 1829--1833
+ [] 
+ []
+
+<VanEssenModelPermeabilityMapConstant.png, id=144, 678.535pt x 549.05125pt>
+File: VanEssenModelPermeabilityMapConstant.png Graphic file (type png)
+
+<use VanEssenModelPermeabilityMapConstant.png>
+Package pdftex.def Info: VanEssenModelPermeabilityMapConstant.png used on input
+ line 1836.
+(pdftex.def)             Requested size: 227.62204pt x 184.17836pt.
+
+Overfull \hbox (3.35349pt too wide) in paragraph at lines 1908--1918
+[]\T1/ptm/m/n/10 The con-trol pa-ram-e-ters of our op-ti-miza-tion prob-lem are
+ again
+ []
+
+[14 <./SPE10TopModelPermeabilityMapConstantRotated.png> <./spe10TopLayerRevenue
+.pdf>]
+Overfull \hbox (10.00397pt too wide) in paragraph at lines 1919--1930
+\T1/ptm/m/n/10 prove-ment of 8.5%. The best for-mally con-strained case (Run 3)
+
+ []
+
+
+Overfull \hbox (0.7235pt too wide) in paragraph at lines 1931--1933
+\T1/ptm/m/n/10 for-mal con-straint han-dling ap-proach typ-i-cally re-quired ab
+out
+ []
+
+
+Overfull \hbox (4.47295pt too wide) in paragraph at lines 1931--1933
+\T1/ptm/m/n/10 48 for-ward sim-u-la-tions, while the heuris-tic treat-ment re-q
+uired
+ []
+
+<vanEssenRevenue.pdf, id=153, 705.63625pt x 503.8825pt>
+File: vanEssenRevenue.pdf Graphic file (type pdf)
+
+<use vanEssenRevenue.pdf>
+Package pdftex.def Info: vanEssenRevenue.pdf used on input line 1975.
+(pdftex.def)             Requested size: 222.65344pt x 158.99377pt.
+
+Overfull \hbox (0.14426pt too wide) in paragraph at lines 1987--1999
+\T1/ptm/m/n/10 In our fi-nal ex-am-ple we con-sider the Norne bench-mark prob-
+ []
+
+[15 <./spe10topLayerReferenceC200_BHP.pdf> <./spe10topLayerReferenceC200_rate_g
+as.pdf> <./spe10topLayerReferenceC200_rate_oil.pdf> <./spe10topLayerOptimalChop
+pedIuPu_BHP.pdf> <./spe10topLayerOptimalChoppedIuPu_rate_gas.pdf> <./spe10topLa
+yerOptimalChoppedIuPu_rate_oil.pdf>]
+File: VanEssenModelPermeabilityMapColorBar.png Graphic file (type png)
+
+<use VanEssenModelPermeabilityMapColorBar.png>
+Package pdftex.def Info: VanEssenModelPermeabilityMapColorBar.png used on input
+ line 2007.
+(pdftex.def)             Requested size: 227.6171pt x 14.22644pt.
+
+Overfull \hbox (1.53583pt too wide) in paragraph at lines 2004--2008
+ [] 
+ []
+
+<NorneModelPermeabilityMap.png, id=188, 689.57625pt x 504.88625pt>
+File: NorneModelPermeabilityMap.png Graphic file (type png)
+
+<use NorneModelPermeabilityMap.png>
+Package pdftex.def Info: NorneModelPermeabilityMap.png used on input line 2011.
+
+(pdftex.def)             Requested size: 194.30058pt x 142.26378pt.
+
+<NorneRevenue.pdf, id=189, 725.71124pt x 503.8825pt>
+File: NorneRevenue.pdf Graphic file (type pdf)
+ <use NorneRevenue.pdf>
+Package pdftex.def Info: NorneRevenue.pdf used on input line 2106.
+(pdftex.def)             Requested size: 226.906pt x 157.54807pt.
+
+Overfull \hbox (2.49373pt too wide) in paragraph at lines 2123--2136
+\T1/ptm/m/n/10 leads to a re-sult for cu-mu-la-tive oil pro-duc-tion (138.5$\OM
+S/ztmcm/m/n/10 ^^B\OT1/ztmcm/m/n/10 10[]$ \T1/ptm/m/n/10 m$[]$
+ []
+
+
+Underfull \vbox (badness 3646) has occurred while \output is active []
+
+ [16 <./spe10TopLayerConstrainedOptimalIuPa_BHP.pdf> <./spe10TopLayerConstraine
+dOptimalIuPa_rate_gas.pdf> <./spe10TopLayerConstrainedOptimalIuPa_rate_oil.pdf>
+ <./VanEssenModelPermeabilityMapConstant.png> <./vanEssenRevenue.pdf>]
+Overfull \hbox (1.94366pt too wide) in paragraph at lines 2137--2150
+\T1/ptm/m/n/10 along with the fea-si-ble ref-er-ence case, are shown in Fig. 6.
+15[].
+ []
+
+[17 <./NorneModelPermeabilityMap.png>]
+<norneReferenceChoppedT300_BHP.pdf, id=216, 716.6775pt x 495.8525pt>
+File: norneReferenceChoppedT300_BHP.pdf Graphic file (type pdf)
+
+<use norneReferenceChoppedT300_BHP.pdf>
+Package pdftex.def Info: norneReferenceChoppedT300_BHP.pdf used on input line 2
+166.
+(pdftex.def)             Requested size: 229.80078pt x 158.99377pt.
+
+<norneReferenceChoppedT300_rate_gas.pdf, id=217, 731.73375pt x 495.8525pt>
+File: norneReferenceChoppedT300_rate_gas.pdf Graphic file (type pdf)
+
+<use norneReferenceChoppedT300_rate_gas.pdf>
+Package pdftex.def Info: norneReferenceChoppedT300_rate_gas.pdf used on input l
+ine 2167.
+(pdftex.def)             Requested size: 234.62852pt x 158.99377pt.
+
+<norneOptimalChoppedImPbT300_BHP.pdf, id=218, 716.6775pt x 495.8525pt>
+File: norneOptimalChoppedImPbT300_BHP.pdf Graphic file (type pdf)
+
+<use norneOptimalChoppedImPbT300_BHP.pdf>
+Package pdftex.def Info: norneOptimalChoppedImPbT300_BHP.pdf used on input line
+ 2176.
+(pdftex.def)             Requested size: 229.80078pt x 158.99377pt.
+
+<norneOptimalChoppedImPbT300_rate_gas.pdf, id=219, 731.73375pt x 495.8525pt>
+File: norneOptimalChoppedImPbT300_rate_gas.pdf Graphic file (type pdf)
+
+<use norneOptimalChoppedImPbT300_rate_gas.pdf>
+Package pdftex.def Info: norneOptimalChoppedImPbT300_rate_gas.pdf used on input
+ line 2177.
+(pdftex.def)             Requested size: 234.62852pt x 158.99377pt.
+
+<norneConstrainedIlPlT300_BHP.pdf, id=220, 716.6775pt x 495.8525pt>
+File: norneConstrainedIlPlT300_BHP.pdf Graphic file (type pdf)
+
+<use norneConstrainedIlPlT300_BHP.pdf>
+Package pdftex.def Info: norneConstrainedIlPlT300_BHP.pdf used on input line 21
+86.
+(pdftex.def)             Requested size: 229.80078pt x 158.99377pt.
+
+<norneConstrainedIlPlT300_rate_gas.pdf, id=221, 731.73375pt x 495.8525pt>
+File: norneConstrainedIlPlT300_rate_gas.pdf Graphic file (type pdf)
+
+<use norneConstrainedIlPlT300_rate_gas.pdf>
+Package pdftex.def Info: norneConstrainedIlPlT300_rate_gas.pdf used on input li
+ne 2187.
+(pdftex.def)             Requested size: 234.62852pt x 158.99377pt.
+ [18 <./NorneRevenue.pdf> <./norneReferenceChoppedT300_BHP.pdf> <./norneReferen
+ceChoppedT300_rate_gas.pdf>]
+[19 <./norneOptimalChoppedImPbT300_BHP.pdf> <./norneOptimalChoppedImPbT300_rate
+_gas.pdf> <./norneConstrainedIlPlT300_BHP.pdf> <./norneConstrainedIlPlT300_rate
+_gas.pdf>] (./ComputationalGeosciencesAdjoints.bbl
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [20]
+Underfull \hbox (badness 1430) in paragraph at lines 167--170
+[]\T1/ptm/m/n/10 Oliver, D., Reynolds, A., Liu, N.: In-verse The-ory
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Underfull \hbox (badness 3965) in paragraph at lines 226--231
+[]\T1/ptm/m/n/10 Walther, A.: Au-to-matic dif-fer-en-ti-a-tion of ex-plicit
+ []
+
+
+Underfull \hbox (badness 1205) in paragraph at lines 245--250
+\T1/ptm/m/n/10 op-ment.  In: SPE Pa-per 106493 pre-sented at the
+ []
+
+)
+- LAST -
+Extra skip:12.76495pt
+Left:547.5pt/2.16492pt
+Right:535.11005pt/1.78992pt
+Output:547.55502pt
+ [21] (./ComputationalGeosciencesAdjoints.aux) ) 
+Here is how much of TeX's memory you used:
+ 5403 strings out of 493014
+ 76580 string characters out of 6135155
+ 162912 words of memory out of 5000000
+ 8756 multiletter control sequences out of 15000+600000
+ 62199 words of font info for 128 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 38i,23n,33p,1350b,443s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/opt/local/share/texmf-texlive
+/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/opt/local/share/texmf-texlive/fonts
+/enc/dvips/base/8r.enc}</opt/local/share/texmf-texlive/fonts/type1/public/amsfo
+nts/cm/cmex10.pfb></opt/local/share/texmf-texlive/fonts/type1/public/amsfonts/c
+m/cmmi10.pfb></opt/local/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr
+10.pfb></opt/local/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmss10.pf
+b></opt/local/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmss8.pfb></op
+t/local/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></opt/l
+ocal/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></opt/local/
+share/texmf-texlive/fonts/type1/public/amsfonts/symbols/msbm10.pfb></opt/local/
+share/texmf-texlive/fonts/type1/public/rsfs/rsfs10.pfb></opt/local/share/texmf-
+texlive/fonts/type1/public/cm-super/sftt1000.pfb></opt/local/share/texmf-texliv
+e/fonts/type1/urw/symbol/usyr.pfb></opt/local/share/texmf-texlive/fonts/type1/u
+rw/symbol/usyr.pfb></opt/local/share/texmf-texlive/fonts/type1/urw/times/utmb8a
+.pfb></opt/local/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></opt/loc
+al/share/texmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
+Output written on ComputationalGeosciencesAdjoints.pdf (21 pages, 882373 bytes)
+.
+PDF statistics:
+ 322 PDF objects out of 1000 (max. 8388607)
+ 215 compressed objects within 3 object streams
+ 0 named destinations out of 1000 (max. 500000)
+ 176 words of extra memory for PDF output out of 10000 (max. 10000000)
+

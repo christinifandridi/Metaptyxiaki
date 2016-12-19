@@ -1,0 +1,258 @@
+\begin{thebibliography}{10}
+\providecommand{\url}[1]{{#1}}
+\providecommand{\urlprefix}{URL }
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{DOI~\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{DOI~\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+
+\bibitem{Asheim}
+Asheim, H.: Maximization of water sweep efficiency by controlling production
+  and injection rates.
+\newblock In: SPE Paper 18365 presented at the SPE European Petroleum
+  Conference. London, UK (1988)
+
+\bibitem{Asouti:2008}
+Asouti, V.G., Zymaris, A.S., Papadimitriou, D.I., Giannakoglou, K.C.:
+  Continuous and discrete adjoint approaches for aerodynamic shape optimization
+  with low {Mach} number preconditioning.
+\newblock International Journal for Numerical Methods in Fluids
+  \textbf{57}(10), 1485--1504 (2008)
+
+\bibitem{Aziz_book79}
+Aziz, K., Settari, A.: Petroleum Reservoir Simulation.
+\newblock Applied Science Publishers, London (1979)
+
+\bibitem{Bertsekas}
+Bertsekas, D.P.: Nonlinear Programming.
+\newblock Athena Scientific (1999)
+
+\bibitem{Brouwer:2004}
+Brouwer, D.R., Jansen, J.D.: Dynamic optimization of water flooding with smart
+  wells using optimal control theory.
+\newblock SPE Journal \textbf{9}(4), 391--402 (2004)
+
+\bibitem{Bryson:1975}
+Bryson, A., Ho, Y.: Applied Optimal Control.
+\newblock Taylor and Francis (Hemisphere), Levittown (2001)
+
+\bibitem{Cao:Thesis}
+Cao, H.: Development of techniques for general purpose simulators.
+\newblock Ph.D. thesis, Stanford University (2002)
+
+\bibitem{Chavent}
+Chavent, G., Dupuy, M., Lemonnier, P.: History matching by use of optimal
+  theory.
+\newblock SPE Journal \textbf{15}, 74--86 (1975).
+\newblock \doi{10.2118/4627-PA}
+
+\bibitem{Gavalas}
+Chen, W., Gavalas, G., Wasserman, M.: A new algorithm for automatic history
+  matching.
+\newblock SPE Journal \textbf{14}(6), 593--608 (1974)
+
+\bibitem{Chen:2010}
+Chen, Y., Oliver, D.: Ensemble-based closed-loop optimization applied to
+  {B}rugge field.
+\newblock SPE Reservoir Evaluation \& Engineering \textbf{13}(1), 56--71 (2010)
+
+\bibitem{Christie}
+Christie, M., Blunt, M.: Tenth {SPE} comparative solution project: a comparison
+  of upscaling techniques.
+\newblock SPE Reservoir Evaluation and Engineering \textbf{4}(4), 308--317
+  (2001)
+
+\bibitem{Coats:1980}
+Coats, K.: An equation of state compositional model.
+\newblock SPE Journal \textbf{20}(5), 363--376 (1980)
+
+\bibitem{Montleau}
+De~Montleau, P., Cominelli, A., Neylon, K., Rowan, D., Pallister, I., Tesaker,
+  O., Nygard, I.: Production optimization under constraints using adjoint
+  gradients.
+\newblock In: 10th European Conference on the Mathematics of Oil Recovery
+  (2006)
+
+\bibitem{Doublet:2009}
+Doublet, D., Aanonsen, S., Tai, X.: An efficient method for smart well
+  production optimisation.
+\newblock Journal of Petroleum Science and Engineering \textbf{69}(1--2),
+  25--39 (2009)
+
+\bibitem{echeverria:2011}
+{Echeverr\'ia Ciaurri}, D., Isebor, O.J., Durlofsky, L.J.: Application of
+  derivative-free methologies to generally constrained oil production
+  optimisation problems.
+\newblock International Journal of Mathematical Modelling and Numerical
+  Optimisation \textbf{2}, 134--161 (2011)
+
+\bibitem{SNOPT}
+Gill, P.E., Murray, W., Saunders, M.A.: {SNOPT}: An {SQP} algorithm for
+  large-scale constrained optimization.
+\newblock SIAM Rev. \textbf{47}(1), 99--131 (2005)
+
+\bibitem{GunzburgerBook}
+Gunzburger, M.: {Perspectives in Flow Control and Optimization}.
+\newblock SIAM (2003)
+
+\bibitem{Hager2000}
+Hager, W.W.: {Runge-Kutta} methods in optimal control and the transformed
+  adjoint system.
+\newblock Numerische Mathematik \textbf{87}(2), 247--282 (2000).
+\newblock \doi{10.1007/s002110000178}
+
+\bibitem{CPRA}
+Han, C., Wallis, J., Sarma, P., Li, G., Schrader, M.L., Chen, W.: Adaptation of
+  the {CPR} preconditioner for efficient solution of the adjoint equation.
+\newblock SPE Journal \textbf{18}(2), 207--213 (2013).
+\newblock \doi{10.2118/141300-PA}
+
+\bibitem{Jansen:2011}
+Jansen, J.D.: Adjoint-based optimization of multi-phase flow through porous
+  media - a review.
+\newblock Computers \& Fluids \textbf{46}(1), 40 -- 51 (2011).
+\newblock \doi{10.1016/j.compfluid.2010.09.039}
+
+\bibitem{Kraaijevanger}
+Kraaijevanger, J., Egberts, P., Valstar, J., Buurman, H.: Optimal waterflood
+  design using the adjoint method.
+\newblock In: Paper SPE 105764 presented at the SPE Reservoir Simulation
+  Symposium. Houston, USA (2007).
+\newblock \doi{DOI: 10.2118/105764-MS}
+
+\bibitem{Li}
+Li, R., Reynolds, A., Oliver, D., of~Tulsa, U.: History matching of three-phase
+  flow production data.
+\newblock SPE Journal \textbf{8}(4), 328--340 (2003).
+\newblock \doi{10.2118/87336-PA}
+
+\bibitem{Brouwer:2008}
+Lien, M., Brouwer, D., Manseth, T., Jansen, J.D.: Multiscale regularization of
+  flooding optimization for smart field management.
+\newblock SPE Journal \textbf{13}(2), 195--204 (2008)
+
+\bibitem{Ramirez:1993}
+Liu, W., Ramirez, W., Qi, Y.: Optimal control of steam flooding.
+\newblock SPE Advanced Technology Series \textbf{1}(2), 73--82 (1993)
+
+\bibitem{Ramirez:1989}
+Mehos, G., Ramirez, W.: Use of optimal control theory to optimize carbon
+  dioxide miscible-flooding enhanced oil recovery.
+\newblock Journal of Petroleum Science and Engineering \textbf{2}(4), 247--260
+  (1989)
+
+\bibitem{Nadarajah:2000}
+Nadarajah, S., Jameson, A.: A comparison of the continuous and discrete adjoint
+  approach to automatic aerodynamic optimization.
+\newblock In: AIAA 38th Aerospace Sciences Meeting and Exhibit. Reno, NV (2000)
+
+\bibitem{Jameson:2007}
+Nadarajah, S.K., Jameson, A.: Optimum shape design for unsteady flows with
+  time-accurate continuous and discrete adjoint methods.
+\newblock AIAA Journal \textbf{45}(7), 1478--1491 (2007).
+\newblock \doi{10.2514/1.24332}
+
+\bibitem{Petra2011}
+Noemi~Petra, G.S.: Model variational inverse problems governed by partial
+  differential equations.
+\newblock ICES Report 11-05, {The Institute for Computational Engineering and
+  Sciences, The University of Texas at Austin} (2011)
+
+\bibitem{NorneWebsite}
+{NTNU (IO Center)}: {Center of Integrated Operations in Petroleum Industry}.
+\newblock Website (2011).
+\newblock \url{www.ipt.ntnu.no/~norne}
+
+\bibitem{Oliver}
+Oliver, D., Reynolds, A., Liu, N.: Inverse Theory for Petroleum Reservoir
+  Characterization and History Matching.
+\newblock Cambridge University Press, Cambridge (2008)
+
+\bibitem{Ramirez:book}
+Ramirez, W.: Application of Optimal Control Theory to Enhanced Oil Recovery.
+\newblock Elsevier Science Ltd, Amsterdam (1987)
+
+\bibitem{Pallav:2008}
+Sarma, P., Chen, W., Durlofsky, L.J., Aziz, K.: Production optimization with
+  adjoint models under nonlinear control-state path inequality constraints.
+\newblock SPE Reservoir Evaluation and Engineering \textbf{11}(2), 326--339
+  (2008)
+
+\bibitem{Pallav:2006}
+Sarma, P., Durlofsky, L.J., Aziz, K., Chen, W.H.: Efficient real-time reservoir
+  management using adjoint-based optimal control and model updating.
+\newblock Computational Geosciences \textbf{10}(1), 3--36 (2006).
+\newblock \doi{10.1007/s10596-005-9009-z}
+
+\bibitem{Stengel:1986}
+Stengel, R.: Stochastic Optimal Control Theory and Application.
+\newblock Wiley, New York (1986)
+
+\bibitem{Sudaryanto:2000}
+Sudaryanto, B., Yortsos, Y.: Optimization of fluid front dynamics in porous
+  media using rate control.
+\newblock Physics of Fluids \textbf{12}(7), 1656--1670 (2000)
+
+\bibitem{Suwartadi:2012}
+Suwartadi, E., Krogstad, S., Foss, B.: Nonlinear output constraints handling
+  for production optimization of oil reservoirs.
+\newblock Computational Geosciences \textbf{16}, 499--517 (2012)
+
+\bibitem{VanEssen}
+{Van Essen G.}, Zandvliet, M., {Van den Hof}, P., Bosgra, O., Jansen, J.D.:
+  Robust waterflooding optimization of multiple geological scenarios.
+\newblock SPE Journal \textbf{14}(1), 202--210 (2009).
+\newblock \doi{10.2118/102913-PA}
+
+\bibitem{Virnovski}
+Virnovski, G.: Waterflooding strategy design using optimal control theory.
+\newblock In: 6th European IOR Symposium, pp. 437--446. Stavanger, Norway
+  (1991)
+
+\bibitem{Voskov:2012}
+Voskov, D., Tchelepi, H.: Comparison of nonlinear formulations for two-phase
+  multi-component {EoS} based simulation.
+\newblock Journal of Petroleum Science and Engineering \textbf{82--83},
+  101--111 (2012).
+\newblock \doi{10.1016/j.petrol.2011.10.012}
+
+\bibitem{Voskov_nonlinear:2009}
+Voskov, D.V., Younis, R., Tchelepi, H.A.: Comparison of nonlinear formulations
+  for isothermal compositional flow simulation.
+\newblock In: SPE paper 118966 presented at the SPE Reservoir Simulation
+  Symposium (2009)
+
+\bibitem{Walther2007}
+Walther, A.: Automatic differentiation of explicit {Runge-Kutta} methods for
+  optimal control.
+\newblock Computational Optimization and Applications \textbf{36}(1), 83--108
+  (2007).
+\newblock \doi{10.1007/s10589-006-0397-3}
+
+\bibitem{Wang:2009}
+Wang, C., Li, G., Reynolds, A.: Production optimization in closed-loop
+  reservoir management.
+\newblock SPE Journal \textbf{14}(3), 506--523 (2009)
+
+\bibitem{Young:1983}
+Young, L., Stephenson, R.: A generalized compositional approach for reservoir
+  simulation.
+\newblock Journal of Petroleum Science and Engineering \textbf{23}(5), 727--742
+  (1983).
+\newblock \doi{10.2118/10516-PA}
+
+\bibitem{Younis:2007}
+Younis, R., Aziz, K.: {Parallel automatically differentiable data-types for
+  next-generation simulator development}.
+\newblock In: SPE Paper 106493 presented at the SPE Reservoir Simulation
+  Symposium. Houston, Texas (2007).
+\newblock \doi{10.2118/106493-MS}
+
+\bibitem{Younis:2010}
+Younis, R., Tchelepi, H., Aziz, K.: {Adaptively localized continuation-Newton
+  method--Nonlinear solvers that converge all the time}.
+\newblock SPE Journal \textbf{15}(2), 526--544 (2010).
+\newblock \doi{10.2118/119147-PA}.
+\newblock SPE-119147-PA
+
+\end{thebibliography}

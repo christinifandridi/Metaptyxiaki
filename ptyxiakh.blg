@@ -1,0 +1,57 @@
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: ptyxiakh.aux
+A level-1 auxiliary file: introduction.aux
+A level-1 auxiliary file: chapter1.aux
+A level-1 auxiliary file: chapter2.aux
+A level-1 auxiliary file: appendix1.aux
+A level-1 auxiliary file: appendix2.aux
+A level-1 auxiliary file: appendix3.aux
+The style file: apalike.bst
+Database file #1: ptyxiakh.bib
+Warning--empty journal in Kirk
+Warning--empty journal in Jelmert
+Warning--there's a number but no volume in Fleshman
+Warning--empty journal in Melzer
+You've used 57 entries,
+            1935 wiz_defined-function locations,
+            846 strings with 12635 characters,
+and the built_in function-call counts, 21141 in all, are:
+= -- 2054
+> -- 806
+< -- 42
++ -- 270
+- -- 262
+* -- 1748
+:= -- 3718
+add.period$ -- 169
+call.type$ -- 57
+change.case$ -- 403
+chr.to.int$ -- 57
+cite$ -- 61
+duplicate$ -- 844
+empty$ -- 1537
+format.name$ -- 353
+if$ -- 4127
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 69
+newline$ -- 286
+num.names$ -- 171
+pop$ -- 388
+preamble$ -- 1
+purify$ -- 416
+quote$ -- 0
+skip$ -- 611
+stack$ -- 0
+substring$ -- 1385
+swap$ -- 80
+text.length$ -- 5
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 316
+warning$ -- 4
+while$ -- 171
+width$ -- 0
+write$ -- 729
+(There were 4 warnings)

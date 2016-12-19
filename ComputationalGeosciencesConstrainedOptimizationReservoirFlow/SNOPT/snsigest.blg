@@ -1,0 +1,71 @@
+This is BibTeX, Version 0.99d (TeX Live 2011/Fink)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: snsigest.aux
+The style file: siam.bst
+Database file #1: references.bib
+Warning--I didn't find a database entry for "SNOPT7"
+Warning--I didn't find a database entry for "MurS98"
+Warning--I didn't find a database entry for "CONOPT"
+Warning--I didn't find a database entry for "FleL98"
+Warning--I didn't find a database entry for "FriS05"
+Warning--I didn't find a database entry for "Gould:2003:GLT"
+Warning--I didn't find a database entry for "GAMS"
+Warning--I didn't find a database entry for "AMPL"
+Warning--I didn't find a database entry for "ByrN91"
+Warning--I didn't find a database entry for "BroGG73"
+Warning--I didn't find a database entry for "ByrNS94"
+Warning--I didn't find a database entry for "GilL03"
+Warning--I didn't find a database entry for "Mor02"
+Warning--I didn't find a database entry for "OSS2002SIAM"
+Warning--I didn't find a database entry for "OS02"
+Warning--I didn't find a database entry for "OSS2002HH"
+Warning--I didn't find a database entry for "Bar71"
+Warning--I didn't find a database entry for "DolM00"
+Warning--I didn't find a database entry for "DolMM04"
+Warning--I didn't find a database entry for "PaiS75"
+Warning--I didn't find a database entry for "ByrLNZ95"
+Warning--I didn't find a database entry for "AMPL2"
+Warning--I didn't find a database entry for "PaiS82a"
+Warning--I didn't find a database entry for "GouOT03"
+You've used 79 entries,
+            2030 wiz_defined-function locations,
+            1088 strings with 16219 characters,
+and the built_in function-call counts, 27436 in all, are:
+= -- 2824
+> -- 908
+< -- 9
++ -- 400
+- -- 292
+* -- 2004
+:= -- 4059
+add.period$ -- 83
+call.type$ -- 79
+change.case$ -- 396
+chr.to.int$ -- 0
+cite$ -- 79
+duplicate$ -- 1324
+empty$ -- 2115
+format.name$ -- 292
+if$ -- 6003
+int.to.chr$ -- 0
+int.to.str$ -- 79
+missing$ -- 69
+newline$ -- 245
+num.names$ -- 144
+pop$ -- 321
+preamble$ -- 2
+purify$ -- 324
+quote$ -- 0
+skip$ -- 1186
+stack$ -- 0
+substring$ -- 2177
+swap$ -- 587
+text.length$ -- 9
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 304
+warning$ -- 0
+while$ -- 308
+width$ -- 81
+write$ -- 733
+(There were 24 warnings)
